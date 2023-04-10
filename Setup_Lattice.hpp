@@ -1,0 +1,20 @@
+#ifndef SETUP_LATTICE_HPP
+#define SETUP_LATTICE_HPP
+
+#include "Site.hpp"
+#include "Measurements.hpp"
+#include "Interactions.hpp"
+
+void init_uniform(Measurements main_measurements, Interactions main_interactions, Site *spin, int Ns, int L);
+
+void init_random(Measurements main_measurements, Interactions main_interactions, Site *spin, int Ns, int L);
+
+inline int index(int x, int y, int L);
+
+void set_coordinates(Site *spin, int Ns, int L);
+
+void set_nn(Site *spin, int Ns, int L);
+
+int mod(int x, int m);
+
+#endif
