@@ -46,7 +46,7 @@ int main(int argc, char *argv[]) {
 
         main_properties.set_pb(1./T);
 
-        Monte_Carlo_Sim(main_interactions, main_measurements, main_properties, 1./T, spin, Ns, L, L_name);
+        Metropolis_MC_Sim(main_interactions, main_measurements, main_properties, 1./T, spin, Ns, L, L_name);
 	
 	if (T <= 1.1 && T >= 0.65) {
 	  del_T = 0.05;

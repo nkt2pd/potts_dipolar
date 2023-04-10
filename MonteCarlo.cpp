@@ -5,6 +5,11 @@
 #include "Rand.hpp"
 #include "Housekeeping.hpp"
 
+//update_site and MC_sweep are both functions for the Metropolis Algorithm
+//Metropolis_MC_Sim performs the Monte Carlo simulation using the Metropolis Algorithm
+
+
+
 //test a new state, accept or reject the state based on parameters. 
 int update_site(Measurements main_measurements, Interactions main_interactions, Properties main_properties, int k, double beta, Site *spin, int Ns, int L) {
 
@@ -62,7 +67,7 @@ double MC_sweep(Measurements main_measurements, Interactions main_interactions, 
     return ((double) hits)/((double) Ns);      // success rate
 }
 
-void Monte_Carlo_Sim(Interactions main_interactions, Measurements main_measurements, Properties main_properties, double beta, Site *spin, int Ns, int L, const std::string L_name) {
+void Metropolis_MC_Sim(Interactions main_interactions, Measurements main_measurements, Properties main_properties, double beta, Site *spin, int Ns, int L, const std::string L_name) {
 
     int thermalize = 20000;
     int nsweep = 50;
