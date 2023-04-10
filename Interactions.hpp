@@ -5,6 +5,7 @@
 
 #include <cmath>
 #include "Site.hpp"
+#include "Setup_Lattice.hpp"
 
 class Interactions {
     public:

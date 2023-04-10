@@ -32,6 +32,7 @@ int main(int argc, char *argv[]) {
 
     set_coordinates(spin, Ns, L);
     set_nn(spin, Ns, L);
+    set_cluster_tag(spin, Ns);
     
     init_random(main_measurements, main_interactions, spin, Ns, L);
 

@@ -15,6 +15,8 @@ void set_coordinates(Site *spin, int Ns, int L);
 
 void set_nn(Site *spin, int Ns, int L);
 
+void set_cluster_tag(Site *spin, int Ns);
+
 int mod(int x, int m);
 
 #endif

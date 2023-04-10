@@ -2,13 +2,22 @@
 
 #include <string>
 #include <iostream>
+#include "Constants.hpp"
+#include "Measurements.hpp"
+#include "Interactions.hpp"
+#include "Properties.hpp"
+#include "Site.hpp"
 #include "Rand.hpp"
 #include "Housekeeping.hpp"
 
 //update_site and MC_sweep are both functions for the Metropolis Algorithm
 //Metropolis_MC_Sim performs the Monte Carlo simulation using the Metropolis Algorithm
 
+//generate_cluster, flip_cluster, and sweep_cluster are all functions for the
+//Wolff Cluster Algorithm
+//Wolff_MC_Sim performs the Monte Carlo simulation using the Wolff Cluster Algorithm
 
+//Metroplis Algorithm
 
 //test a new state, accept or reject the state based on parameters. 
 int update_site(Measurements main_measurements, Interactions main_interactions, Properties main_properties, int k, double beta, Site *spin, int Ns, int L) {
@@ -121,4 +130,74 @@ void Metropolis_MC_Sim(Interactions main_interactions, Measurements main_measure
     }
 
     print(L_name, E1, E2, PM1, PM2, PM4, beta, Ns);
+}
+
+
+//Wolff Cluster Algorithm
+
+int generate_cluster(Properties main_properties, Site *spin, int Ns) {
+    
+    main_properties.cluster.clear();
+
+    main_properties.new_pSpin_cluster = (int)(rand1() * q);
+    int initial_site = (int)(rand1() * Ns);
+
+    main_properties.cluster.push_back(initial_site);
+    spin[initial_site].cluster_tag = 1;
+
+    main_properties.prev_additions.push_back(initial_site);
+
+    std::vector<int>::const_iterator i;
+
+    int curr_site = 0;
+    int curr_neighbor = 0;
+
+    while(main_properties.prev_additions.size() > 0) {
+        
+        main_properties.new_additions.clear();
+
+        for(i = main_properties.prev_additions.begin(); i != main_properties.prev_additions.end(); ++i) {
+            
+            curr_site = (*i);
+
+            for(int j = 0; j < N_nn1; j++) {
+                
+                curr_neighbor = spin[curr_site].nn1[j]->idx;
+
+                if(spin[curr_neighbor].cluster_tag == 0 && 
+                   rand1() < main_properties.pb[main_properties.new_pSpin_cluster][spin[curr_site].potts][spin[curr_neighbor].potts]) {
+                    
+                    main_properties.cluster.push_back(curr_neighbor);
+                    spin[curr_neighbor].cluster_tag = 1;
+
+                    main_properties.new_additions.push_back(curr_neighbor);
+                }
+            }
+        }
+        main_properties.prev_additions = main_properties.new_additions;
+    }
+    return main_properties.cluster.size();
+}
+
+int flip_cluster(Properties main_properties, Site *spin) {
+    std::vector<int>::const_iterator i;
+
+    int p_new = 0;
+    int Sz_new = 0;
+
+    for (i = main_properties.cluster.begin(); i != main_properties.cluster.end(); ++i) {
+        
+        int curr_site = (*i);
+
+        p_new = main_properties.idx_m[main_properties.new_pSpin_cluster][spin[curr_site].potts];
+        Sz_new = (p_new % 2 == 0) ? 1 : -1;
+    }
+}
+
+double sweep_cluster() {
+
+}
+
+void Wolff_MC_Sim() {
+
 }

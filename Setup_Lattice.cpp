@@ -1,5 +1,7 @@
-#include "Setup_Lattice.hpp"
+#include "Measurements.hpp"
+#include "Interactions.hpp"
 #include "Site.hpp"
+#include "Setup_Lattice.hpp"
 #include "Rand.hpp"
 
 void init_uniform(Measurements main_measurements, Interactions main_interactions, Site *spin, int Ns, int L) {
@@ -64,6 +66,12 @@ void set_nn(Site *spin, int Ns, int L) { //sets the 2*D nearest neighbors for ea
         k = index(mod(x+1, L), mod(y-1, L), L);
         spin[i].nn1[5] = &spin[k];
 
+    }
+}
+
+void set_cluster_tag(Site *spin, int Ns) {
+    for (int i = 0; i < Ns; i++) {
+        spin[i].cluster_tag = 0;
     }
 }
 

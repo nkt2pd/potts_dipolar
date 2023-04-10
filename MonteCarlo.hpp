@@ -3,6 +3,9 @@
 
 #include <string>
 #include "Measurements.hpp"
+#include "Interactions.hpp"
+#include "Properties.hpp"
+#include "Site.hpp"
 
 int update_site(Measurements main_measurements, Interactions main_interactions, Properties main_properties, int k, double beta, Site *spin, int Ns, int L);
 

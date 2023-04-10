@@ -12,6 +12,7 @@ public:
     int Ns;
     int L;
     int lattice_pt[2];
+    int cluster_tag;
     // idx of its four neighbors
     Site *nn1[N_nn1];
 
