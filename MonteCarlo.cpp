@@ -9,6 +9,7 @@
 #include "Site.hpp"
 #include "Rand.hpp"
 #include "Housekeeping.hpp"
+#include "Cluster.hpp"
 
 //update_site and MC_sweep are both functions for the Metropolis Algorithm
 //Metropolis_MC_Sim performs the Monte Carlo simulation using the Metropolis Algorithm
@@ -135,28 +136,28 @@ void Metropolis_MC_Sim(Interactions main_interactions, Measurements main_measure
 
 //Wolff Cluster Algorithm
 
-int generate_cluster(Properties main_properties, Site *spin, int Ns) {
+int generate_cluster(Cluster main_cluster, Properties main_properties, Site *spin, int Ns) {
     
-    main_properties.cluster.clear();
+    main_cluster.new_cluster.clear();
 
-    main_properties.new_pSpin_cluster = (int)(rand1() * q);
+    main_cluster.new_pSpin_cluster = (int)(rand1() * q);
     int initial_site = (int)(rand1() * Ns);
 
-    main_properties.cluster.push_back(initial_site);
+    main_cluster.new_cluster.push_back(initial_site);
     spin[initial_site].cluster_tag = 1;
 
-    main_properties.prev_additions.push_back(initial_site);
+    main_cluster.prev_additions.push_back(initial_site);
 
     std::vector<int>::const_iterator i;
 
     int curr_site = 0;
     int curr_neighbor = 0;
 
-    while(main_properties.prev_additions.size() > 0) {
+    while(main_cluster.prev_additions.size() > 0) {
         
-        main_properties.new_additions.clear();
+        main_cluster.new_additions.clear();
 
-        for(i = main_properties.prev_additions.begin(); i != main_properties.prev_additions.end(); ++i) {
+        for(i = main_cluster.prev_additions.begin(); i != main_cluster.prev_additions.end(); ++i) {
             
             curr_site = (*i);
 
@@ -165,39 +166,149 @@ int generate_cluster(Properties main_properties, Site *spin, int Ns) {
                 curr_neighbor = spin[curr_site].nn1[j]->idx;
 
                 if(spin[curr_neighbor].cluster_tag == 0 && 
-                   rand1() < main_properties.pb[main_properties.new_pSpin_cluster][spin[curr_site].potts][spin[curr_neighbor].potts]) {
+                   rand1() < main_properties.pb[main_cluster.new_pSpin_cluster][spin[curr_site].potts][spin[curr_neighbor].potts]) {
                     
-                    main_properties.cluster.push_back(curr_neighbor);
+                    main_cluster.new_cluster.push_back(curr_neighbor);
                     spin[curr_neighbor].cluster_tag = 1;
 
-                    main_properties.new_additions.push_back(curr_neighbor);
+                    main_cluster.new_additions.push_back(curr_neighbor);
                 }
             }
         }
-        main_properties.prev_additions = main_properties.new_additions;
+        main_cluster.prev_additions = main_cluster.new_additions;
     }
-    return main_properties.cluster.size();
+    return main_cluster.new_cluster.size();
 }
 
-int flip_cluster(Properties main_properties, Site *spin) {
+int flip_cluster(Cluster main_cluster, Measurements main_measurements, Interactions main_interactions, Properties main_properties, Site *spin, int Ns, int L, double beta) {
     std::vector<int>::const_iterator i;
 
-    int p_new = 0;
-    int Sz_new = 0;
+    int curr_site = 0;
 
-    for (i = main_properties.cluster.begin(); i != main_properties.cluster.end(); ++i) {
+    for(i = main_cluster.new_cluster.begin(); i != main_cluster.new_cluster.end(); ++i) {
         
-        int curr_site = (*i);
+        curr_site = (*i);
 
-        p_new = main_properties.idx_m[main_properties.new_pSpin_cluster][spin[curr_site].potts];
-        Sz_new = (p_new % 2 == 0) ? 1 : -1;
+        spin[curr_site].new_potts = main_properties.idx_m[main_cluster.new_pSpin_cluster][spin[curr_site].potts];
+        spin[curr_site].new_Sz = (spin[curr_site].new_potts % 2 == 0) ? 1 : -1;
+    }
+
+    double excluded_sum = 0;
+    double included_sum = 0;
+
+    for(i = main_cluster.new_cluster.begin(); i != main_cluster.new_cluster.end(); ++i) {
+
+        curr_site = (*i);
+
+        for(int j = 0; j < Ns; j++) {
+
+            if(spin[j].cluster_tag == 0) {
+
+                excluded_sum += (spin[curr_site].new_Sz - spin[curr_site].Sz)*spin[j].Sz*main_interactions.Ud(spin, curr_site, j, L);
+
+            } else {
+
+                included_sum += (spin[curr_site].new_Sz*spin[j].new_Sz - spin[curr_site].Sz*spin[j].Sz)*main_interactions.Ud(spin, curr_site, j, L);
+
+            }
+        }
+    }
+
+    double delE = Dp*(excluded_sum + 0.5*included_sum);
+
+
+    double r = rand1();
+    if(r < exp(-beta*delE)) {
+
+        for(i = main_cluster.new_cluster.begin(); i != main_cluster.new_cluster.end(); ++i) {
+            curr_site = (*i);
+
+            spin[curr_site].potts = spin[curr_site].new_potts;
+            spin[curr_site].Sz = spin[curr_site].new_Sz;
+
+            spin[curr_site].cluster_tag = 0;
+        }
+
+        main_measurements.Ed_curr += delE;
+
+        return 1;
+
+    } else {
+
+        for(i = main_cluster.new_cluster.begin(); i != main_cluster.new_cluster.end(); ++i) {
+            curr_site = (*i);
+
+            spin[curr_site].cluster_tag = 0;
+        }
+
+        return 0;
     }
 }
 
-double sweep_cluster() {
+double sweep_cluster(Cluster main_cluster, Measurements main_measurements, Interactions main_interactions, Properties main_properties, Site *spin, int Ns, int L, double beta, double num_sweeps) {
+    int hits = 0;
+    int total_sites = 0;
+    int total_accepted_sites = 0;
+    int cluster_size = 0;
 
+    for (int i = 0; i < num_sweeps; i++) {
+        cluster_size = generate_cluster(main_cluster, main_properties, spin, Ns);
+
+        total_sites += cluster_size;
+
+        int accepted = flip_cluster(main_cluster, main_measurements, main_interactions, main_properties, spin, Ns, L, beta);
+        if (accepted == 1) {
+            hits++;
+            total_accepted_sites += cluster_size;
+        }
+    }
+
+    main_cluster.avg_size = ((double)total_sites / (double)num_sweeps);
+    main_cluster.avg_flipped_size = (hits == 0) ? 0 : ((double)total_accepted_sites / (double)hits);
+
+    return ((double)hits / (double)num_sweeps);
 }
 
-void Wolff_MC_Sim() {
+void Wolff_MC_Sim(Cluster main_cluster, Measurements main_measurements, Interactions main_interactions, Properties main_properties, Site *spin, int Ns, int L, double beta, const std::string L_name) {
+    main_properties.set_pb(beta);
 
+    double hits = 0;
+    double thermalize = 2000;
+    double sweep_therm = 2;
+    long int npts = 50000000;
+
+    double E1 = 0, E2 = 0;
+    double PM1 = 0, PM2 = 0, PM4 = 0;
+    double IM1 = 0, IM2 = 0, IM4 = 0;
+
+    //thermalize the system
+    for(int i = 0; i < thermalize; i++) {
+        hits += sweep_cluster(main_cluster, main_measurements, main_interactions, main_properties, spin, Ns, L, beta, sweep_therm);
+    }
+    std::cout << "Cluster acceptance rate: " << (hits*100) / (double)thermalize << "% " << std::endl;
+
+    //Collect data
+    std::cout << "gatering data... " << std::endl;
+
+    for(long int n = 0; n < npts; n++) {
+        hits = sweep_cluster(main_cluster, main_measurements, main_interactions, main_properties, spin, Ns, L, beta, sweep_therm);
+
+        double e = main_measurements.clock_energy(main_properties, spin, Ns, L) + main_measurements.Ed_curr;
+
+        E1 = (n*E1 + e) / (n + 1.);
+        E2 = (n*E2 + e*e) / (n = 1.);
+
+        double potts_mag = main_measurements.potts_magnetization(main_properties, spin, Ns, L);
+
+        PM1 = (n * PM1 + potts_mag) / (n + 1.);
+        PM2 = (n * PM2 + pow(potts_mag, 2)) / (n + 1.);
+        PM4 = (n * PM4 + pow(potts_mag, 4)) / (n + 1.);
+
+        double ising_mag = main_measurements.ising_magnetization(spin, Ns);
+
+        IM1 = (n * IM1 + ising_mag) / (n + 1.);
+        IM2 = (n * IM2 + pow(ising_mag, 2)) / (n + 1.);
+        IM4 = (n * IM4 + pow(ising_mag, 4)) / (n + 1.);
+    }
+    print(L_name, E1, E2, PM1, PM2, PM4, beta, Ns);
 }

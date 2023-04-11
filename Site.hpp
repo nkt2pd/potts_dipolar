@@ -8,7 +8,9 @@ public:
     int idx;    // index 0, 1, 2, ... Ns-1
     int x, y;   // coordinates
     int Sz;     // Ising spins
+    int new_Sz;
     int potts;
+    int new_potts;
     int Ns;
     int L;
     int lattice_pt[2];

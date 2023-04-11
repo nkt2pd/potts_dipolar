@@ -1,12 +1,12 @@
 #ifndef PROPERTIES_HPP
 #define PROPERTIES_HPP
 
-#define _USE_MATH_DEFINES
 #define q 6
 #define Jnn -1
 
 #include <cmath>
 #include <vector>
+#include "Constants.hpp"
 
 class Properties {
     public:
@@ -14,11 +14,6 @@ class Properties {
     double V_clock[q][q];
     double theta[q];
     double pb[q][q][q];
-
-    std::vector<int> cluster;
-    std::vector<int> prev_additions;
-    std::vector<int> new_additions;
-    int new_pSpin_cluster;
 
     Properties() {
 

@@ -24,7 +24,7 @@ int main(int argc, char *argv[]) {
     Measurements main_measurements;
 
     const std::string L_size(argv[1]);
-    const std::string L_name = "Potts" + L_size;
+    const std::string L_name = "Potts_ising" + L_size;
     
     clear_files(L_name);
     
@@ -32,7 +32,6 @@ int main(int argc, char *argv[]) {
 
     set_coordinates(spin, Ns, L);
     set_nn(spin, Ns, L);
-    set_cluster_tag(spin, Ns);
     
     init_random(main_measurements, main_interactions, spin, Ns, L);
 
@@ -48,13 +47,6 @@ int main(int argc, char *argv[]) {
         main_properties.set_pb(1./T);
 
         Metropolis_MC_Sim(main_interactions, main_measurements, main_properties, 1./T, spin, Ns, L, L_name);
-	
-	if (T <= 1.1 && T >= 0.65) {
-	  del_T = 0.05;
-	} else {
-	  del_T = 0.1;
-	}
-
     }
 
 
