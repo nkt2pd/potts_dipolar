@@ -2,6 +2,7 @@
 
 #include <string>
 #include <iostream>
+#include <ctime>
 #include "Constants.hpp"
 #include "Measurements.hpp"
 #include "Interactions.hpp"
@@ -79,6 +80,10 @@ double MC_sweep(Measurements main_measurements, Interactions main_interactions, 
 
 void Metropolis_MC_Sim(Interactions main_interactions, Measurements main_measurements, Properties main_properties, double beta, Site *spin, int Ns, int L, const std::string L_name) {
 
+    clock_t t_start = clock();
+    clock_t t_now;
+    double t_diff = 0;
+
     int thermalize = 20000;
     int nsweep = 50;
     int ndata = 50000000;
@@ -130,7 +135,10 @@ void Metropolis_MC_Sim(Interactions main_interactions, Measurements main_measure
         IM4 = (n * IM4 + pow(ising_mag, 4)) / (n + 1.);
     }
 
-    print(L_name, E1, E2, PM1, PM2, PM4, beta, Ns);
+    t_now = clock();
+    t_diff = (double)((t_now - t_start)/CLOCKS_PER_SEC);
+
+    print(L_name, E1, E2, PM1, PM2, PM4, beta, Ns, t_diff);
 }
 
 
@@ -270,6 +278,11 @@ double sweep_cluster(Cluster main_cluster, Measurements main_measurements, Inter
 }
 
 void Wolff_MC_Sim(Cluster main_cluster, Measurements main_measurements, Interactions main_interactions, Properties main_properties, Site *spin, int Ns, int L, double beta, const std::string L_name) {
+    
+    clock_t t_start = clock();
+    clock_t t_now;
+    double t_diff = 0;
+    
     main_properties.set_pb(beta);
 
     double hits = 0;
@@ -310,5 +323,9 @@ void Wolff_MC_Sim(Cluster main_cluster, Measurements main_measurements, Interact
         IM2 = (n * IM2 + pow(ising_mag, 2)) / (n + 1.);
         IM4 = (n * IM4 + pow(ising_mag, 4)) / (n + 1.);
     }
-    print(L_name, E1, E2, PM1, PM2, PM4, beta, Ns);
+
+    t_now = clock();
+    t_diff = (double)((t_now - t_start)/CLOCKS_PER_SEC);
+
+    print(L_name, E1, E2, PM1, PM2, PM4, beta, Ns, t_diff);
 }

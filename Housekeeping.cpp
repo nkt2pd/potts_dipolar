@@ -19,7 +19,7 @@ void clear_files(const std::string L_name) {
 
 }
 
-void print(const std::string L_name, double E1, double E2, double M1, double M2, double M4, double beta, int Ns) {
+void print(const std::string L_name, double E1, double E2, double M1, double M2, double M4, double beta, int Ns, int t_diff) {
     
         std::ofstream energy;
         energy.open(L_name + "_energy.dat", std::fstream::app);
@@ -43,5 +43,12 @@ void print(const std::string L_name, double E1, double E2, double M1, double M2,
         binder4.close();
         energy.close();
         heat.close();
+
+        std::ofstream time;
+        time.open(L_name + "_time.dat", std::fstream::app);
+
+        time << 1./beta << ", " << t_diff << std::endl;
+
+        time.close();
 
 }

@@ -6,6 +6,7 @@
 #include "Interactions.hpp"
 #include "Properties.hpp"
 #include "Site.hpp"
+#include "Cluster.hpp"
 
 int update_site(Measurements main_measurements, Interactions main_interactions, Properties main_properties, int k, double beta, Site *spin, int Ns, int L);
 
