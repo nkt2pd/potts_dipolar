@@ -12,7 +12,7 @@
 
 int main(int argc, char *argv[]) {
     if (argc != 2) {
-        std::cout << "Usage: ./potts_parallel <Lattice Length>" << std::endl;
+        std::cout << "Usage: ./potts_dipolar_Wolff <Lattice Length>" << std::endl;
         return 1;
     }
 
@@ -27,13 +27,21 @@ int main(int argc, char *argv[]) {
 
     const std::string L_size(argv[1]);
     const std::string L_name = "Potts_cls" + L_size;
+
+    main_interactions.compute_Vd(L, 200);
     
     clear_files(L_name);
     
+    std::cout << "Test 1" << std::endl;
+
     init_uniform(main_measurements, main_interactions, spin, Ns, L);
 
+    std::cout << "Test 4" << std::endl;
+
     set_coordinates(spin, Ns, L);
+
     set_nn(spin, Ns, L);
+    
     set_cluster_tag(spin, Ns);
     
     init_random(main_measurements, main_interactions, spin, Ns, L);

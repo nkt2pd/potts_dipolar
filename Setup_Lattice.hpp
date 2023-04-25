@@ -2,8 +2,9 @@
 #define SETUP_LATTICE_HPP
 
 #include "Site.hpp"
+//#include "Interactions.hpp"
+class Interactions;
 #include "Measurements.hpp"
-#include "Interactions.hpp"
 
 void init_uniform(Measurements main_measurements, Interactions main_interactions, Site *spin, int Ns, int L);
 
@@ -17,6 +18,6 @@ void set_nn(Site *spin, int Ns, int L);
 
 void set_cluster_tag(Site *spin, int Ns);
 
-int mod(int x, int m);
+
 
 #endif

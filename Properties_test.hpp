@@ -3,6 +3,7 @@
 
 #define q 6
 #define Jnn -1
+#define _USE_MATH_DEFINES
 
 #include <cmath>
 #include <vector>
@@ -19,12 +20,12 @@ class Properties {
 
         for (int i = 0; i < q; i++) {
             for (int j = 0; j < q; j++) {
-                V_clock[i][j] = cos((i - j)*2.*PI/((double)q));
+                V_clock[i][j] = cos((i - j)*2.*M_PI/((double)q));
             }
         }
 
         for (int k = 0; k < q; k++) {
-            theta[q] = (2 * PI * (double)k) / (double)q;
+            theta[q] = (2 * M_PI * (double)k) / (double)q;
         }
 
         idx_m[0][0] = 3;
@@ -75,8 +76,8 @@ class Properties {
             for(int j=0; j<q; j++) {
                 for(int k=0; k<q; k++) {
     
-            double f1 = cos((j - i)*2.*PI/((double) q));
-            double f2 = cos((k - i)*2.*PI/((double) q));
+            double f1 = cos((j - i)*2.*M_PI/((double) q));
+            double f2 = cos((k - i)*2.*M_PI/((double) q));
             
             pb[i][j][k] = 1. - exp(2.*beta*Jnn*f1*f2);
             

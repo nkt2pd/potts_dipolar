@@ -1,3 +1,4 @@
+#include <iostream>
 #include "Measurements.hpp"
 #include "Interactions.hpp"
 #include "Site.hpp"
@@ -75,11 +76,3 @@ void set_cluster_tag(Site *spin, int Ns) {
     }
 }
 
-int mod(int x, int m) {
-	if (x>=0 && x<m)
-		return x;
-	else if (x<0)
-		return m-1-mod(-1-x,m);
-	else
-		return x%m;
-}

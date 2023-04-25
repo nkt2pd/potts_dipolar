@@ -8,10 +8,11 @@
 #include "MonteCarlo.hpp"
 #include "Housekeeping.hpp"
 #include "Rand.hpp"
+#include "Cluster.hpp"
 
 int main(int argc, char *argv[]) {
     if (argc != 2) {
-        std::cout << "Usage: ./potts_dipolar_Ising <Lattice Length>" << std::endl;
+        std::cout << "Usage: ./potts_parallel <Lattice Length>" << std::endl;
         return 1;
     }
 
@@ -22,19 +23,20 @@ int main(int argc, char *argv[]) {
     Properties main_properties;
     Interactions main_interactions(L);
     Measurements main_measurements;
+    Cluster main_cluster;
+
+    main_interactions.compute_Vd(L, 200);
 
     const std::string L_size(argv[1]);
-    const std::string L_name = "Potts_ising" + L_size;
-    
-    main_interactions.compute_Vd(L, 200);
+    const std::string L_name = "Potts_cls" + L_size;
     
     clear_files(L_name);
-
+    
     init_uniform(main_measurements, main_interactions, spin, Ns, L);
-    
+
     set_coordinates(spin, Ns, L);
-    
     set_nn(spin, Ns, L);
+    set_cluster_tag(spin, Ns);
     
     init_random(main_measurements, main_interactions, spin, Ns, L);
 
@@ -48,9 +50,9 @@ int main(int argc, char *argv[]) {
         std::cout << "T = " << T << std::endl;
 
         main_properties.set_pb(1./T);
-    
-        Metropolis_MC_Sim(main_interactions, main_measurements, main_properties, 1./T, spin, Ns, L, L_name);
-        
+
+        Wolff_MC_Sim(main_cluster, main_measurements, main_interactions, main_properties, spin, Ns, L, 1./T, L_name);
+
     }
 
 

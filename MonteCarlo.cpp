@@ -84,9 +84,9 @@ void Metropolis_MC_Sim(Interactions main_interactions, Measurements main_measure
     clock_t t_now;
     double t_diff = 0;
 
-    int thermalize = 20000;
+    int thermalize = 2000;
     int nsweep = 50;
-    int ndata = 50000000;
+    int ndata = 500000;
 
     //Run 5000 sweeps of the system to achieve equilibrium
     double accepted = 0;
@@ -301,7 +301,7 @@ void Wolff_MC_Sim(Cluster main_cluster, Measurements main_measurements, Interact
     std::cout << "Cluster acceptance rate: " << (hits*100) / (double)thermalize << "% " << std::endl;
 
     //Collect data
-    std::cout << "gatering data... " << std::endl;
+    std::cout << "gathering data... " << std::endl;
 
     for(long int n = 0; n < npts; n++) {
         hits = sweep_cluster(main_cluster, main_measurements, main_interactions, main_properties, spin, Ns, L, beta, sweep_therm);

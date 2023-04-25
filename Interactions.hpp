@@ -5,14 +5,14 @@
 
 #include <cmath>
 #include "Site.hpp"
-#include "Setup_Lattice.hpp"
+#include "Housekeeping.hpp"
 
 class Interactions {
     public:
     double *Vd;
 
     Interactions(int L) {
-        double* Vd = new double[L*L];
+        Vd = new double[L*L];
     }
 
     void compute_Vd(int L, int N_max) {
@@ -21,10 +21,11 @@ class Interactions {
         for(int x=0; x<L; x++)
             for(int y=0; y<L; y++) {
         
-            if(x == 0 && y == 0) this->Vd[x*L + y] = 0;
-            else {
+            if(x == 0 && y == 0) { 
+                Vd[x*L + y] = 0;
+            } else {
         
-                this->Vd[x*L + y] = 0;
+                Vd[x*L + y] = 0;
             
                 dr0[0] = x + 0.5*y;
                 dr0[1] = 0.5*sqrt(3.)*y;
@@ -37,13 +38,24 @@ class Interactions {
                 
                     double r2 = pow(dr[0], 2) + pow(dr[1], 2);
                 
-                    this->Vd[x*L + y] += 1./pow(r2, 1.5);
+                    Vd[x*L + y] += 1./pow(r2, 1.5);
                 
                 
                 }
             }
         }
     }
+
+    /*void compute_Ud(Site *spin, int Ns, int L) {
+        for(int i = 0; i < Ns; i++) {
+            for(int j = 0; j < Ns; j++) {
+                int dx = spin[j].lattice_pt[0] - spin[i].lattice_pt[0];
+                int dy = spin[j].lattice_pt[1] - spin[i].lattice_pt[1];
+
+                Ud[i*L + j] = 0.5*(this->Vd[mod(dx, L)*L + mod(dy, L)] + this->Vd[mod(-dx, L)*L + mod(-dy, L)]);
+            }
+        }
+    }*/
 
     inline double Ud(Site *spin, int i, int j, int L) {
         int dx = spin[j].lattice_pt[0] - spin[i].lattice_pt[0];
@@ -53,7 +65,7 @@ class Interactions {
     }
 
     ~Interactions() {
-        delete[] Vd;
+        delete[] this->Vd;
     }
 };
 

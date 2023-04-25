@@ -1,4 +1,5 @@
 #include "Housekeeping.hpp"
+#include <cmath>
 #include <string>
 #include <fstream>
 
@@ -51,4 +52,13 @@ void print(const std::string L_name, double E1, double E2, double M1, double M2,
 
         time.close();
 
+}
+
+int mod(int x, int m) {
+	if (x>=0 && x<m)
+		return x;
+	else if (x<0)
+		return m-1-mod(-1-x,m);
+	else
+		return x%m;
 }

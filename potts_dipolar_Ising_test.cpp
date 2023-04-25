@@ -11,7 +11,7 @@
 
 int main(int argc, char *argv[]) {
     if (argc != 2) {
-        std::cout << "Usage: ./potts_dipolar_Ising <Lattice Length>" << std::endl;
+        std::cout << "Usage: ./potts_parallel <Lattice Length>" << std::endl;
         return 1;
     }
 
@@ -26,14 +26,11 @@ int main(int argc, char *argv[]) {
     const std::string L_size(argv[1]);
     const std::string L_name = "Potts_ising" + L_size;
     
-    main_interactions.compute_Vd(L, 200);
-    
     clear_files(L_name);
-
+    
     init_uniform(main_measurements, main_interactions, spin, Ns, L);
-    
+
     set_coordinates(spin, Ns, L);
-    
     set_nn(spin, Ns, L);
     
     init_random(main_measurements, main_interactions, spin, Ns, L);
@@ -48,9 +45,8 @@ int main(int argc, char *argv[]) {
         std::cout << "T = " << T << std::endl;
 
         main_properties.set_pb(1./T);
-    
+
         Metropolis_MC_Sim(main_interactions, main_measurements, main_properties, 1./T, spin, Ns, L, L_name);
-        
     }
 
 

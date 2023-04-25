@@ -11,7 +11,7 @@
 
 class Measurements {
     public:
-    double Ed_curr;
+    double Ed_curr = 0;
 
     double clock_energy(Properties main_properties, Site *spin, int Ns, int L) {
         double sum = 0;
