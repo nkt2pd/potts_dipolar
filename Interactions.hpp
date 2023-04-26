@@ -12,6 +12,7 @@ class Interactions {
     double *Vd;
 
     Interactions(int L) {
+        
         Vd = new double[L*L];
     }
 
@@ -62,10 +63,6 @@ class Interactions {
         int dy = spin[j].lattice_pt[1] - spin[i].lattice_pt[1];
     
         return 0.5*(this->Vd[mod(dx, L)*L + mod(dy, L)] + this->Vd[mod(-dx, L)*L + mod(-dy, L)]);
-    }
-
-    ~Interactions() {
-        delete[] this->Vd;
     }
 };
 

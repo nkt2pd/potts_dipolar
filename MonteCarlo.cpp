@@ -102,7 +102,7 @@ void Metropolis_MC_Sim(Interactions main_interactions, Measurements main_measure
     double IM1 = 0, IM2 = 0, IM4 = 0;
     double avg_accept = 0;
 
-    int system_check = 100000;
+    int system_check = 1000;
 
     for (int n = 0; n < ndata; n++) {
 
@@ -160,7 +160,6 @@ int generate_cluster(Cluster main_cluster, Properties main_properties, Site *spi
 
     int curr_site = 0;
     int curr_neighbor = 0;
-
     while(main_cluster.prev_additions.size() > 0) {
         
         main_cluster.new_additions.clear();
@@ -175,7 +174,6 @@ int generate_cluster(Cluster main_cluster, Properties main_properties, Site *spi
 
                 if(spin[curr_neighbor].cluster_tag == 0 && 
                    rand1() < main_properties.pb[main_cluster.new_pSpin_cluster][spin[curr_site].potts][spin[curr_neighbor].potts]) {
-                    
                     main_cluster.new_cluster.push_back(curr_neighbor);
                     spin[curr_neighbor].cluster_tag = 1;
 
@@ -288,7 +286,7 @@ void Wolff_MC_Sim(Cluster main_cluster, Measurements main_measurements, Interact
     double hits = 0;
     double thermalize = 2000;
     double sweep_therm = 2;
-    long int npts = 50000000;
+    int npts = 500000;
 
     double E1 = 0, E2 = 0;
     double PM1 = 0, PM2 = 0, PM4 = 0;
@@ -299,17 +297,22 @@ void Wolff_MC_Sim(Cluster main_cluster, Measurements main_measurements, Interact
         hits += sweep_cluster(main_cluster, main_measurements, main_interactions, main_properties, spin, Ns, L, beta, sweep_therm);
     }
     std::cout << "Cluster acceptance rate: " << (hits*100) / (double)thermalize << "% " << std::endl;
-
+    std::cout << "Cluster Average Size: " << main_cluster.avg_size << std::endl;
     //Collect data
     std::cout << "gathering data... " << std::endl;
 
-    for(long int n = 0; n < npts; n++) {
+    int system_check = 100000;
+
+    for(int n = 0; n < npts; n++) {
+
+        if (n % system_check == 0) std::cout << "n = " << n << std::endl;
+
         hits = sweep_cluster(main_cluster, main_measurements, main_interactions, main_properties, spin, Ns, L, beta, sweep_therm);
 
         double e = main_measurements.clock_energy(main_properties, spin, Ns, L) + main_measurements.Ed_curr;
 
         E1 = (n*E1 + e) / (n + 1.);
-        E2 = (n*E2 + e*e) / (n = 1.);
+        E2 = (n*E2 + e*e) / (n + 1.);
 
         double potts_mag = main_measurements.potts_magnetization(main_properties, spin, Ns, L);
 

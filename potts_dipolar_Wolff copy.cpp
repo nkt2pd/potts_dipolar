@@ -58,7 +58,7 @@ int main(int argc, char *argv[]) {
 
     }
 
-    delete[] main_interactions.Vd;
+
     delete[] spin;
 
     return 0;

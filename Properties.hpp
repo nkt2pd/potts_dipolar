@@ -6,6 +6,7 @@
 
 #include <cmath>
 #include <vector>
+#include <iostream>
 #include "Constants.hpp"
 
 class Properties {
@@ -75,11 +76,10 @@ class Properties {
             for(int j=0; j<q; j++) {
                 for(int k=0; k<q; k++) {
     
-            double f1 = cos((j - i)*2.*PI/((double) q));
-            double f2 = cos((k - i)*2.*PI/((double) q));
+                    double f1 = cos((j - i)*2.*PI/((double) q));
+                    double f2 = cos((k - i)*2.*PI/((double) q));
             
-            pb[i][j][k] = 1. - exp(2.*beta*Jnn*f1*f2);
-            
+                    pb[i][j][k] = 1. - exp(2.*beta*Jnn*f1*f2);
                 }
             }
         }

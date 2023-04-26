@@ -33,6 +33,8 @@ int main(int argc, char *argv[]) {
     init_uniform(main_measurements, main_interactions, spin, Ns, L);
     
     set_coordinates(spin, Ns, L);
+
+    std::cout << "test" << std::endl;
     
     set_nn(spin, Ns, L);
     
@@ -53,7 +55,7 @@ int main(int argc, char *argv[]) {
         
     }
 
-
+    delete[] main_interactions.Vd;
     delete[] spin;
 
     return 0;
