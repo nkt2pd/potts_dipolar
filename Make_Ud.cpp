@@ -14,16 +14,16 @@ int main() {
     Site* spin = new Site[Ns];
     Interactions matrices(L);
 
-    std::cout << "Test" << std::endl;
-
     set_coordinates(spin, Ns, L);
 
-    matrices.compute_Vd(L, 2000);
+    std::cout << "Computing Matrix..." << std::endl;
+
+    matrices.compute_Vd(L, 20000);
 
     std::ofstream Vd_file;
     std::ofstream Ud_file;
 
-    Vd_file.open("Vd_matrix.dat", std::fstream::app);
+    Vd_file.open("Vd_matrix_20000.dat", std::fstream::app);
 
     Vd_file << std::fixed << std::setprecision(7);
 
@@ -33,6 +33,8 @@ int main() {
         }
         Vd_file << std::endl;
     }
+
+    std::cout << "Done!" << std::endl;
 
     Vd_file.close();
 

@@ -1,6 +1,6 @@
-set xrange [0:10]
-set yrange [0:1]
+set xrange [0.01:10]
+set yrange [0:2]
 
 set logscale x
 
-plot "Potts_cls12_m.dat" using 1:2 with points
+plot "Potts_cls12_heat.dat" using 1:2 with points
