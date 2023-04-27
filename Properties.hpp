@@ -25,7 +25,7 @@ class Properties {
         }
 
         for (int k = 0; k < q; k++) {
-            theta[q] = (2 * PI * (double)k) / (double)q;
+            theta[k] = (2 * PI * (double)k) / (double)q;
         }
 
         idx_m[0][0] = 3;

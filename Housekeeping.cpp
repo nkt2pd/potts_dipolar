@@ -2,6 +2,7 @@
 #include <cmath>
 #include <string>
 #include <fstream>
+#include <vector>
 
 void clear_files(const std::string L_name) {
     std::ofstream clear1, clear2, clear3, clear4, clear5;
@@ -21,7 +22,7 @@ void clear_files(const std::string L_name) {
 }
 
 void print(const std::string L_name, double E1, double E2, double M1, double M2, double M4, double beta, int Ns, int t_diff) {
-    
+
         std::ofstream energy;
         energy.open(L_name + "_energy.dat", std::fstream::app);
         std::ofstream heat;
