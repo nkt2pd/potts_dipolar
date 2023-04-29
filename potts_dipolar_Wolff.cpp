@@ -55,7 +55,12 @@ int main(int argc, char *argv[]) {
 
         //Metropolis_MC_Sim(main_interactions, main_measurements, main_properties, 1./T, spin, Ns, L, L_name);
         Wolff_MC_Sim(main_cluster, main_measurements, main_interactions, main_properties, spin, Ns, L, 1./T, L_name);
-
+        if(T < 2.9) {
+            del_T = .01;
+        }
+        if(T < .16) {
+            del_T = .001;
+        }
     }
 
     delete[] main_interactions.Vd;
