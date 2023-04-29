@@ -1,5 +1,5 @@
-set xrange [0:10]
-set yrange [0:1]
+set xrange [0.01:10]
+set yrange [0:2]
 
 set logscale x
 
