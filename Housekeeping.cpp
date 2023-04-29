@@ -5,19 +5,21 @@
 #include <vector>
 
 void clear_files(const std::string L_name) {
-    std::ofstream clear1, clear2, clear3, clear4, clear5;
+    std::ofstream clear1, clear2, clear3, clear4, clear5, clear6;
     
     clear1.open(L_name + "_energy.dat", std::fstream::trunc);
     clear2.open(L_name + "_heat.dat", std::fstream::trunc);
     clear3.open(L_name + "_m.dat", std::fstream::trunc);
     clear4.open(L_name + "_susceptibility.dat", std::fstream::trunc);
     clear5.open(L_name + "_binder4.dat", std::fstream::trunc);
+    clear6.open(L_name + "_time.dat", std::fstream::trunc);
 
     clear1.close();
     clear2.close();
     clear3.close();
     clear4.close();
     clear5.close();
+    clear6.close();
 
 }
 
