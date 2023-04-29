@@ -35,7 +35,7 @@ int update_site(Measurements main_measurements, Interactions main_interactions, 
         delPSpin += (main_properties.V_clock[p_new][spin[k].nn1[l]->potts] - main_properties.V_clock[spin[k].potts][spin[k].nn1[l]->potts]);
     }
 
-    if (Sz_new = spin[k].Sz) {
+    if (Sz_new == spin[k].Sz) {
         delISpin = 0;
     } else {
         for (int m = 0; m < Ns; m++) {
