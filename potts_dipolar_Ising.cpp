@@ -24,7 +24,7 @@ int main(int argc, char *argv[]) {
     Measurements main_measurements;
 
     const std::string L_size(argv[1]);
-    const std::string L_name = "Potts_ising" + L_size;
+    const std::string L_name = "Potts_Metrop" + L_size;
     
     main_interactions.compute_Vd(L, 200);
     
@@ -44,7 +44,7 @@ int main(int argc, char *argv[]) {
 
     std::cout << "Thank you for choosing the Potts Model :)" << std::endl;
             
-    for(double T = 1.5; T>0; T -= del_T) {
+    for(double T = 10; T>0; T -= del_T) {
 
         std::cout << "Lattice Length = " << L << std::endl;
         std::cout << "T = " << T << std::endl;

@@ -5,14 +5,15 @@
 #include <vector>
 
 void clear_files(const std::string L_name) {
-    std::ofstream clear1, clear2, clear3, clear4, clear5, clear6;
+    std::ofstream clear1, clear2, clear3, clear4, clear5, clear6, clear7;
     
     clear1.open(L_name + "_energy.dat", std::fstream::trunc);
     clear2.open(L_name + "_heat.dat", std::fstream::trunc);
-    clear3.open(L_name + "_m.dat", std::fstream::trunc);
-    clear4.open(L_name + "_susceptibility.dat", std::fstream::trunc);
-    clear5.open(L_name + "_binder4.dat", std::fstream::trunc);
-    clear6.open(L_name + "_time.dat", std::fstream::trunc);
+    clear3.open(L_name + "Potts_m.dat", std::fstream::trunc);
+    clear4.open(L_name + "Ising_m.dat", std::fstream::trunc);
+    clear5.open(L_name + "_susceptibility.dat", std::fstream::trunc);
+    clear6.open(L_name + "_binder4.dat", std::fstream::trunc);
+    clear7.open(L_name + "_time.dat", std::fstream::trunc);
 
     clear1.close();
     clear2.close();
@@ -20,17 +21,21 @@ void clear_files(const std::string L_name) {
     clear4.close();
     clear5.close();
     clear6.close();
+    clear7.close();
 
 }
 
-void print(const std::string L_name, double E1, double E2, double M1, double M2, double M4, double beta, int Ns, int t_diff) {
+void print(const std::string L_name, double E1, double E2, double PM1, double PM2, double PM4, 
+           double IM1, double IM2, double IM4, double beta, int Ns, int t_diff) {
 
         std::ofstream energy;
         energy.open(L_name + "_energy.dat", std::fstream::app);
         std::ofstream heat;
         heat.open(L_name + "_heat.dat", std::fstream::app);
-        std::ofstream m;
-        m.open(L_name + "_m.dat", std::fstream::app);
+        std::ofstream Potts_m;
+        Potts_m.open(L_name + "Potts_m.dat", std::fstream::app);
+        std::ofstream Ising_m;
+        Ising_m.open(L_name + "Ising_m.dat", std::fstream::app);
         std::ofstream susceptibility;
         susceptibility.open(L_name + "_susceptibility.dat", std::fstream::app);
         std::ofstream binder4;
@@ -38,11 +43,13 @@ void print(const std::string L_name, double E1, double E2, double M1, double M2,
 
         energy << 1./beta << ", " << E1/((double) Ns) << std::endl;
         heat << 1./beta << ", " << pow(beta, 2) * (E2 - E1*E1) / ((double) Ns) << std::endl;
-        m << 1./beta << ", " << M1 << std::endl;
-        susceptibility << 1./beta << ", " << beta*(M2 - M1*M1) << std::endl;
-        binder4 << 1./beta << ", " << 1. - (M4/(3 * pow(M2, 2))) << std::endl;
+        Potts_m << 1./beta << ", " << PM1 << std::endl;
+        Ising_m << 1./beta << ", " << IM1 << std::endl;
+        susceptibility << 1./beta << ", " << beta*(PM2 - PM1*PM1) << std::endl;
+        binder4 << 1./beta << ", " << 1. - (PM4/(3 * pow(PM2, 2))) << std::endl;
 
-        m.close();
+        Potts_m.close();
+        Ising_m.close();
         susceptibility.close();
         binder4.close();
         energy.close();

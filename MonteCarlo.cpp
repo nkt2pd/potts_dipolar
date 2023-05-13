@@ -138,7 +138,7 @@ void Metropolis_MC_Sim(Interactions main_interactions, Measurements main_measure
     t_now = clock();
     t_diff = (double)((t_now - t_start)/CLOCKS_PER_SEC);
 
-    print(L_name, E1, E2, PM1, PM2, PM4, beta, Ns, t_diff);
+    print(L_name, E1, E2, PM1, PM2, PM4, IM1, IM2, IM4, beta, Ns, t_diff);
 }
 
 
@@ -391,5 +391,5 @@ void Wolff_MC_Sim(Cluster main_cluster, Measurements main_measurements, Interact
     t_now = clock();
     t_diff = (double)((t_now - t_start)/CLOCKS_PER_SEC);
 
-    print(L_name, E1, E2, PM1, PM2, PM4, beta, Ns, t_diff);
+    print(L_name, E1, E2, PM1, PM2, PM4, IM1, IM2, IM4, beta, Ns, t_diff);
 }
