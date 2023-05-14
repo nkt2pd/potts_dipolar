@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include "Constants.hpp"
 #include "Measurements.hpp"
 #include "Interactions.hpp"
@@ -9,13 +10,16 @@
 #include "Housekeeping.hpp"
 #include "Rand.hpp"
 
+//If using this program, must clear files manually before running right now :(
+
 int main(int argc, char *argv[]) {
-    if (argc != 2) {
-        std::cout << "Usage: ./potts_dipolar_Ising <Lattice Length>" << std::endl;
+    if (argc != 3) {
+        std::cout << "Usage: ./potts_dipolar_Ising <Lattice Length> <Temp>" << std::endl;
         return 1;
     }
 
     const int L = atof(argv[1]);
+    const double T = atof(argv[2]);
     const int Ns = L * L;
 
     Site* spin = new Site[Ns];
@@ -27,8 +31,6 @@ int main(int argc, char *argv[]) {
     const std::string L_name = "Potts_Metrop" + L_size;
     
     main_interactions.compute_Vd(L, 200);
-    
-    clear_files(L_name);
 
     init_uniform(main_measurements, main_interactions, spin, Ns, L);
     
@@ -40,25 +42,14 @@ int main(int argc, char *argv[]) {
     
     init_random(main_measurements, main_interactions, spin, Ns, L);
 
-    double del_T = 0.1;
-
     std::cout << "Thank you for choosing the Potts Model :)" << std::endl;
-            
-    for(double T = 10; T>0; T -= del_T) {
 
-        std::cout << "Lattice Length = " << L << std::endl;
-        std::cout << "T = " << T << std::endl;
+    std::cout << "Lattice Length = " << L << std::endl;
+    std::cout << "T = " << T << std::endl;
 
-        main_properties.set_pb(1./T);
+    main_properties.set_pb(1./T);
     
-        Metropolis_MC_Sim(main_interactions, main_measurements, main_properties, 1./T, spin, Ns, L, L_name);
-        if(T < 2.9) {
-            del_T = .01;
-        }
-        if(T < .16) {
-            del_T = .001;
-        }
-    }
+    Metropolis_MC_Sim(main_interactions, main_measurements, main_properties, 1./T, spin, Ns, L, L_name);
 
     delete[] main_interactions.Vd;
     delete[] spin;
