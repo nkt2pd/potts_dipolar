@@ -25,11 +25,13 @@ void clear_files(const std::string L_name) {
 
 }
 
-void print(const std::string L_name, double E1, double E2, double PM1, double PM2, double PM4, 
+void print(const std::string L_name, double E1, double E2, double E1_j, double E1_d, double PM1, double PM2, double PM4, 
            double IM1, double IM2, double IM4, double beta, int Ns, int t_diff) {
 
         std::ofstream energy;
         energy.open(L_name + "_energy.dat", std::fstream::app);
+        std::ofstream energy_parts;
+        energy_parts.open(L_name + "_energyParts.dat", std::fstream::app);
         std::ofstream heat;
         heat.open(L_name + "_heat.dat", std::fstream::app);
         std::ofstream Potts_m;
@@ -42,6 +44,7 @@ void print(const std::string L_name, double E1, double E2, double PM1, double PM
         binder4.open(L_name + "_binder4.dat", std::fstream::app);
 
         energy << 1./beta << ", " << E1/((double) Ns) << std::endl;
+        energy_parts << 1./beta << ", " << E1_j/((double) Ns) << ", " << E1_d/((double) Ns) << std::endl;
         heat << 1./beta << ", " << pow(beta, 2) * (E2 - E1*E1) / ((double) Ns) << std::endl;
         Potts_m << 1./beta << ", " << PM1 << std::endl;
         Ising_m << 1./beta << ", " << IM1 << std::endl;
@@ -53,6 +56,7 @@ void print(const std::string L_name, double E1, double E2, double PM1, double PM
         susceptibility.close();
         binder4.close();
         energy.close();
+        energy_parts.close();
         heat.close();
 
         std::ofstream time;

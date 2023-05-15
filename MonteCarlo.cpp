@@ -53,7 +53,7 @@ int update_site(Measurements main_measurements, Interactions main_interactions, 
         if (r < 0.5) {
             spin[k].potts = p_new;
             spin[k].Sz = Sz_new;
-            main_measurements.Ed_curr += Dp * delISpin;
+            //main_measurements.Ed_curr += Dp * delISpin;
 
             return 1;
         } else return 0;
@@ -61,7 +61,7 @@ int update_site(Measurements main_measurements, Interactions main_interactions, 
         if (r < exp(-delE * beta)) {
             spin[k].potts = p_new;
             spin[k].Sz = Sz_new;
-            main_measurements.Ed_curr += Dp * delISpin;
+            //main_measurements.Ed_curr += Dp * delISpin;
 
             return 1;
         } else {
@@ -84,11 +84,11 @@ void Metropolis_MC_Sim(Interactions main_interactions, Measurements main_measure
     clock_t t_now;
     double t_diff = 0;
 
-    int thermalize = 2000;
+    int thermalize = 20000;
     int nsweep = 50;
-    int ndata = 500000;
+    int ndata = 5000000;
 
-    //Run 5000 sweeps of the system to achieve equilibrium
+    //Run 20000 sweeps of the system to achieve equilibrium
     double accepted = 0;
     
     for (int i = 0; i < thermalize; i++) {
@@ -98,6 +98,8 @@ void Metropolis_MC_Sim(Interactions main_interactions, Measurements main_measure
 
     //now start to collect data
     double E1 = 0, E2 = 0;
+    double E_j = 0, E_d = 0;
+    double E1_j = 0, E1_d = 0;
     double PM1 = 0, PM2 = 0, PM4 = 0;
     double IM1 = 0, IM2 = 0, IM4 = 0;
     double avg_accept = 0;
@@ -117,10 +119,16 @@ void Metropolis_MC_Sim(Interactions main_interactions, Measurements main_measure
         accepted /= ((double) nsweep);
         avg_accept = (n * avg_accept + accepted) / (n + 1.);
 
-        double e = main_measurements.clock_energy(main_properties, spin, Ns, L) + main_measurements.Ed_curr;
+        E_j = main_measurements.clock_energy(main_properties, spin, Ns, L);
+        E_d = main_measurements.dipolar_energy(main_interactions, spin, Ns, L);
+
+        double e = E_j + E_d;
 
         E1 = (n * E1 + e) / (n + 1.);
         E2 = (n * E2 + e*e) / (n + 1.);
+
+        E1_j = (n * E1_j + E_j) / (n + 1.);
+        E1_d = (n * E1_d + E_d) / (n + 1.);
 
         double potts_mag = main_measurements.potts_magnetization(main_properties, spin, Ns, L);
 
@@ -128,7 +136,7 @@ void Metropolis_MC_Sim(Interactions main_interactions, Measurements main_measure
         PM2 = (n * PM2 + pow(potts_mag, 2)) / (n + 1.);
         PM4 = (n * PM4 + pow(potts_mag, 4)) / (n + 1.);
 
-        double ising_mag = main_measurements.ising_magnetization(spin, Ns);
+        double ising_mag = abs(main_measurements.ising_magnetization(spin, Ns));
 
         IM1 = (n * IM1 + ising_mag) / (n + 1.);
         IM2 = (n * IM2 + pow(ising_mag, 2)) / (n + 1.);
@@ -138,7 +146,7 @@ void Metropolis_MC_Sim(Interactions main_interactions, Measurements main_measure
     t_now = clock();
     t_diff = (double)((t_now - t_start)/CLOCKS_PER_SEC);
 
-    print(L_name, E1, E2, PM1, PM2, PM4, IM1, IM2, IM4, beta, Ns, t_diff);
+    print(L_name, E1, E2, E1_j, E1_d, PM1, PM2, PM4, IM1, IM2, IM4, beta, Ns, t_diff);
 }
 
 
@@ -233,7 +241,7 @@ int generate_and_flip_cluster(Cluster main_cluster, Properties main_properties, 
             spin[curr_site].cluster_tag = 0;
         }
 
-        main_measurements.Ed_curr += delE;
+        //main_measurements.Ed_curr += delE;
 
         return 1;
 
@@ -350,6 +358,8 @@ void Wolff_MC_Sim(Cluster main_cluster, Measurements main_measurements, Interact
     int npts = 500000;
 
     double E1 = 0, E2 = 0;
+    double E_j = 0, E_d = 0;
+    double E1_j = 0, E1_d = 0;
     double PM1 = 0, PM2 = 0, PM4 = 0;
     double IM1 = 0, IM2 = 0, IM4 = 0;
 
@@ -370,10 +380,16 @@ void Wolff_MC_Sim(Cluster main_cluster, Measurements main_measurements, Interact
 
         hits = sweep_cluster(main_cluster, main_measurements, main_interactions, main_properties, spin, Ns, L, beta, sweep_therm, &average_cluster);
 
-        double e = main_measurements.clock_energy(main_properties, spin, Ns, L) + main_measurements.Ed_curr;
+        E_j = main_measurements.clock_energy(main_properties, spin, Ns, L);
+        E_d = main_measurements.dipolar_energy(main_interactions, spin, Ns, L);
 
-        E1 = (n*E1 + e) / (n + 1.);
-        E2 = (n*E2 + e*e) / (n + 1.);
+        double e = E_j + E_d;
+
+        E1 = (n * E1 + e) / (n + 1.);
+        E2 = (n * E2 + e*e) / (n + 1.);
+
+        E1_j = (n * E1_j + E_j) / (n + 1.);
+        E1_d = (n * E1_d + E_d) / (n + 1.);
 
         double potts_mag = main_measurements.potts_magnetization(main_properties, spin, Ns, L);
 
@@ -391,5 +407,5 @@ void Wolff_MC_Sim(Cluster main_cluster, Measurements main_measurements, Interact
     t_now = clock();
     t_diff = (double)((t_now - t_start)/CLOCKS_PER_SEC);
 
-    print(L_name, E1, E2, PM1, PM2, PM4, IM1, IM2, IM4, beta, Ns, t_diff);
+    print(L_name, E1, E2, E1_j, E1_d, PM1, PM2, PM4, IM1, IM2, IM4, beta, Ns, t_diff);
 }
