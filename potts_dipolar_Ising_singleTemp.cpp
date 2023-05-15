@@ -19,7 +19,7 @@ int main(int argc, char *argv[]) {
     }
 
     const int L = atof(argv[1]);
-    const double T = atof(argv[2]);
+    double T = atof(argv[2]);
     const int Ns = L * L;
 
     T /= 200;
