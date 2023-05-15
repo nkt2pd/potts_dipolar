@@ -22,6 +22,8 @@ int main(int argc, char *argv[]) {
     const double T = atof(argv[2]);
     const int Ns = L * L;
 
+    T /= 200;
+
     Site* spin = new Site[Ns];
     Properties main_properties;
     Interactions main_interactions(L);
