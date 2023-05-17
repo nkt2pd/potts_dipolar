@@ -136,7 +136,7 @@ void Metropolis_MC_Sim(Interactions main_interactions, Measurements main_measure
         PM2 = (n * PM2 + pow(potts_mag, 2)) / (n + 1.);
         PM4 = (n * PM4 + pow(potts_mag, 4)) / (n + 1.);
 
-        double ising_mag = abs(main_measurements.ising_magnetization(spin, Ns));
+        double ising_mag = fabs(main_measurements.ising_magnetization(spin, Ns));
 
         IM1 = (n * IM1 + ising_mag) / (n + 1.);
         IM2 = (n * IM2 + pow(ising_mag, 2)) / (n + 1.);
