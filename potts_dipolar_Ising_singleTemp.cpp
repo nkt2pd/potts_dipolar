@@ -33,12 +33,10 @@ int main(int argc, char *argv[]) {
     const std::string L_name = "Potts_Metrop" + L_size;
     
     main_interactions.compute_Vd(L, 200);
-
+    
     init_uniform(main_measurements, main_interactions, spin, Ns, L);
     
     set_coordinates(spin, Ns, L);
-
-    std::cout << "test" << std::endl;
     
     set_nn(spin, Ns, L);
     

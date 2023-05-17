@@ -33,7 +33,7 @@ class Measurements {
             }
         }
     
-        return 0.5*Dp*sum;
+        return 0.5 * Dp * sum;
     }
 
     inline double E_tot(Interactions main_interactions, Properties main_properties, Site *spin, int Ns, int L) {
