@@ -30,7 +30,6 @@ int update_site(Measurements main_measurements, Interactions main_interactions, 
     double delPSpin = 0;
     double delISpin = 0;
     double delE = 0;
-    int static count = 0;
 
     for(int l=0; l<N_nn1; l++) {
         delPSpin += Jnn*(main_properties.V_clock[p_new][spin[k].nn1[l]->potts] - main_properties.V_clock[spin[k].potts][spin[k].nn1[l]->potts]);
