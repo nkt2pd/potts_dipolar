@@ -52,11 +52,8 @@ int main(int argc, char *argv[]) {
         main_properties.set_pb(1./T);
     
         Metropolis_MC_Sim(main_interactions, main_measurements, main_properties, 1./T, spin, Ns, L, L_name);
-        if(T < 2.9) {
+        if(T < .2) {
             del_T = .01;
-        }
-        if(T < .16) {
-            del_T = .001;
         }
     }
 

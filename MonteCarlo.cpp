@@ -30,21 +30,22 @@ int update_site(Measurements main_measurements, Interactions main_interactions, 
     double delPSpin = 0;
     double delISpin = 0;
     double delE = 0;
+    int static count = 0;
 
     for(int l=0; l<N_nn1; l++) {
-        delPSpin += (main_properties.V_clock[p_new][spin[k].nn1[l]->potts] - main_properties.V_clock[spin[k].potts][spin[k].nn1[l]->potts]);
+        delPSpin += Jnn*(main_properties.V_clock[p_new][spin[k].nn1[l]->potts] - main_properties.V_clock[spin[k].potts][spin[k].nn1[l]->potts]);
     }
 
     if (Sz_new == spin[k].Sz) {
         delISpin = 0;
     } else {
         for (int m = 0; m < Ns; m++) {
-            delISpin += (Sz_new - spin[k].Sz)*spin[k].Sz*main_interactions.Ud(spin, k, m, L);
+            delISpin += (Sz_new - spin[k].Sz)*spin[m].Sz*main_interactions.Ud(spin, k, m, L);
         }
     }
 
     //change in energy when spin is flipped
-    delE = (-Jnn * Jnn * delPSpin) + (Dp * delISpin);
+    delE = (-Jnn * delPSpin) + (Dp * delISpin);
 
     double r = rand1();
 
@@ -53,19 +54,19 @@ int update_site(Measurements main_measurements, Interactions main_interactions, 
         if (r < 0.5) {
             spin[k].potts = p_new;
             spin[k].Sz = Sz_new;
-            //main_measurements.Ed_curr += Dp * delISpin;
 
             return 1;
-        } else return 0;
+        } else {
+            return 0;
+        }
     } else {
         if (r < exp(-delE * beta)) {
             spin[k].potts = p_new;
             spin[k].Sz = Sz_new;
-            //main_measurements.Ed_curr += Dp * delISpin;
 
             return 1;
         } else {
-        return 0;
+            return 0;
         }
     }
 }
@@ -86,7 +87,7 @@ void Metropolis_MC_Sim(Interactions main_interactions, Measurements main_measure
 
     int thermalize = 20000;
     int nsweep = 50;
-    int ndata = 500000;
+    int ndata = 50000;
 
     //Run 20000 sweeps of the system to achieve equilibrium
     double accepted = 0;
@@ -104,7 +105,7 @@ void Metropolis_MC_Sim(Interactions main_interactions, Measurements main_measure
     double IM1 = 0, IM2 = 0, IM4 = 0;
     double avg_accept = 0;
 
-    int system_check = 1000;
+    int system_check = 10000;
 
     for (int n = 0; n < ndata; n++) {
 

@@ -10,19 +10,17 @@
 #include "Housekeeping.hpp"
 #include "Rand.hpp"
 
-//If using this program, must clear files manually before running right now :(
+//If using this program, must clear files manually before running right now
 
 int main(int argc, char *argv[]) {
     if (argc != 3) {
-        std::cout << "Usage: ./potts_dipolar_Ising <Lattice Length> <Temp>" << std::endl;
+        std::cout << "Usage: ./potts_dipolar_Ising_singleTemp <Lattice Length> <Temp>" << std::endl;
         return 1;
     }
 
     const int L = atof(argv[1]);
     double T = atof(argv[2]);
     const int Ns = L * L;
-
-    T /= 200;
 
     Site* spin = new Site[Ns];
     Properties main_properties;
