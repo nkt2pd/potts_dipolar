@@ -29,6 +29,8 @@ int main(int argc, char *argv[]) {
 
     const std::string L_size(argv[1]);
     const std::string L_name = "Potts_Metrop" + L_size;
+
+    T /= 200;
     
     main_interactions.compute_Vd(L, 200);
     
