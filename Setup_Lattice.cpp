@@ -22,7 +22,7 @@ void init_random(Measurements main_measurements, Interactions main_interactions,
 }
 
 inline int index(int x, int y, int L) {
-    return x*L+y;
+    return y*L+x;
 }
 
 void set_coordinates(Site *spin, int Ns, int L) {
@@ -42,7 +42,7 @@ void set_coordinates(Site *spin, int Ns, int L) {
     }
 }
 
-void set_nn(Site *spin, int Ns, int L) { //sets the 2*D nearest neighbors for each site in the system
+void set_nn(Site *spin, int Ns, int L) { //sets the q nearest neighbors for each site in the system
     int k;
     int x, y;
     for(int i=0; i<Ns; i++) { 

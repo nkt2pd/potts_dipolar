@@ -2,6 +2,7 @@
 
 #include <string>
 #include <iostream>
+#include <fstream>
 #include <ctime>
 #include "Constants.hpp"
 #include "Measurements.hpp"
@@ -27,12 +28,21 @@ int update_site(Measurements main_measurements, Interactions main_interactions, 
     int p_new = (int) (rand1() * (double)q);
     int Sz_new = (p_new % 2 == 0) ? 1 : -1;
 
+    int p0 = spin[k].potts;
+    int Sz0 = spin[k].Sz;
+
     double delPSpin = 0;
     double delISpin = 0;
     double delE = 0;
 
+    double static first = 0;
+
+    double clock_Echeck_0 = 0, clock_Echeck_f = 0, clock_Echeck = 0;
+    double dip_Echeck_0 = 0, dip_Echeck_f = 0, dip_Echeck = 0;
+    double Echeck_0 = 0, Echeck_f = 0, Echeck = 0;
+
     for(int l=0; l<N_nn1; l++) {
-        delPSpin += Jnn*(main_properties.V_clock[p_new][spin[k].nn1[l]->potts] - main_properties.V_clock[spin[k].potts][spin[k].nn1[l]->potts]);
+        delPSpin += (main_properties.V_clock[p_new][spin[k].nn1[l]->potts] - main_properties.V_clock[spin[k].potts][spin[k].nn1[l]->potts]);
     }
 
     if (Sz_new == spin[k].Sz) {
@@ -44,8 +54,43 @@ int update_site(Measurements main_measurements, Interactions main_interactions, 
     }
 
     //change in energy when spin is flipped
-    delE = (-Jnn * delPSpin) + (Dp * delISpin);
+    delE = (Jnn * delPSpin) + (Dp * delISpin);
 
+    // //check to see if energy calculation is correct
+    // Echeck_0 = main_measurements.clock_energy(main_properties, spin, Ns, L) + main_measurements.dipolar_energy(main_interactions, spin, Ns, L);
+    // clock_Echeck_0 = main_measurements.clock_energy(main_properties, spin, Ns, L);
+    // dip_Echeck_0 = main_measurements.dipolar_energy(main_interactions, spin, Ns, L);
+
+    // spin[k].potts = p_new;
+    // spin[k].Sz = Sz_new;
+
+    // Echeck_f = main_measurements.clock_energy(main_properties, spin, Ns, L) + main_measurements.dipolar_energy(main_interactions, spin, Ns, L);
+    // clock_Echeck_f = main_measurements.clock_energy(main_properties, spin, Ns, L);
+    // dip_Echeck_f = main_measurements.dipolar_energy(main_interactions, spin, Ns, L);
+
+    // Echeck = Echeck_f - Echeck_0;
+    // clock_Echeck = clock_Echeck_f - clock_Echeck_0;
+    // dip_Echeck = dip_Echeck_f - dip_Echeck_0;
+
+    // //Return variables back to normal
+    // spin[k].potts = p0;
+    // spin[k].Sz = Sz0;
+
+    // std::ofstream EcheckFile;
+    // EcheckFile.open("delEcheck.dat", std::fstream::app);
+
+    // if (first == 0) {
+    //     EcheckFile << "Local Calc, Lattice Calc, Clock Local Calc, Clock Lattice Calc, Dipolar Local Calc, Dipolar Lattice Calc" << std::endl;
+    //     first = 1;
+    // }
+
+    // EcheckFile << delE << ", " << Echeck << ", " << Jnn * delPSpin << ", " << clock_Echeck << ", " << Dp * delISpin << ", " << dip_Echeck << std::endl;
+
+    // if (delE >= (Echeck + .001) || delE <= (Echeck - .001)) {
+    //     std::cout << delE << ", " << Echeck << std::endl;
+    // }
+
+    //spin flip or not
     double r = rand1();
 
     if (delE == 0) {
