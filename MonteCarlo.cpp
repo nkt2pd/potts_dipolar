@@ -28,18 +28,18 @@ int update_site(Measurements main_measurements, Interactions main_interactions, 
     int p_new = (int) (rand1() * (double)q);
     int Sz_new = (p_new % 2 == 0) ? 1 : -1;
 
-    int p0 = spin[k].potts;
-    int Sz0 = spin[k].Sz;
+    // int p0 = spin[k].potts;
+    // int Sz0 = spin[k].Sz;
 
     double delPSpin = 0;
     double delISpin = 0;
     double delE = 0;
 
-    double static first = 0;
+    // double static first = 0;
 
-    double clock_Echeck_0 = 0, clock_Echeck_f = 0, clock_Echeck = 0;
-    double dip_Echeck_0 = 0, dip_Echeck_f = 0, dip_Echeck = 0;
-    double Echeck_0 = 0, Echeck_f = 0, Echeck = 0;
+    // double clock_Echeck_0 = 0, clock_Echeck_f = 0, clock_Echeck = 0;
+    // double dip_Echeck_0 = 0, dip_Echeck_f = 0, dip_Echeck = 0;
+    // double Echeck_0 = 0, Echeck_f = 0, Echeck = 0;
 
     for(int l=0; l<N_nn1; l++) {
         delPSpin += (main_properties.V_clock[p_new][spin[k].nn1[l]->potts] - main_properties.V_clock[spin[k].potts][spin[k].nn1[l]->potts]);
