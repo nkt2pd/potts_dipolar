@@ -26,7 +26,7 @@ void clear_files(const std::string L_name) {
 }
 
 void print(const std::string L_name, double E1, double E2, double E1_j, double E1_d, double PM1, double PM2, double PM4, 
-           double IM1, double IM2, double IM4, double beta, int Ns, int t_diff) {
+           double IM1, double IM2, double IM4, double F1, double F2, double F4, double beta, int Ns, int t_diff) {
 
         std::ofstream energy;
         energy.open(L_name + "_energy.dat", std::fstream::app);
@@ -42,6 +42,8 @@ void print(const std::string L_name, double E1, double E2, double E1_j, double E
         susceptibility.open(L_name + "_susceptibility.dat", std::fstream::app);
         std::ofstream binder4;
         binder4.open(L_name + "_binder4.dat", std::fstream::app);
+        std::ofstream fb;
+        fb.open(L_name + "_fb.dat", std::fstream::app);
 
         energy << 1./beta << ", " << E1/((double) Ns) << std::endl;
         energy_parts << 1./beta << ", " << E1_j/((double) Ns) << ", " << E1_d/((double) Ns) << std::endl;
@@ -50,6 +52,7 @@ void print(const std::string L_name, double E1, double E2, double E1_j, double E
         Ising_m << 1./beta << ", " << IM1 << std::endl;
         susceptibility << 1./beta << ", " << beta*(PM2 - PM1*PM1) << std::endl;
         binder4 << 1./beta << ", " << 1. - (PM4/(3 * pow(PM2, 2))) << std::endl;
+        fb << 1./beta << ", " << F1 << ", " << F2 << ", " << F4 << std::endl;
 
         Potts_m.close();
         Ising_m.close();
@@ -58,6 +61,7 @@ void print(const std::string L_name, double E1, double E2, double E1_j, double E
         energy.close();
         energy_parts.close();
         heat.close();
+        fb.close();
 
         std::ofstream time;
         time.open(L_name + "_time.dat", std::fstream::app);

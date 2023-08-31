@@ -131,10 +131,12 @@ void Metropolis_MC_Sim(Interactions main_interactions, Measurements main_measure
 
     int thermalize = 20000;
     int nsweep = 50;
-    int ndata = 50000;
+    int ndata = 50000000;
 
     //Run 20000 sweeps of the system to achieve equilibrium
     double accepted = 0;
+
+    double fb[2];
     
     for (int i = 0; i < thermalize; i++) {
         accepted += MC_sweep(main_measurements, main_interactions, main_properties, beta, spin, Ns, L);
@@ -147,6 +149,7 @@ void Metropolis_MC_Sim(Interactions main_interactions, Measurements main_measure
     double E1_j = 0, E1_d = 0;
     double PM1 = 0, PM2 = 0, PM4 = 0;
     double IM1 = 0, IM2 = 0, IM4 = 0;
+    double F1 = 0, F2 = 0, F4 = 0;
     double avg_accept = 0;
 
     int system_check = 10000;
@@ -186,12 +189,20 @@ void Metropolis_MC_Sim(Interactions main_interactions, Measurements main_measure
         IM1 = (n * IM1 + ising_mag) / (n + 1.);
         IM2 = (n * IM2 + pow(ising_mag, 2)) / (n + 1.);
         IM4 = (n * IM4 + pow(ising_mag, 4)) / (n + 1.);
+
+        main_measurements.compute_fb(spin, fb, Ns);
+
+        double fm2 = pow(fb[0], 2) + pow(fb[1], 2);
+            
+        F1 = (n*F1 + sqrt(fm2))/(n + 1.);
+        F2 = (n*F2 + fm2)/(n + 1.);
+        F4 = (n*F4 + pow(fm2, 2))/(n + 1.);
     }
 
     t_now = clock();
     t_diff = (double)((t_now - t_start)/CLOCKS_PER_SEC);
 
-    print(L_name, E1, E2, E1_j, E1_d, PM1, PM2, PM4, IM1, IM2, IM4, beta, Ns, t_diff);
+    print(L_name, E1, E2, E1_j, E1_d, PM1, PM2, PM4, IM1, IM2, IM4, F1, F2, F4, beta, Ns, t_diff);
 }
 
 
@@ -407,6 +418,9 @@ void Wolff_MC_Sim(Cluster main_cluster, Measurements main_measurements, Interact
     double E1_j = 0, E1_d = 0;
     double PM1 = 0, PM2 = 0, PM4 = 0;
     double IM1 = 0, IM2 = 0, IM4 = 0;
+    double F1 = 0, F2 = 0, F4 = 0;
+
+    double fb[2];
 
     //thermalize the system
     for(int i = 0; i < thermalize; i++) {
@@ -447,10 +461,18 @@ void Wolff_MC_Sim(Cluster main_cluster, Measurements main_measurements, Interact
         IM1 = (n * IM1 + ising_mag) / (n + 1.);
         IM2 = (n * IM2 + pow(ising_mag, 2)) / (n + 1.);
         IM4 = (n * IM4 + pow(ising_mag, 4)) / (n + 1.);
+
+        main_measurements.compute_fb(spin, fb, Ns);
+
+        double fm2 = pow(fb[0], 2) + pow(fb[1], 2);
+            
+        F1 = (n*F1 + sqrt(fm2))/(n + 1.);
+        F2 = (n*F2 + fm2)/(n + 1.);
+        F4 = (n*F4 + pow(fm2, 2))/(n + 1.);
     }
 
     t_now = clock();
     t_diff = (double)((t_now - t_start)/CLOCKS_PER_SEC);
 
-    print(L_name, E1, E2, E1_j, E1_d, PM1, PM2, PM4, IM1, IM2, IM4, beta, Ns, t_diff);
+    print(L_name, E1, E2, E1_j, E1_d, PM1, PM2, PM4, IM1, IM2, IM4, F1, F2, F4, beta, Ns, t_diff);
 }

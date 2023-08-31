@@ -67,6 +67,29 @@ class Measurements {
     
         return ((double) sum)/((double) Ns);
     }
+
+    double compute_fb(Site *spin, double *fb, int Ns) {
+    
+        int Nb_x[3];
+
+        for(int k=0; k<3; k++) Nb_x[k] = 0;
+        
+        for(int i=0; i<Ns; i++) {
+            
+            for(int k=0; k<3; k++) {
+                
+                if(spin[i].Sz != spin[i].nn1[2*k]->Sz) Nb_x[k]++;
+            
+            }
+        }
+        
+        int sum = Nb_x[0] + Nb_x[1] + Nb_x[2];
+        
+        fb[0] = ((double) (Nb_x[1] + Nb_x[2] - 2*Nb_x[0]))/((double) sum)/sqrt(6.);
+        fb[1] = ((double) (Nb_x[1] - Nb_x[2]))/((double) sum)/sqrt(2.);
+    
+        return ((double) sum)/((double) 3*Ns);
+}
     
 };
 
