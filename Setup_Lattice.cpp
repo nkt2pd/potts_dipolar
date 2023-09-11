@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include "Measurements.hpp"
 #include "Interactions.hpp"
 #include "Site.hpp"
@@ -32,14 +33,45 @@ void set_coordinates(Site *spin, int Ns, int L) {
         spin[i].lattice_pt[0] = x;
         spin[i].lattice_pt[1] = y;
         spin[i].idx = i;
-        spin[i].x = x + 0.5*y;
-        spin[i].y = 0.5*sqrt(3)*y;
+        spin[i].x = (double)x + 0.5*(double)y;
+        spin[i].y = 0.5*sqrt(3)*(double)y;
         x++;
         if (x%L == 0) {
             y++;
             x = 0;
         }
     }
+}
+
+void set_hex_coordinates(Site *spin, int Ns, int L) {
+    std::ofstream coord_test;
+    coord_test.open("hex_coords.dat", std::fstream::app);
+
+    double x = 0, y = 0;
+    int index = 0;
+    for(int i = 0; i < L; i++) {
+
+        y = sqrt(3)*(double)i*2.;
+
+        for(int j = 0; j < 2*L-1-i; j++) {
+
+            x = (-(2.*L-i-2.)/2.) + j;
+
+            spin[index].x = x;
+            spin[index].y = y;
+            coord_test << index << ", " << x << ", " << y << std::endl;
+            index++;
+
+            if(y!=0) {
+                spin[index].x = x;
+                spin[index].y = -1*y;
+                coord_test << index << ", " << x << ", " << -1*y << std::endl;
+                index++;
+            }
+
+        }
+    }
+    coord_test.close();
 }
 
 void set_nn(Site *spin, int Ns, int L) { //sets the q nearest neighbors for each site in the system

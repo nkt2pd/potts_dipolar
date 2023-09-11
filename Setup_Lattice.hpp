@@ -14,6 +14,8 @@ inline int index(int x, int y, int L);
 
 void set_coordinates(Site *spin, int Ns, int L);
 
+void set_hex_coordinates(Site *spin, int Ns, int L);
+
 void set_nn(Site *spin, int Ns, int L);
 
 void set_cluster_tag(Site *spin, int Ns);

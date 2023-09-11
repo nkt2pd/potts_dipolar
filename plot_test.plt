@@ -1,1 +1,1 @@
-plot "test.dat" using 1:2 with linespoints
+plot "hex_coords.dat" using 2:3 with points
