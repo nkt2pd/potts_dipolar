@@ -29,7 +29,7 @@ int main(int argc, char *argv[]) {
     const std::string L_name = "Potts_cls" + L_size;
 
     main_interactions.compute_Vd(L, 200);
-    
+
     clear_files(L_name);
 
     init_uniform(main_measurements, main_interactions, spin, Ns, L);
