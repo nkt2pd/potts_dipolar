@@ -20,6 +20,8 @@ void set_nn(Site *spin, int Ns, int L);
 
 void set_hex_nn(Site *spin, int Ns, int L);
 
+void hex_periodic(Site *spin, int Ns, int L, int i, double R2, double dx, double dy, double *new_x, double *new_y);
+
 void set_cluster_tag(Site *spin, int Ns);
 
 

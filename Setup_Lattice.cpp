@@ -110,35 +110,57 @@ void set_nn(Site *spin, int Ns, int L) { //sets the q nearest neighbors for each
 //Repeat for all q NN for each of the Ns spins.
 
 void set_hex_nn(Site *spin, int Ns, int L) {
-    double R = L-1;
+    double R2 = pow(L-1, 2);
+    double dx = 0, dy = 0;
+    double new_x = 0, new_y = 0;
+    int nn_idx = 0;
 
     for(int i = 0; i < Ns; i++) {
+        for(int j = 0; j < (int)q; j++) {
 
-    //Left Neighbor
+            dx = cos(-1*PI*(double)i/3. + PI);
+            dy = sin(-1*PI*(double)i/3. + PI);
 
-    
+            new_x = spin[i].x + dx;
+            new_y = spin[i].y + dy;
 
-    //Upper Left Neighbor
-
-
-
-    //Upper Right Neighbor
-
-
-
-    //Right Neighbor
-
-
-
-    //Bottom Right Neighbor
-
-
-
-    //Bottom Left Neighbor
-    
+            if (pow(new_x, 2) + pow(new_y, 2) <= R2) {
+                for(int k = 0; k < Ns; k++) {
+                    if(spin[k].x == new_x && spin[k].y == new_y) {
+                        spin[i].nn1[j] = &spin[k];
+                        break;
+                    }
+                }
+            }
+            else {
+                hex_periodic(spin, Ns, L, i, R2, dx, dy, &new_x, &new_y);
+                for(int k = 0; k < Ns; k++) {
+                    if(spin[k].x == new_x && spin[k].y == new_y) {
+                        spin[i].nn1[j] = &spin[k];
+                        break;
+                    }
+                }
+            }
+        }
     }
-
 }
+
+void hex_periodic(Site *spin, int Ns, int L, int i, double R2, double dx, double dy, double *new_x, double *new_y) {
+    dx *= -1;
+    dy *= -1;
+
+    *new_x += dx;
+    *new_y += dy;
+
+    if (pow(*new_x, 2) + pow(*new_y, 2) <= R2) {
+        hex_periodic(spin, Ns, L, i, R2, dx, dy, new_x, new_y);
+    }
+    else {
+        *new_x -= dx;
+        *new_y -= dy;
+    }
+}
+
 
 void set_cluster_tag(Site *spin, int Ns) {
     for (int i = 0; i < Ns; i++) {
