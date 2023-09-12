@@ -11,8 +11,6 @@ public:
     int new_Sz;
     int potts;
     int new_potts;
-    int Ns;
-    int L;
     int lattice_pt[2];
     int cluster_tag;
     // idx of its four neighbors

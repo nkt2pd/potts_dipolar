@@ -1,1 +1,1 @@
-plot "hex_coords.dat" using 2:3 with points
+plot "hex_coords.dat" using 2:3 with points, '' using 2:3:1 with labels font "Helvetica,5"

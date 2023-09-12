@@ -20,7 +20,7 @@ int main(int argc, char *argv[]) {
 
     const int L = atof(argv[1]);
     double T = atof(argv[2]);
-    const int Ns = L * L;
+    const int Ns = pow(L, 3) - pow(L - 1, 3);
 
     Site* spin = new Site[Ns];
     Properties main_properties;
@@ -39,8 +39,10 @@ int main(int argc, char *argv[]) {
     // set_coordinates(spin, Ns, L);
 
     set_hex_coordinates(spin, Ns, L);
+
+    set_hex_nn(spin, Ns, L);
     
-    set_nn(spin, Ns, L);
+    // set_nn(spin, Ns, L);
     
     init_random(main_measurements, main_interactions, spin, Ns, L);
 
