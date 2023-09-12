@@ -51,7 +51,7 @@ void set_hex_coordinates(Site *spin, int Ns, int L) {
     int index = 0;
     for(int i = 0; i < L; i++) {
 
-        y = sqrt(3)*(double)i*2.;
+        y = sqrt(3)*(double)i/2.;
 
         for(int j = 0; j < 2*L-1-i; j++) {
 
@@ -100,6 +100,44 @@ void set_nn(Site *spin, int Ns, int L) { //sets the q nearest neighbors for each
         spin[i].nn1[5] = &spin[k];
 
     }
+}
+
+//set nn process:
+//check candidate nearest neighbor to see if its magnitude < R
+//If it is, set it as NN and move on
+//If it is not, move in the opposite direction until a point is reached
+//Where magnitude > R, then go back a point and set the NN
+//Repeat for all q NN for each of the Ns spins.
+
+void set_hex_nn(Site *spin, int Ns, int L) {
+    double R = L-1;
+
+    for(int i = 0; i < Ns; i++) {
+
+    //Left Neighbor
+
+    
+
+    //Upper Left Neighbor
+
+
+
+    //Upper Right Neighbor
+
+
+
+    //Right Neighbor
+
+
+
+    //Bottom Right Neighbor
+
+
+
+    //Bottom Left Neighbor
+    
+    }
+
 }
 
 void set_cluster_tag(Site *spin, int Ns) {
