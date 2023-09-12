@@ -115,57 +115,74 @@ void set_hex_nn(Site *spin, int Ns, int L) {
     double nn_x = 0, nn_y = 0;
     int nn_idx = 0;
 
-    int counter1 = 0;
-    int counter2 = 0;
-
     for(int i = 0; i < Ns; i++) {
         for(int j = 0; j < (int)q; j++) {
-
-            dx = cos(-1*PI*(double)j/3. + PI);
-            dy = sin(-1*PI*(double)j/3. + PI);
+            
+            if(j == 0) {
+                dx = -1.;
+                dy = 0;
+            }else if (j == 1) {
+                dx = -.5;
+                dy = sqrt(3)/2.;
+            }else if (j == 2) {
+                dx = 0.5;
+                dy = sqrt(3)/2.;
+            }else if (j == 3) {
+                dx = 1;
+                dy = 0;
+            }else if (j == 4) {
+                dx = 0.5;
+                dy = -1*sqrt(3)/2.;
+            }else if (j == 5) {
+                dx = -.5;
+                dy = -1*sqrt(3)/2.;
+            }
 
             nn_x = spin[i].x + dx;
             nn_y = spin[i].y + dy;
 
             if (pow(nn_x, 2) + pow(nn_y, 2) <= R2) {
                 for(int k = 0; k < Ns; k++) {
-                    if((spin[k].x > nn_x - .01) && (spin[k].x < nn_x + .01) && (spin[k].y > nn_y - .01) && (spin[k].y < nn_y + .01)) {
+                    if(spin[k].x > nn_x - 0.1 && spin[k].x < nn_x + 0.1 && spin[k].y > nn_y - 0.1 && spin[k].y < nn_y + 0.1) {
                         spin[i].nn1[j] = &spin[k];
-                        counter1++;
                         break;
                     }
                 }
             }
             else {
-                hex_periodic(spin, Ns, L, i, R2, dx, dy, &nn_x, &nn_y);
+                double test_x = 0, test_y = 0;
+                hex_periodic(spin, Ns, L, i, R2, dx, dy, &nn_x, &nn_y, 0);
                 for(int k = 0; k < Ns; k++) {
-                    if((spin[k].x > nn_x - .01) && (spin[k].x < nn_x + .01) && (spin[k].y > nn_y - .01) && (spin[k].y < nn_y + .01)) {
+                    test_x = spin[k].x;
+                    test_y = spin[k].y;
+                    if(spin[k].x > nn_x - 0.1 && spin[k].x < nn_x + 0.1 && spin[k].y > nn_y - 0.1 && spin[k].y < nn_y + 0.1) {
                         spin[i].nn1[j] = &spin[k];
-                        counter2++;
                         break;
                     }
                 }
             }
+
         }
     }
-    //Should print 312, 54, 366
-    std::cout << counter1 << ", " << counter2 << ", " << counter1 + counter2 << std::endl;
     
-    // for(int m = 0; m < Ns; m++) {
-    //     std::cout << spin[m].x << ", " << spin[m].y << ", " << spin[m].idx << ", " << spin[m].nn1[0]->idx << ", " << spin[m].nn1[1]->idx << ", " << spin[m].nn1[2]->idx << ", " << spin[m].nn1[3]->idx << ", " << spin[m].nn1[4]->idx << ", " << spin[m].nn1[5]->idx << std::endl;
-    // }
+    for(int m = 0; m < Ns; m++) {
+        coord_test << spin[m].x << ", " << spin[m].y << ", " << spin[m].idx << ", " << spin[m].nn1[0]->idx << ", " << spin[m].nn1[1]->idx << ", " << spin[m].nn1[2]->idx << ", " << spin[m].nn1[3]->idx << ", " << spin[m].nn1[4]->idx << ", " << spin[m].nn1[5]->idx << std::endl;
+    }
     coord_test.close();
 }
 
-void hex_periodic(Site *spin, int Ns, int L, int i, double R2, double dx, double dy, double *nn_x, double *nn_y) {
-    dx *= -1;
-    dy *= -1;
+void hex_periodic(Site *spin, int Ns, int L, int i, double R2, double dx, double dy, double *nn_x, double *nn_y, int flip) {
+    
+    if(flip == 0) {
+        dx *= -1;
+        dy *= -1;
+    }
 
     *nn_x += dx;
     *nn_y += dy;
 
     if (pow(*nn_x, 2) + pow(*nn_y, 2) <= R2) {
-        hex_periodic(spin, Ns, L, i, R2, dx, dy, nn_x, nn_y);
+        hex_periodic(spin, Ns, L, i, R2, dx, dy, nn_x, nn_y, 1);
     }
     else {
         *nn_x -= dx;
