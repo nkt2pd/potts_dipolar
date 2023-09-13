@@ -107,13 +107,10 @@ void set_nn(Site *spin, int Ns, int L) { //sets the q nearest neighbors for each
 //Repeat for all q NN for each of the Ns spins.
 
 void set_hex_nn(Site *spin, int Ns, int L) {
-    std::ofstream coord_test;
-    coord_test.open("hex_coords.dat", std::fstream::app);
 
     double R2 = pow(L-1, 2);
     double dx = 0, dy = 0;
     double nn_x = 0, nn_y = 0;
-    int nn_idx = 0;
 
     for(int i = 0; i < Ns; i++) {
         for(int j = 0; j < (int)q; j++) {
@@ -150,11 +147,8 @@ void set_hex_nn(Site *spin, int Ns, int L) {
                 }
             }
             else {
-                double test_x = 0, test_y = 0;
                 hex_periodic(spin, Ns, L, i, R2, dx, dy, &nn_x, &nn_y, 0);
                 for(int k = 0; k < Ns; k++) {
-                    test_x = spin[k].x;
-                    test_y = spin[k].y;
                     if(spin[k].x > nn_x - 0.1 && spin[k].x < nn_x + 0.1 && spin[k].y > nn_y - 0.1 && spin[k].y < nn_y + 0.1) {
                         spin[i].nn1[j] = &spin[k];
                         break;
@@ -164,11 +158,6 @@ void set_hex_nn(Site *spin, int Ns, int L) {
 
         }
     }
-    
-    for(int m = 0; m < Ns; m++) {
-        coord_test << spin[m].x << ", " << spin[m].y << ", " << spin[m].idx << ", " << spin[m].nn1[0]->idx << ", " << spin[m].nn1[1]->idx << ", " << spin[m].nn1[2]->idx << ", " << spin[m].nn1[3]->idx << ", " << spin[m].nn1[4]->idx << ", " << spin[m].nn1[5]->idx << std::endl;
-    }
-    coord_test.close();
 }
 
 void hex_periodic(Site *spin, int Ns, int L, int i, double R2, double dx, double dy, double *nn_x, double *nn_y, int flip) {
