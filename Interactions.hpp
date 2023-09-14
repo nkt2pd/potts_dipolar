@@ -25,12 +25,12 @@ class Interactions {
             if(x == 0 && y == 0) { 
                 Vd[y*L + x] = 0;
             } else {
-        
+                
                 Vd[y*L + x] = 0;
-            
+
                 dr0[0] = x + 0.5*y;
                 dr0[1] = 0.5*sqrt(3.)*y;
-            
+                
                 for(int m=-N_max; m<=N_max; m++)
                     for(int n=-N_max; n<=N_max; n++) {
                     
@@ -44,6 +44,12 @@ class Interactions {
                 }
             }
         }
+    }
+
+    void compute_hex_Vd(int L, int N_max) {
+        double dr0[2], dr[2];
+
+
     }
 
     /*void compute_Ud(Site *spin, int Ns, int L) {
