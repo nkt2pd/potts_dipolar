@@ -2,7 +2,6 @@
 #define PROPERTIES_HPP
 
 #define q 6
-#define Jnn -1
 
 #include <cmath>
 #include <vector>
