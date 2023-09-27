@@ -22,7 +22,15 @@ int main(int argc, char *argv[]) {
     double T = atof(argv[2]);
     const int Ns = L*L;
 
-    T /= 200;
+    int print_config = 0;
+
+    if (int(T*100) % 5 == 0) {
+        print_config = 1;
+    } else {
+        print_config = 0;
+    }
+
+    T = (T*.0054)+.2246;
 
     Site* spin = new Site[Ns];
     Properties main_properties;
@@ -53,7 +61,7 @@ int main(int argc, char *argv[]) {
 
     main_properties.set_pb(1./T);
     
-    Metropolis_MC_Sim(main_interactions, main_measurements, main_properties, 1./T, spin, Ns, L, L_name);
+    Metropolis_MC_Sim(main_interactions, main_measurements, main_properties, 1./T, spin, Ns, L, L_name, print_config);
 
     delete[] main_interactions.Vd;
     delete[] spin;

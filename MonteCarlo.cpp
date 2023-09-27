@@ -123,15 +123,15 @@ double MC_sweep(Measurements main_measurements, Interactions main_interactions, 
     return ((double) hits)/((double) Ns);      // success rate
 }
 
-void Metropolis_MC_Sim(Interactions main_interactions, Measurements main_measurements, Properties main_properties, double beta, Site *spin, int Ns, int L, const std::string L_name) {
+void Metropolis_MC_Sim(Interactions main_interactions, Measurements main_measurements, Properties main_properties, double beta, Site *spin, int Ns, int L, const std::string L_name, int print_config) {
 
     clock_t t_start = clock();
     clock_t t_now;
     double t_diff = 0;
 
-    int thermalize = 20000;
+    int thermalize = 5000;
     int nsweep = 50;
-    int ndata = 500000;
+    int ndata = 5000;
 
     //Run 20000 sweeps of the system to achieve equilibrium
     double accepted = 0;
@@ -152,11 +152,30 @@ void Metropolis_MC_Sim(Interactions main_interactions, Measurements main_measure
     double F1 = 0, F2 = 0, F4 = 0;
     double avg_accept = 0;
 
-    int system_check = 10000;
+    int print_config = ndata / 10;
+
+    const std::string T_val = std::to_string(1./beta);
+    const std::string L_val = std::to_string(L);
+    
 
     for (int n = 0; n < ndata; n++) {
 
-        if(n % system_check == 0) std::cout << "n = " << n << std::endl;
+        if(n % print_config == 0 && print_config == 1) {
+            
+            const std::string n_val = std::to_string(n);
+            const std::string config_name = "config_T" + T_val + "_L" + L_val + "_n" + n_val;
+
+            std::ofstream config;
+            config.open(config_name + ".dat", std::fstream::app);
+
+            std::cout << "n = " << n << std::endl;
+
+            for(int i = 0; i < Ns; i++) {
+                config << spin[i].x << ", " << spin[i].y << ", " << spin[i].potts << ", " << spin[i].Sz << std::endl;
+            }
+
+            config.close();
+        }
 
         accepted = 0;
         for (int r = 0; r < nsweep; r++) {
@@ -197,6 +216,7 @@ void Metropolis_MC_Sim(Interactions main_interactions, Measurements main_measure
         F1 = (n*F1 + sqrt(fm2))/(n + 1.);
         F2 = (n*F2 + fm2)/(n + 1.);
         F4 = (n*F4 + pow(fm2, 2))/(n + 1.);
+
     }
 
     t_now = clock();
