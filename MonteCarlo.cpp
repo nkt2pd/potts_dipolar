@@ -152,8 +152,6 @@ void Metropolis_MC_Sim(Interactions main_interactions, Measurements main_measure
     double F1 = 0, F2 = 0, F4 = 0;
     double avg_accept = 0;
 
-    int print_config = ndata / 10;
-
     const std::string T_val = std::to_string(1./beta);
     const std::string L_val = std::to_string(L);
     
