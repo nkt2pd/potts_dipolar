@@ -1,0 +1,25 @@
+Thank you for choosing the Potts Model :)
+Lattice Length = 10
+T = 1.095
+var/spool/slurm/slurmd/job53182300/slurm_script: line 24: 1012836 Segmentation fault      (core dumped) ./potts_dipolar_Ising_singleTemp.exe 10 ${SLURM_ARRAY_TASK_ID}
+/var/spool/slurm/slurmd/job53182296/slurm_script: line 24: 3530417 Segmentation fault      (core dumped) ./potts_dipolar_Ising_singleTemp.exe 10 ${SLURM_ARRAY_TASK_ID}
+/var/spool/slurm/slurmd/job53182297/slurm_script: line 24: 1536931 Segmentation fault      (core dumped) ./potts_dipolar_Ising_singleTemp.exe 10 ${SLURM_ARRAY_TASK_ID}
+/var/spool/slurm/slurmd/job53182298/slurm_script: line 24: 2496089 Segmentation fault      (core dumped) ./potts_dipolar_Ising_singleTemp.exe 10 ${SLURM_ARRAY_TASK_ID}
+Thank you for choosing the Potts Model :)
+Lattice Length = 10
+T = 1.135
+ntation fault      (core dumped) ./potts_dipolar_Ising_singleTemp.exe 10 ${SLURM_ARRAY_TASK_ID}
+/var/spool/slurm/slurmd/job53182299/slurm_script: line 24: 2496094 Segmentation fault      (core dumped) ./potts_dipolar_Ising_singleTemp.exe 10 ${SLURM_ARRAY_TASK_ID}
+Thank you for choosing the Potts Model :)
+Lattice Length = 10
+T = 1.1
+/var/spool/slurm/slurmd/job53182291/slurm_script: line 24: 1017674 Segmentation fault      (core dumped) ./potts_dipolar_Ising_singleTemp.exe 10 ${SLURM_ARRAY_TASK_ID}
+/var/spool/slurm/slurmd/job53182292/slurm_script: line 24: 1017679 Segmentation fault      (core dumped) ./potts_dipolar_Ising_singleTemp.exe 10 ${SLURM_ARRAY_TASK_ID}
+Thank you for choosing the Potts Model :)
+Lattice Length = 10
+T = 1.105
+Thank you for choosing the Potts Model :)
+Lattice Length = 10
+T = 1.11
+/var/spool/slurm/slurmd/job53182293/slurm_script: line 24: 1017682 Segmentation fault      (core dumped) ./potts_dipolar_Ising_singleTemp.exe 10 ${SLURM_ARRAY_TASK_ID}
+/var/spool/slurm/slurmd/job53182294/slurm_script: line 24: 1017684 Segmentation fault      (core dumped) ./potts_dipolar_Ising_singleTemp.exe 10 ${SLURM_ARRAY_TASK_ID}

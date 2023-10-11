@@ -1,0 +1,22 @@
+#!/bin/bash
+
+
+
+#SBATCH --job-name=potts_dipolar12
+
+#SBATCH -A cherngroup
+
+#SBATCH --ntasks=1
+
+#SBATCH --mem=32G
+
+#SBATCH -p standard
+
+#SBATCH --time=3-00:00:00
+
+#SBATCH --array=1-51
+
+#SBATCH -o potts36sbatch.out
+
+
+./potts_dipolar_Ising_singleTemp.exe 36 ${SLURM_ARRAY_TASK_ID}
