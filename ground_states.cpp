@@ -15,6 +15,8 @@ int main() {
     const int L = 120;
     const int Ns = L*L;
 
+    const double J = 1;
+
     Site* spin = new Site[Ns];
     Properties main_properties;
     Interactions main_interactions(L);
@@ -23,33 +25,54 @@ int main() {
     std::ifstream Vd_read;
     Vd_read.open("Vd_file.dat");
 
-    double Vd_test[L*L];
-
     for(int y = 0; y < L; y++) {
         for(int x = 0; x < L; x++) {
-            Vd_read >> Vd_test[y*L + x];
+            Vd_read >> main_interactions.Vd[y*L + x];
         }
     }
+
+    Vd_read.close();
+
+    set_coordinates(spin, Ns, L);
+    set_nn(spin, Ns, L);
 
     for(int i = 0; i<=30; i++) {
+
+        double h_arr[12] = {1, 2, 3, 4, 5, 6, 10, 12, 15, 20, 30, 60};
         double D = (double)i*(5./30.);
-    }
+        double ground_state = 0;
+        double ground_energy = 0;
+        double energy = 0;
 
-    const std::string L_name = "Potts_Metrop";
-    
-    main_interactions.compute_Vd(L, 200);
+        const std::string DJ_val = std::to_string(D/J);
+        const std::string enrg_name = "DJ" + DJ_val + ".dat";
 
-    for(int y = 0; y < L; y++) {
-        for(int x = 0; x < L; x++) {
-            if(Vd_test[y*L + x] != main_interactions.Vd[y*L + x]) {
-                std::cout << "Uh oh boss";
+        std::ofstream enrg;
+        enrg.open(enrg_name);
+
+        for(int j = 0; j < 12; j++) {
+
+            init_stripe(main_measurements, main_interactions, spin, Ns, L, h_arr[j]);
+
+            energy = main_measurements.E_tot_var(main_interactions, main_properties, spin, Ns, L, J, D);
+
+            if(j == 0) {
+                ground_energy = energy;
+                ground_state = h_arr[j];
+            } else {
+                if(energy < ground_energy) {
+                    ground_energy = energy;
+                    ground_state = h_arr[j];
+                }
+            }
+            enrg << h_arr[j] << "\t" << energy << std::endl;
+
+            if(j == 11) {
+                enrg << "Ground State: h = " << ground_state << std::endl;
             }
         }
+        enrg.close();
     }
-    
-    // set_coordinates(spin, Ns, L);
-    
-    // set_nn(spin, Ns, L);
 
     delete[] main_interactions.Vd;
     delete[] spin;

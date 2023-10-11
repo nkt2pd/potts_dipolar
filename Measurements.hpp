@@ -41,6 +41,34 @@ class Measurements {
         return this->clock_energy(main_properties, spin, Ns, L) + this->dipolar_energy(main_interactions, spin, Ns, L);
     }
 
+    double clock_energy_var(Properties main_properties, Site *spin, int Ns, int L, double J) {
+        double sum = 0;
+        for(int i=0; i<Ns; i++) {
+           for(int k=0; k<N_nn1; k++) {
+               sum += main_properties.V_clock[spin[i].potts][spin[i].nn1[k]->potts];
+           }
+     }
+        return -0.5 * J * sum;
+    }
+
+    double dipolar_energy_var(Interactions main_interactions, Site *spin, int Ns, int L, double D) {
+    
+        double sum = 0;
+        for(int i=0; i<Ns; i++) {
+    
+            for(int j=0; j<Ns; j++) {
+                sum += main_interactions.Ud(spin, i, j, L)*spin[i].Sz*spin[j].Sz;
+            }
+        }
+    
+        return 0.5 * D * sum;
+    }
+
+    inline double E_tot_var(Interactions main_interactions, Properties main_properties, Site *spin, int Ns, int L, double J, double D) {
+    
+        return this->clock_energy_var(main_properties, spin, Ns, L, J) + this->dipolar_energy_var(main_interactions, spin, Ns, L, D);
+    }
+
     double potts_magnetization(Properties main_properties, Site *spin, int Ns, int L) {
     
         double xsum = 0, ysum = 0, sum = 0;
