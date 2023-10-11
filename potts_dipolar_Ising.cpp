@@ -18,8 +18,6 @@ int main(int argc, char *argv[]) {
     const int L = atof(argv[1]);
     const int Ns = L * L;
 
-    int print_config = 0;
-
     Site* spin = new Site[Ns];
     Properties main_properties;
     Interactions main_interactions(L);
@@ -44,19 +42,11 @@ int main(int argc, char *argv[]) {
 
     std::cout << "Thank you for choosing the Potts Model :)" << std::endl;
 
-    for(double T = .35; T>0; T -= del_T) {
-
-        if(int(T*100) % 5 == 0) {
-            print_config = 1;
-        } else {
-            print_config = 0;
-        }
+    for(double T = 0; T<3; T += del_T) {
 
         std::cout << "Lattice Length = " << L << std::endl;
         std::cout << "T = " << T << std::endl;
 
-        main_properties.set_pb(1./T);
-    
         Metropolis_MC_Sim(main_interactions, main_measurements, main_properties, 1./T, spin, Ns, L, L_name, print_config);
         
     }
