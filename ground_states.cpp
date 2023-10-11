@@ -36,10 +36,10 @@ int main() {
     set_coordinates(spin, Ns, L);
     set_nn(spin, Ns, L);
 
-    for(int i = 0; i<=30; i++) {
+    for(int i = 31; i<=33; i++) {
 
-        double h_arr[12] = {1, 2, 3, 4, 5, 6, 10, 12, 15, 20, 30, 60};
-        double D = (double)i*(5./30.);
+        double h_arr[13] = {1, 2, 3, 4, 5, 6, 10, 12, 15, 20, 30, 60, 120};
+        double D = (double)i*(0.3/30.);
         double ground_state = 0;
         double ground_energy = 0;
         double energy = 0;
@@ -50,9 +50,13 @@ int main() {
         std::ofstream enrg;
         enrg.open(enrg_name);
 
-        for(int j = 0; j < 12; j++) {
+        for(int j = 0; j < 13; j++) {
 
-            init_stripe(main_measurements, main_interactions, spin, Ns, L, h_arr[j]);
+            if(h_arr[j]==120) {
+                init_uniform(main_measurements, main_interactions, spin, Ns, L);
+            } else{
+                init_stripe(main_measurements, main_interactions, spin, Ns, L, h_arr[j]);
+            }
 
             energy = main_measurements.E_tot_var(main_interactions, main_properties, spin, Ns, L, J, D);
 
@@ -67,7 +71,7 @@ int main() {
             }
             enrg << h_arr[j] << "\t" << energy << std::endl;
 
-            if(j == 11) {
+            if(j == 12) {
                 enrg << "Ground State: h = " << ground_state << std::endl;
             }
         }
