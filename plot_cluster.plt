@@ -1,8 +1,8 @@
-set xrange [0.005:10]
-set yrange [.01:1000]
+set xrange [0.08:0.6]
+set yrange [0:1]
 
-set logscale x
-set logscale y
+unset logscale x
+unset logscale y
 
 plot "Potts_Metrop15_heat.dat" using 1:2 with points
 pause -1 "Specific Heat graph for L=15, D = 1, J = 0. Hit return to continue"
@@ -22,13 +22,13 @@ pause -1  "Stripe Order graph for L=15, D = 1, J = 0. Hit return to continue"
 
 set yrange [0:.1]
 
-plot "Potts_Metrop15Potts_m.dat" using 1:2 with points
-pause -1 "Potts Order graph for L=15, D = 1, J = 0. Hit return to continue"
+#plot "Potts_Metrop15Potts_m.dat" using 1:2 with points
+#pause -1 "Potts Order graph for L=15, D = 1, J = 0. Hit return to continue"
 
-set yrange [0:.04]
+#set yrange [0:.04]
 
-plot "Potts_Metrop15Ising_m.dat" using 1:2 with points
-pause -1 "Ising Order graph for L=15, D = 1, J = 0. Hit return to continue"
+#plot "Potts_Metrop15Ising_m.dat" using 1:2 with points
+#pause -1 "Ising Order graph for L=15, D = 1, J = 0. Hit return to continue"
 
 #plot "Potts_Metrop15_binder4.dat" using 1:2 with points
 #pause -1 "Binder's 4th Cumulant graph for L=15, D = 1, J = 0. Hit return to continue"

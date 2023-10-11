@@ -22,6 +22,23 @@ void init_random(Measurements main_measurements, Interactions main_interactions,
     main_measurements.Ed_curr = main_measurements.dipolar_energy(main_interactions, spin, Ns, L);
 }
 
+void init_stripe(Measurements main_measurements, Interactions main_interactions, Site *spin, int Ns, int L, int h) {
+    for (int x = 0; x < L; x++) {
+        int p = 0;
+        for (int y = 0; y < L; y++) {
+            
+            if(y%h == 0) {
+                p == 0 ? p=1 : p=0;
+            }
+
+            int i = y*L + x;
+
+            spin[i].potts = p;
+            spin[i].Sz = (spin[i].potts % 2 == 0) ? 1 : -1;
+        }
+    }
+}
+
 inline int index(int x, int y, int L) {
     return y*L+x;
 }
