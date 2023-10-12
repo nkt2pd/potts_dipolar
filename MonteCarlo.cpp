@@ -56,40 +56,6 @@ int update_site(Measurements main_measurements, Interactions main_interactions, 
     //change in energy when spin is flipped
     delE = (Jnn * delPSpin) + (Dp * delISpin);
 
-    // //check to see if energy calculation is correct
-    // Echeck_0 = main_measurements.clock_energy(main_properties, spin, Ns, L) + main_measurements.dipolar_energy(main_interactions, spin, Ns, L);
-    // clock_Echeck_0 = main_measurements.clock_energy(main_properties, spin, Ns, L);
-    // dip_Echeck_0 = main_measurements.dipolar_energy(main_interactions, spin, Ns, L);
-
-    // spin[k].potts = p_new;
-    // spin[k].Sz = Sz_new;
-
-    // Echeck_f = main_measurements.clock_energy(main_properties, spin, Ns, L) + main_measurements.dipolar_energy(main_interactions, spin, Ns, L);
-    // clock_Echeck_f = main_measurements.clock_energy(main_properties, spin, Ns, L);
-    // dip_Echeck_f = main_measurements.dipolar_energy(main_interactions, spin, Ns, L);
-
-    // Echeck = Echeck_f - Echeck_0;
-    // clock_Echeck = clock_Echeck_f - clock_Echeck_0;
-    // dip_Echeck = dip_Echeck_f - dip_Echeck_0;
-
-    // //Return variables back to normal
-    // spin[k].potts = p0;
-    // spin[k].Sz = Sz0;
-
-    // std::ofstream EcheckFile;
-    // EcheckFile.open("delEcheck.dat", std::fstream::app);
-
-    // if (first == 0) {
-    //     EcheckFile << "Local Calc, Lattice Calc, Clock Local Calc, Clock Lattice Calc, Dipolar Local Calc, Dipolar Lattice Calc" << std::endl;
-    //     first = 1;
-    // }
-
-    // EcheckFile << delE << ", " << Echeck << ", " << Jnn * delPSpin << ", " << clock_Echeck << ", " << Dp * delISpin << ", " << dip_Echeck << std::endl;
-
-    // if (delE >= (Echeck + .001) || delE <= (Echeck - .001)) {
-    //     std::cout << delE << ", " << Echeck << std::endl;
-    // }
-
     //spin flip or not
     double r = rand1();
 
@@ -158,7 +124,7 @@ void Metropolis_MC_Sim(Interactions main_interactions, Measurements main_measure
 
     for (int n = 0; n < ndata; n++) {
 
-        if(n % print_config == 0 && print_config == 1) {
+        if(n % 1000 == 0 && print_config == 1) {
             
             const std::string n_val = std::to_string(n);
             const std::string config_name = "config_T" + T_val + "_L" + L_val + "_n" + n_val;

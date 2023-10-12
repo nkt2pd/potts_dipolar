@@ -42,7 +42,7 @@ int main(int argc, char *argv[]) {
 
     for(int i = 0; i < 6; i++) {
         double h_arr[6] = {1, 2, 3, 4, 6, 12};
-
+        
         const std::string h_val = std::to_string(int(h_arr[i]));
         const std::string stripe_name = "stripe_h" + h_val + "_.dat";
 

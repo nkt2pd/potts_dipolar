@@ -15,6 +15,8 @@ int main(int argc, char *argv[]) {
         return 1;
     }
 
+    double print_config = 0;
+
     const int L = atof(argv[1]);
     const int Ns = L * L;
 
@@ -46,7 +48,7 @@ int main(int argc, char *argv[]) {
 
         main_properties.set_pb(1./T);
 
-        Metropolis_MC_Sim(main_interactions, main_measurements, main_properties, 1./T, spin, Ns, L, L_name);
+        Metropolis_MC_Sim(main_interactions, main_measurements, main_properties, 1./T, spin, Ns, L, L_name, print_config);
     }
 
 
