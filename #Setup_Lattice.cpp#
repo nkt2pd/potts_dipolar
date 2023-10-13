@@ -1,0 +1,198 @@
+#include <iostream>
+#include <fstream>
+#include "Measurements.hpp"
+#include "Interactions.hpp"
+#include "Site.hpp"
+#include "Setup_Lattice.hpp"
+#include "Rand.hpp"
+
+void init_uniform(Measurements main_measurements, Interactions main_interactions, Site *spin, int Ns, int L) {
+    for (int i=0; i < Ns; i++) {
+        spin[i].Sz = 1;
+        spin[i].potts = 0;
+    }
+    main_measurements.Ed_curr = main_measurements.dipolar_energy(main_interactions, spin, Ns, L);
+}
+
+void init_random(Measurements main_measurements, Interactions main_interactions, Site *spin, int Ns, int L) {
+    for (int i = 0; i < Ns; i++) {
+        spin[i].potts = (int) (rand1() * 6);
+        spin[i].Sz = (spin[i].potts % 2 == 0) ? 1 : -1;
+    }
+    main_measurements.Ed_curr = main_measurements.dipolar_energy(main_interactions, spin, Ns, L);
+}
+
+inline int index(int x, int y, int L) {
+    return y*L+x;
+}
+
+void set_coordinates(Site *spin, int Ns, int L) {
+    int y = 0;
+    int x = 0;
+    for(int i=0; i<Ns; i++) {
+        spin[i].lattice_pt[0] = x;
+        spin[i].lattice_pt[1] = y;
+        spin[i].idx = i;
+        spin[i].x = (double)x + 0.5*(double)y;
+        spin[i].y = 0.5*sqrt(3)*(double)y;
+        x++;
+        if (x%L == 0) {
+            y++;
+            x = 0;
+        }
+    }
+}
+
+void set_hex_coordinates(Site *spin, int Ns, int L) {
+
+    double x = 0, y = 0;
+    int index = 0;
+    for(int i = 0; i < L; i++) {
+
+        y = sqrt(3)*(double)i/2.;
+
+        for(int j = 0; j < 2*L-1-i; j++) {
+
+            x = (-(2.*L-i-2.)/2.) + j;
+
+            spin[index].x = x;
+            spin[index].y = y;
+            spin[index].idx = index;
+            index++;
+
+            if(y!=0) {
+                spin[index].x = x;
+                spin[index].y = -1*y;
+                spin[index].idx = index;
+                index++;
+            }
+
+        }
+    }
+}
+
+void set_nn(Site *spin, int Ns, int L) { //sets the q nearest neighbors for each site in the system
+    int k;
+    int x, y;
+    for(int i=0; i<Ns; i++) { 
+        x = spin[i].lattice_pt[0];
+		y = spin[i].lattice_pt[1];
+
+        k = index(mod(x+1, L), y, L);
+        spin[i].nn1[0] = &spin[k];
+        
+        k = index(x, mod(y+1, L), L);
+        spin[i].nn1[1] = &spin[k];
+        
+        k = index(mod(x-1, L), mod(y+1, L), L);
+        spin[i].nn1[2] = &spin[k];
+        
+        k = index(mod(x-1, L), y, L);
+        spin[i].nn1[3] = &spin[k];
+        
+        k = index(x, mod(y-1, L), L);
+        spin[i].nn1[4] = &spin[k];
+        
+        k = index(mod(x+1, L), mod(y-1, L), L);
+        spin[i].nn1[5] = &spin[k];
+
+    }
+}
+
+//set nn process:
+//check candidate nearest neighbor to see if its magnitude < R
+//If it is, set it as NN and move on
+//If it is not, move in the opposite direction until a point is reached
+//Where magnitude > R, then go back a point and set the NN
+//Repeat for all q NN for each of the Ns spins.
+
+void set_hex_nn(Site *spin, int Ns, int L) {
+    std::ofstream coord_test;
+    coord_test.open("hex_coords.dat", std::fstream::app);
+
+    double R2 = pow(L-1, 2);
+    double dx = 0, dy = 0;
+    double nn_x = 0, nn_y = 0;
+
+    for(int i = 0; i < Ns; i++) {
+        for(int j = 0; j < (int)q; j++) {
+            
+            if(j == 0) {
+                dx = -1.;
+                dy = 0;
+            }else if (j == 1) {
+                dx = -.5;
+                dy = sqrt(3)/2.;
+            }else if (j == 2) {
+                dx = 0.5;
+                dy = sqrt(3)/2.;
+            }else if (j == 3) {
+                dx = 1;
+                dy = 0;
+            }else if (j == 4) {
+                dx = 0.5;
+                dy = -1*sqrt(3)/2.;
+            }else if (j == 5) {
+                dx = -.5;
+                dy = -1*sqrt(3)/2.;
+            }
+
+            nn_x = spin[i].x + dx;
+            nn_y = spin[i].y + dy;
+
+            if (pow(nn_x, 2) + pow(nn_y, 2) <= R2) {
+                for(int k = 0; k < Ns; k++) {
+                    if(spin[k].x > nn_x - 0.1 && spin[k].x < nn_x + 0.1 && spin[k].y > nn_y - 0.1 && spin[k].y < nn_y + 0.1) {
+                        spin[i].nn1[j] = &spin[k];
+                        break;
+                    }
+                }
+            }
+            else {
+                double test_
+                hex_periodic(spin, Ns, L, i, R2, dx, dy, &nn_x, &nn_y, 0);
+                for(int k = 0; k < Ns; k++) {
+                    test_x = spin[k].x;
+                    test_y = spin[k].y;
+                    if(spin[k].x > nn_x - 0.1 && spin[k].x < nn_x + 0.1 && spin[k].y > nn_y - 0.1 && spin[k].y < nn_y + 0.1) {
+                        spin[i].nn1[j] = &spin[k];
+                        break;
+                    }
+                }
+            }
+
+        }
+    }
+    
+    for(int m = 0; m < Ns; m++) {
+        coord_test << spin[m].x << ", " << spin[m].y << ", " << spin[m].idx << ", " << spin[m].nn1[0]->idx << ", " << spin[m].nn1[1]->idx << ", " << spin[m].nn1[2]->idx << ", " << spin[m].nn1[3]->idx << ", " << spin[m].nn1[4]->idx << ", " << spin[m].nn1[5]->idx << std::endl;
+    }
+    coord_test.close();
+}
+
+void hex_periodic(Site *spin, int Ns, int L, int i, double R2, double dx, double dy, double *nn_x, double *nn_y, int flip) {
+    
+    if(flip == 0) {
+        dx *= -1;
+        dy *= -1;
+    }
+
+    *nn_x += dx;
+    *nn_y += dy;
+
+    if (pow(*nn_x, 2) + pow(*nn_y, 2) <= R2) {
+        hex_periodic(spin, Ns, L, i, R2, dx, dy, nn_x, nn_y, 1);
+    }
+    else {
+        *nn_x -= dx;
+        *nn_y -= dy;
+    }
+}
+
+
+void set_cluster_tag(Site *spin, int Ns) {
+    for (int i = 0; i < Ns; i++) {
+        spin[i].cluster_tag = 0;
+    }
+}
+

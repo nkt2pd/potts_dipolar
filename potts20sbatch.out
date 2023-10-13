@@ -1,0 +1,902 @@
+Thank you for choosing the Potts Model :)
+Lattice Length = 100
+T = 10
+Cluster acceptance rate: 97.25% 
+Cluster Average Size: 0.66825
+gathering data... 
+n = 0
+n = 100000
+n = 200000
+n = 300000
+n = 400000
+Lattice Length = 100
+T = 9.9
+Cluster acceptance rate: 96.55% 
+Cluster Average Size: 0.678
+gathering data... 
+n = 0
+n = 100000
+n = 200000
+n = 300000
+n = 400000
+Lattice Length = 100
+T = 9.8
+Cluster acceptance rate: 97.175% 
+Cluster Average Size: 0.681
+gathering data... 
+n = 0
+n = 100000
+n = 200000
+n = 300000
+n = 400000
+Lattice Length = 100
+T = 9.7
+Cluster acceptance rate: 96.875% 
+Cluster Average Size: 0.6935
+gathering data... 
+n = 0
+n = 100000
+n = 200000
+n = 300000
+n = 400000
+Lattice Length = 100
+T = 9.6
+Cluster acceptance rate: 97.025% 
+Cluster Average Size: 0.686
+gathering data... 
+n = 0
+n = 100000
+n = 200000
+n = 300000
+n = 400000
+Lattice Length = 100
+T = 9.5
+Cluster acceptance rate: 96.4% 
+Cluster Average Size: 0.693
+gathering data... 
+n = 0
+n = 100000
+n = 200000
+n = 300000
+n = 400000
+Lattice Length = 100
+T = 9.4
+Cluster acceptance rate: 96.625% 
+Cluster Average Size: 0.69275
+gathering data... 
+n = 0
+n = 100000
+n = 200000
+n = 300000
+n = 400000
+Lattice Length = 100
+T = 9.3
+Cluster acceptance rate: 96.9% 
+Cluster Average Size: 0.68275
+gathering data... 
+n = 0
+n = 100000
+n = 200000
+n = 300000
+n = 400000
+Lattice Length = 100
+T = 9.2
+Cluster acceptance rate: 96.25% 
+Cluster Average Size: 0.709
+gathering data... 
+n = 0
+n = 100000
+n = 200000
+n = 300000
+n = 400000
+Lattice Length = 100
+T = 9.1
+Cluster acceptance rate: 96.7% 
+Cluster Average Size: 0.7135
+gathering data... 
+n = 0
+n = 100000
+n = 200000
+n = 300000
+n = 400000
+Lattice Length = 100
+T = 9
+Cluster acceptance rate: 96% 
+Cluster Average Size: 0.7055
+gathering data... 
+n = 0
+n = 100000
+n = 200000
+n = 300000
+n = 400000
+Lattice Length = 100
+T = 8.9
+Cluster acceptance rate: 96.025% 
+Cluster Average Size: 0.70075
+gathering data... 
+n = 0
+n = 100000
+n = 200000
+n = 300000
+n = 400000
+Lattice Length = 100
+T = 8.8
+Cluster acceptance rate: 96.45% 
+Cluster Average Size: 0.72125
+gathering data... 
+n = 0
+n = 100000
+n = 200000
+n = 300000
+n = 400000
+Lattice Length = 100
+T = 8.7
+Cluster acceptance rate: 96.5% 
+Cluster Average Size: 0.71375
+gathering data... 
+n = 0
+n = 100000
+n = 200000
+n = 300000
+n = 400000
+Lattice Length = 100
+T = 8.6
+Cluster acceptance rate: 97% 
+Cluster Average Size: 0.69675
+gathering data... 
+n = 0
+n = 100000
+n = 200000
+n = 300000
+n = 400000
+Lattice Length = 100
+T = 8.5
+Cluster acceptance rate: 96.625% 
+Cluster Average Size: 0.7205
+gathering data... 
+n = 0
+n = 100000
+n = 200000
+n = 300000
+n = 400000
+Lattice Length = 100
+T = 8.4
+Cluster acceptance rate: 96.25% 
+Cluster Average Size: 0.73325
+gathering data... 
+n = 0
+n = 100000
+n = 200000
+n = 300000
+n = 400000
+Lattice Length = 100
+T = 8.3
+Cluster acceptance rate: 96.325% 
+Cluster Average Size: 0.72725
+gathering data... 
+n = 0
+n = 100000
+n = 200000
+n = 300000
+n = 400000
+Lattice Length = 100
+T = 8.2
+Cluster acceptance rate: 96% 
+Cluster Average Size: 0.73675
+gathering data... 
+n = 0
+n = 100000
+n = 200000
+n = 300000
+n = 400000
+Lattice Length = 100
+T = 8.1
+Cluster acceptance rate: 95.95% 
+Cluster Average Size: 0.73475
+gathering data... 
+n = 0
+n = 100000
+n = 200000
+n = 300000
+n = 400000
+Lattice Length = 100
+T = 8
+Cluster acceptance rate: 96.25% 
+Cluster Average Size: 0.735
+gathering data... 
+n = 0
+n = 100000
+n = 200000
+n = 300000
+n = 400000
+Lattice Length = 100
+T = 7.9
+Cluster acceptance rate: 95.825% 
+Cluster Average Size: 0.73125
+gathering data... 
+n = 0
+n = 100000
+n = 200000
+n = 300000
+n = 400000
+Lattice Length = 100
+T = 7.8
+Cluster acceptance rate: 95.65% 
+Cluster Average Size: 0.77025
+gathering data... 
+n = 0
+n = 100000
+n = 200000
+n = 300000
+n = 400000
+Lattice Length = 100
+T = 7.7
+Cluster acceptance rate: 95.825% 
+Cluster Average Size: 0.74675
+gathering data... 
+n = 0
+n = 100000
+n = 200000
+n = 300000
+n = 400000
+Lattice Length = 100
+T = 7.6
+Cluster acceptance rate: 95.6% 
+Cluster Average Size: 0.75725
+gathering data... 
+n = 0
+n = 100000
+n = 200000
+n = 300000
+n = 400000
+Lattice Length = 100
+T = 7.5
+Cluster acceptance rate: 95.425% 
+Cluster Average Size: 0.768
+gathering data... 
+n = 0
+n = 100000
+n = 200000
+n = 300000
+n = 400000
+Lattice Length = 100
+T = 7.4
+Cluster acceptance rate: 95.575% 
+Cluster Average Size: 0.7795
+gathering data... 
+n = 0
+n = 100000
+n = 200000
+n = 300000
+n = 400000
+Lattice Length = 100
+T = 7.3
+Cluster acceptance rate: 95.225% 
+Cluster Average Size: 0.7415
+gathering data... 
+n = 0
+n = 100000
+n = 200000
+n = 300000
+n = 400000
+Lattice Length = 100
+T = 7.2
+Cluster acceptance rate: 95.425% 
+Cluster Average Size: 0.7985
+gathering data... 
+n = 0
+n = 100000
+n = 200000
+n = 300000
+n = 400000
+Lattice Length = 100
+T = 7.1
+Cluster acceptance rate: 95.4% 
+Cluster Average Size: 0.78975
+gathering data... 
+n = 0
+n = 100000
+n = 200000
+n = 300000
+n = 400000
+Lattice Length = 100
+T = 7
+Cluster acceptance rate: 95.225% 
+Cluster Average Size: 0.8075
+gathering data... 
+n = 0
+n = 100000
+n = 200000
+n = 300000
+n = 400000
+Lattice Length = 100
+T = 6.9
+Cluster acceptance rate: 95.4% 
+Cluster Average Size: 0.82175
+gathering data... 
+n = 0
+n = 100000
+n = 200000
+n = 300000
+n = 400000
+Lattice Length = 100
+T = 6.8
+Cluster acceptance rate: 94.825% 
+Cluster Average Size: 0.8355
+gathering data... 
+n = 0
+n = 100000
+n = 200000
+n = 300000
+n = 400000
+Lattice Length = 100
+T = 6.7
+Cluster acceptance rate: 95.05% 
+Cluster Average Size: 0.798
+gathering data... 
+n = 0
+n = 100000
+n = 200000
+n = 300000
+n = 400000
+Lattice Length = 100
+T = 6.6
+Cluster acceptance rate: 95.275% 
+Cluster Average Size: 0.825
+gathering data... 
+n = 0
+n = 100000
+n = 200000
+n = 300000
+n = 400000
+Lattice Length = 100
+T = 6.5
+Cluster acceptance rate: 94.475% 
+Cluster Average Size: 0.853
+gathering data... 
+n = 0
+n = 100000
+n = 200000
+n = 300000
+n = 400000
+Lattice Length = 100
+T = 6.4
+Cluster acceptance rate: 95.15% 
+Cluster Average Size: 0.84725
+gathering data... 
+n = 0
+n = 100000
+n = 200000
+n = 300000
+n = 400000
+Lattice Length = 100
+T = 6.3
+Cluster acceptance rate: 93.725% 
+Cluster Average Size: 0.853
+gathering data... 
+n = 0
+n = 100000
+n = 200000
+n = 300000
+n = 400000
+Lattice Length = 100
+T = 6.2
+Cluster acceptance rate: 94.675% 
+Cluster Average Size: 0.86275
+gathering data... 
+n = 0
+n = 100000
+n = 200000
+n = 300000
+n = 400000
+Lattice Length = 100
+T = 6.1
+Cluster acceptance rate: 94.15% 
+Cluster Average Size: 0.87625
+gathering data... 
+n = 0
+n = 100000
+n = 200000
+n = 300000
+n = 400000
+Lattice Length = 100
+T = 6
+Cluster acceptance rate: 93.4% 
+Cluster Average Size: 0.85825
+gathering data... 
+n = 0
+n = 100000
+n = 200000
+n = 300000
+n = 400000
+Lattice Length = 100
+T = 5.9
+Cluster acceptance rate: 94.575% 
+Cluster Average Size: 0.8915
+gathering data... 
+n = 0
+n = 100000
+n = 200000
+n = 300000
+n = 400000
+Lattice Length = 100
+T = 5.8
+Cluster acceptance rate: 95.05% 
+Cluster Average Size: 0.90975
+gathering data... 
+n = 0
+n = 100000
+n = 200000
+n = 300000
+n = 400000
+Lattice Length = 100
+T = 5.7
+Cluster acceptance rate: 94.275% 
+Cluster Average Size: 0.894
+gathering data... 
+n = 0
+n = 100000
+n = 200000
+n = 300000
+n = 400000
+Lattice Length = 100
+T = 5.6
+Cluster acceptance rate: 93.45% 
+Cluster Average Size: 0.90125
+gathering data... 
+n = 0
+n = 100000
+n = 200000
+n = 300000
+n = 400000
+Lattice Length = 100
+T = 5.5
+Cluster acceptance rate: 93.5% 
+Cluster Average Size: 0.903
+gathering data... 
+n = 0
+n = 100000
+n = 200000
+n = 300000
+n = 400000
+Lattice Length = 100
+T = 5.4
+Cluster acceptance rate: 94.45% 
+Cluster Average Size: 0.9495
+gathering data... 
+n = 0
+n = 100000
+n = 200000
+n = 300000
+n = 400000
+Lattice Length = 100
+T = 5.3
+Cluster acceptance rate: 93.775% 
+Cluster Average Size: 0.97775
+gathering data... 
+n = 0
+n = 100000
+n = 200000
+n = 300000
+n = 400000
+Lattice Length = 100
+T = 5.2
+Cluster acceptance rate: 93.15% 
+Cluster Average Size: 0.985
+gathering data... 
+n = 0
+n = 100000
+n = 200000
+n = 300000
+n = 400000
+Lattice Length = 100
+T = 5.1
+Cluster acceptance rate: 92.275% 
+Cluster Average Size: 1.01125
+gathering data... 
+n = 0
+n = 100000
+n = 200000
+n = 300000
+n = 400000
+Lattice Length = 100
+T = 5
+Cluster acceptance rate: 92.825% 
+Cluster Average Size: 1.04775
+gathering data... 
+n = 0
+n = 100000
+n = 200000
+n = 300000
+n = 400000
+Lattice Length = 100
+T = 4.9
+Cluster acceptance rate: 92.925% 
+Cluster Average Size: 1.0095
+gathering data... 
+n = 0
+n = 100000
+n = 200000
+n = 300000
+n = 400000
+Lattice Length = 100
+T = 4.8
+Cluster acceptance rate: 92.8% 
+Cluster Average Size: 1.0545
+gathering data... 
+n = 0
+n = 100000
+n = 200000
+n = 300000
+n = 400000
+Lattice Length = 100
+T = 4.7
+Cluster acceptance rate: 92.85% 
+Cluster Average Size: 1.059
+gathering data... 
+n = 0
+n = 100000
+n = 200000
+n = 300000
+n = 400000
+Lattice Length = 100
+T = 4.6
+Cluster acceptance rate: 92.15% 
+Cluster Average Size: 1.08825
+gathering data... 
+n = 0
+n = 100000
+n = 200000
+n = 300000
+n = 400000
+Lattice Length = 100
+T = 4.5
+Cluster acceptance rate: 92% 
+Cluster Average Size: 1.12425
+gathering data... 
+n = 0
+n = 100000
+n = 200000
+n = 300000
+n = 400000
+Lattice Length = 100
+T = 4.4
+Cluster acceptance rate: 92.15% 
+Cluster Average Size: 1.173
+gathering data... 
+n = 0
+n = 100000
+n = 200000
+n = 300000
+n = 400000
+Lattice Length = 100
+T = 4.3
+Cluster acceptance rate: 91.525% 
+Cluster Average Size: 1.2105
+gathering data... 
+n = 0
+n = 100000
+n = 200000
+n = 300000
+n = 400000
+Lattice Length = 100
+T = 4.2
+Cluster acceptance rate: 91.15% 
+Cluster Average Size: 1.253
+gathering data... 
+n = 0
+n = 100000
+n = 200000
+n = 300000
+n = 400000
+Lattice Length = 100
+T = 4.1
+Cluster acceptance rate: 90.475% 
+Cluster Average Size: 1.2795
+gathering data... 
+n = 0
+n = 100000
+n = 200000
+n = 300000
+n = 400000
+Lattice Length = 100
+T = 4
+Cluster acceptance rate: 89.975% 
+Cluster Average Size: 1.34525
+gathering data... 
+n = 0
+n = 100000
+n = 200000
+n = 300000
+n = 400000
+Lattice Length = 100
+T = 3.9
+Cluster acceptance rate: 89.15% 
+Cluster Average Size: 1.38825
+gathering data... 
+n = 0
+n = 100000
+n = 200000
+n = 300000
+n = 400000
+Lattice Length = 100
+T = 3.8
+Cluster acceptance rate: 89.7% 
+Cluster Average Size: 1.53375
+gathering data... 
+n = 0
+n = 100000
+n = 200000
+n = 300000
+n = 400000
+Lattice Length = 100
+T = 3.7
+Cluster acceptance rate: 89.375% 
+Cluster Average Size: 1.46825
+gathering data... 
+n = 0
+n = 100000
+n = 200000
+n = 300000
+n = 400000
+Lattice Length = 100
+T = 3.6
+Cluster acceptance rate: 89.675% 
+Cluster Average Size: 1.547
+gathering data... 
+n = 0
+n = 100000
+n = 200000
+n = 300000
+n = 400000
+Lattice Length = 100
+T = 3.5
+Cluster acceptance rate: 89.2% 
+Cluster Average Size: 1.6435
+gathering data... 
+n = 0
+n = 100000
+n = 200000
+n = 300000
+n = 400000
+Lattice Length = 100
+T = 3.4
+Cluster acceptance rate: 88.75% 
+Cluster Average Size: 1.7545
+gathering data... 
+n = 0
+n = 100000
+n = 200000
+n = 300000
+n = 400000
+Lattice Length = 100
+T = 3.3
+Cluster acceptance rate: 87.425% 
+Cluster Average Size: 1.94175
+gathering data... 
+n = 0
+n = 100000
+n = 200000
+n = 300000
+n = 400000
+Lattice Length = 100
+T = 3.2
+Cluster acceptance rate: 85.85% 
+Cluster Average Size: 2.02
+gathering data... 
+n = 0
+n = 100000
+n = 200000
+n = 300000
+n = 400000
+Lattice Length = 100
+T = 3.1
+Cluster acceptance rate: 85.8% 
+Cluster Average Size: 2.2325
+gathering data... 
+n = 0
+n = 100000
+n = 200000
+n = 300000
+n = 400000
+Lattice Length = 100
+T = 3
+Cluster acceptance rate: 85.2% 
+Cluster Average Size: 2.403
+gathering data... 
+n = 0
+n = 100000
+n = 200000
+n = 300000
+n = 400000
+Lattice Length = 100
+T = 2.9
+Cluster acceptance rate: 84.35% 
+Cluster Average Size: 2.63
+gathering data... 
+n = 0
+n = 100000
+n = 200000
+n = 300000
+n = 400000
+Lattice Length = 100
+T = 2.8
+Cluster acceptance rate: 82.7% 
+Cluster Average Size: 3.14125
+gathering data... 
+n = 0
+n = 100000
+n = 200000
+n = 300000
+n = 400000
+Lattice Length = 100
+T = 2.75
+Cluster acceptance rate: 82.875% 
+Cluster Average Size: 3.35425
+gathering data... 
+n = 0
+n = 100000
+n = 200000
+n = 300000
+n = 400000
+Lattice Length = 100
+T = 2.7
+Cluster acceptance rate: 81.475% 
+Cluster Average Size: 3.72875
+gathering data... 
+n = 0
+n = 100000
+n = 200000
+n = 300000
+n = 400000
+Lattice Length = 100
+T = 2.65
+Cluster acceptance rate: 80.65% 
+Cluster Average Size: 4.36475
+gathering data... 
+n = 0
+n = 100000
+n = 200000
+n = 300000
+n = 400000
+Lattice Length = 100
+T = 2.6
+Cluster acceptance rate: 79.025% 
+Cluster Average Size: 4.47425
+gathering data... 
+n = 0
+n = 100000
+n = 200000
+n = 300000
+n = 400000
+Lattice Length = 100
+T = 2.55
+Cluster acceptance rate: 79.425% 
+Cluster Average Size: 5.404
+gathering data... 
+n = 0
+n = 100000
+n = 200000
+n = 300000
+n = 400000
+Lattice Length = 100
+T = 2.5
+Cluster acceptance rate: 76.825% 
+Cluster Average Size: 5.862
+gathering data... 
+n = 0
+n = 100000
+n = 200000
+n = 300000
+n = 400000
+Lattice Length = 100
+T = 2.45
+Cluster acceptance rate: 76.575% 
+Cluster Average Size: 7.193
+gathering data... 
+n = 0
+n = 100000
+n = 200000
+n = 300000
+n = 400000
+Lattice Length = 100
+T = 2.4
+Cluster acceptance rate: 75.65% 
+Cluster Average Size: 7.61475
+gathering data... 
+n = 0
+n = 100000
+n = 200000
+n = 300000
+n = 400000
+Lattice Length = 100
+T = 2.35
+Cluster acceptance rate: 73.55% 
+Cluster Average Size: 8.87925
+gathering data... 
+n = 0
+n = 100000
+n = 200000
+n = 300000
+n = 400000
+Lattice Length = 100
+T = 2.3
+Cluster acceptance rate: 69.2% 
+Cluster Average Size: 12.9808
+gathering data... 
+n = 0
+n = 100000
+n = 200000
+n = 300000
+n = 400000
+Lattice Length = 100
+T = 2.25
+Cluster acceptance rate: 68.775% 
+Cluster Average Size: 15.4415
+gathering data... 
+n = 0
+n = 100000
+n = 200000
+n = 300000
+n = 400000
+Lattice Length = 100
+T = 2.2
+Cluster acceptance rate: 67.775% 
+Cluster Average Size: 21.3955
+gathering data... 
+n = 0
+n = 100000
+n = 200000
+n = 300000
+n = 400000
+Lattice Length = 100
+T = 2.15
+Cluster acceptance rate: 64.45% 
+Cluster Average Size: 30.1217
+gathering data... 
+n = 0
+n = 100000
+n = 200000
+n = 300000
+n = 400000
+Lattice Length = 100
+T = 2.1
+Cluster acceptance rate: 57.95% 
+Cluster Average Size: 50.8695
+gathering data... 
+n = 0
+n = 100000
+n = 200000
+n = 300000
+n = 400000
+Lattice Length = 100
+T = 2.05
+Cluster acceptance rate: 55.925% 
+Cluster Average Size: 73.1778
+gathering data... 
+n = 0
+n = 100000
+n = 200000
+n = 300000
+n = 400000
+Lattice Length = 100
+T = 2
+Cluster acceptance rate: 49.925% 
+Cluster Average Size: 152.893
+gathering data... 
+n = 0
+n = 100000
+n = 200000
+n = 300000
+n = 400000
+Lattice Length = 100
+T = 1.95
+Cluster acceptance rate: 43.475% 
+Cluster Average Size: 225.875
+gathering data... 
+n = 0
+n = 100000
+n = 200000
+n = 300000
+n = 400000
+slurmstepd: error: *** JOB 49525989 ON udc-aw34-3c0 CANCELLED AT 2023-05-09T19:22:51 ***
