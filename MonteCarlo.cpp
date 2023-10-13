@@ -56,40 +56,6 @@ int update_site(Measurements main_measurements, Interactions main_interactions, 
     //change in energy when spin is flipped
     delE = (Jnn * delPSpin) + (Dp * delISpin);
 
-    // //check to see if energy calculation is correct
-    // Echeck_0 = main_measurements.clock_energy(main_properties, spin, Ns, L) + main_measurements.dipolar_energy(main_interactions, spin, Ns, L);
-    // clock_Echeck_0 = main_measurements.clock_energy(main_properties, spin, Ns, L);
-    // dip_Echeck_0 = main_measurements.dipolar_energy(main_interactions, spin, Ns, L);
-
-    // spin[k].potts = p_new;
-    // spin[k].Sz = Sz_new;
-
-    // Echeck_f = main_measurements.clock_energy(main_properties, spin, Ns, L) + main_measurements.dipolar_energy(main_interactions, spin, Ns, L);
-    // clock_Echeck_f = main_measurements.clock_energy(main_properties, spin, Ns, L);
-    // dip_Echeck_f = main_measurements.dipolar_energy(main_interactions, spin, Ns, L);
-
-    // Echeck = Echeck_f - Echeck_0;
-    // clock_Echeck = clock_Echeck_f - clock_Echeck_0;
-    // dip_Echeck = dip_Echeck_f - dip_Echeck_0;
-
-    // //Return variables back to normal
-    // spin[k].potts = p0;
-    // spin[k].Sz = Sz0;
-
-    // std::ofstream EcheckFile;
-    // EcheckFile.open("delEcheck.dat", std::fstream::app);
-
-    // if (first == 0) {
-    //     EcheckFile << "Local Calc, Lattice Calc, Clock Local Calc, Clock Lattice Calc, Dipolar Local Calc, Dipolar Lattice Calc" << std::endl;
-    //     first = 1;
-    // }
-
-    // EcheckFile << delE << ", " << Echeck << ", " << Jnn * delPSpin << ", " << clock_Echeck << ", " << Dp * delISpin << ", " << dip_Echeck << std::endl;
-
-    // if (delE >= (Echeck + .001) || delE <= (Echeck - .001)) {
-    //     std::cout << delE << ", " << Echeck << std::endl;
-    // }
-
     //spin flip or not
     double r = rand1();
 
@@ -123,7 +89,7 @@ double MC_sweep(Measurements main_measurements, Interactions main_interactions, 
     return ((double) hits)/((double) Ns);      // success rate
 }
 
-void Metropolis_MC_Sim(Interactions main_interactions, Measurements main_measurements, Properties main_properties, double beta, Site *spin, int Ns, int L, const std::string L_name, int print_config) {
+void Metropolis_MC_Sim(Interactions main_interactions, Measurements main_measurements, Properties main_properties, double beta, Site *spin, int Ns, int L, const std::string L_name, const std::string D_name, int print_config) {
 
     clock_t t_start = clock();
     clock_t t_now;
@@ -158,7 +124,7 @@ void Metropolis_MC_Sim(Interactions main_interactions, Measurements main_measure
 
     for (int n = 0; n < ndata; n++) {
 
-        if(n % print_config == 0 && print_config == 1) {
+        if(n % 1000 == 0 && print_config == 1) {
             
             const std::string n_val = std::to_string(n);
             const std::string config_name = "config_T" + T_val + "_L" + L_val + "_n" + n_val;
@@ -220,7 +186,7 @@ void Metropolis_MC_Sim(Interactions main_interactions, Measurements main_measure
     t_now = clock();
     t_diff = (double)((t_now - t_start)/CLOCKS_PER_SEC);
 
-    print(L_name, E1, E2, E1_j, E1_d, PM1, PM2, PM4, IM1, IM2, IM4, F1, F2, F4, beta, Ns, t_diff);
+    print(L_name, D_name, T_val, E1, E2, E1_j, E1_d, PM1, PM2, PM4, IM1, IM2, IM4, F1, F2, F4, beta, Ns, t_diff);
 }
 
 
@@ -417,7 +383,7 @@ double sweep_cluster(Cluster main_cluster, Measurements main_measurements, Inter
     return ((double)hits / (double)num_sweeps);
 }
 
-void Wolff_MC_Sim(Cluster main_cluster, Measurements main_measurements, Interactions main_interactions, Properties main_properties, Site *spin, int Ns, int L, double beta, const std::string L_name) {
+void Wolff_MC_Sim(Cluster main_cluster, Measurements main_measurements, Interactions main_interactions, Properties main_properties, Site *spin, int Ns, int L, double beta, const std::string L_name, const std::string D_name) {
     
     clock_t t_start = clock();
     clock_t t_now;
@@ -439,6 +405,8 @@ void Wolff_MC_Sim(Cluster main_cluster, Measurements main_measurements, Interact
     double F1 = 0, F2 = 0, F4 = 0;
 
     double fb[2];
+
+    const std::string T_val = std::to_string(1./beta);
 
     //thermalize the system
     for(int i = 0; i < thermalize; i++) {
@@ -492,5 +460,5 @@ void Wolff_MC_Sim(Cluster main_cluster, Measurements main_measurements, Interact
     t_now = clock();
     t_diff = (double)((t_now - t_start)/CLOCKS_PER_SEC);
 
-    print(L_name, E1, E2, E1_j, E1_d, PM1, PM2, PM4, IM1, IM2, IM4, F1, F2, F4, beta, Ns, t_diff);
+    print(L_name, D_name, T_val, E1, E2, E1_j, E1_d, PM1, PM2, PM4, IM1, IM2, IM4, F1, F2, F4, beta, Ns, t_diff);
 }

@@ -7,7 +7,7 @@
             "args": [
                 "-fdiagnostics-color=always",
                 "-g",
-                "${file}","Housekeeping.cpp","MonteCarlo.cpp","Setup_Lattice.cpp","Rand.cpp",
+                "${file}","Housekeeping.cpp","MonteCarlo.cpp","MonteCarlo_var.cpp","Setup_Lattice.cpp","Rand.cpp",
                 "-o",
                 "${fileDirname}\\${fileBasenameNoExtension}.exe"
             ],
