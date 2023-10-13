@@ -4,6 +4,7 @@
 #include <iostream>
 #include <fstream>
 #include <ctime>
+#include <filesystem>
 #include "Constants.hpp"
 #include "Measurements.hpp"
 #include "Interactions.hpp"
@@ -80,7 +81,7 @@ double MC_sweep_var(Measurements main_measurements, Interactions main_interactio
     return ((double) hits)/((double) Ns);      // success rate
 }
 
-void Metropolis_MC_Sim_var(Interactions main_interactions, Measurements main_measurements, Properties main_properties, double beta, Site *spin, int Ns, int L, const std::string L_name, int print_config, double D, double J) {
+void Metropolis_MC_Sim_var(Interactions main_interactions, Measurements main_measurements, Properties main_properties, double beta, Site *spin, int Ns, int L, const std::string L_name, const std::string D_name, double D, double J) {
 
     clock_t t_start = clock();
     clock_t t_now;
@@ -105,6 +106,18 @@ void Metropolis_MC_Sim_var(Interactions main_interactions, Measurements main_mea
     }
     std::cout << "spin update rate = " << accepted/((double) thermalize) << std::endl;
 
+    const std::string T_val = std::to_string(1./beta);
+    const std::string config_name = "config_T" + T_val;
+
+    std::ofstream config;
+    config.open("./heatsims1/L=" + L_name + "_heat/DJ" + D_name + "/" + config_name + ".dat", std::fstream::app);
+
+    for(int i = 0; i < Ns; i++) {
+        config << spin[i].x << ", " << spin[i].y << ", " << spin[i].potts << ", " << spin[i].Sz << std::endl;
+    }
+
+    config.close();
+
     //now start to collect data
     double E1 = 0, E2 = 0;
     double E_j = 0, E_d = 0;
@@ -113,26 +126,10 @@ void Metropolis_MC_Sim_var(Interactions main_interactions, Measurements main_mea
     double IM1 = 0, IM2 = 0, IM4 = 0;
     double F1 = 0, F2 = 0, F4 = 0;
     double avg_accept = 0;
-
-    const std::string T_val = std::to_string(1./beta);
-    const std::string DJ_val = std::to_string(D/J);
     
-
     for (int n = 0; n < ndata; n++) {
 
-        if(n % 1000 == 0 && print_config == 1) {
-            const std::string n_val = std::to_string(n);
-            const std::string config_name = "config_T" + T_val + "_DJ" + DJ_val + "_n" + n_val;
-
-            std::ofstream config;
-            config.open(".\\DJsims\\configs\\" + config_name + ".dat", std::fstream::app);
-
-            for(int i = 0; i < Ns; i++) {
-                config << spin[i].x << ", " << spin[i].y << ", " << spin[i].potts << ", " << spin[i].Sz << std::endl;
-            }
-
-            config.close();
-
+        if(n % 1000 == 0) {
             std::cout << "n = " << n << std::endl;
         }
 
@@ -181,5 +178,5 @@ void Metropolis_MC_Sim_var(Interactions main_interactions, Measurements main_mea
     t_now = clock();
     t_diff = (double)((t_now - t_start)/CLOCKS_PER_SEC);
 
-    print(L_name, E1, E2, E1_j, E1_d, PM1, PM2, PM4, IM1, IM2, IM4, F1, F2, F4, beta, Ns, t_diff);
+    print(L_name, D_name, E1, E2, E1_j, E1_d, PM1, PM2, PM4, IM1, IM2, IM4, F1, F2, F4, beta, Ns, t_diff);
 }

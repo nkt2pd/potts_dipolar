@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <map>
+#include <filesystem>
 #include "Constants.hpp"
 #include "Measurements.hpp"
 #include "Interactions.hpp"
@@ -30,10 +31,7 @@ int main(int argc, char *argv[]) {
     auto it = stripe_map.find(D/J);
     int h = it->second;
 
-    int print_config = 0;
-    int config_count = 0;
-
-    const int L = 120;
+    const int L = 60;
     const int Ns = L * L;
 
     Site* spin = new Site[Ns];
@@ -53,6 +51,9 @@ int main(int argc, char *argv[]) {
         }
     }
 
+    const std::string D_name = std::to_string(D/J);
+    std::filesystem::create_directories("./heatsims1/L=" + L_name + "_heat/DJ" + D_name);
+
     Vd_read.close();
 
     init_stripe(main_measurements, main_interactions, spin, Ns, L, h);
@@ -68,15 +69,10 @@ int main(int argc, char *argv[]) {
 
     for(double T = 0; T<=4; T += del_T) {
 
-        if(config_count%5 == 0) {
-            print_config = 1;
-        } else {
-            print_config = 0;
-        }
 
         std::cout << "T = " << T << std::endl;
     
-        Metropolis_MC_Sim_var(main_interactions, main_measurements, main_properties, 1./T, spin, Ns, L, L_name, print_config, D, J);
+        Metropolis_MC_Sim_var(main_interactions, main_measurements, main_properties, 1./T, spin, Ns, L, L_name, D_name, D, J);
         
         if(T>=0.1) {
             del_T = 0.05;
@@ -84,7 +80,6 @@ int main(int argc, char *argv[]) {
         if(T>=1) {
             del_T = 0.25;
         }
-        config_count++;
     }
 
     delete[] main_interactions.Vd;
