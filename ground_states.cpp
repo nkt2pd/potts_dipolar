@@ -12,7 +12,7 @@
 
 int main() {
 
-    const int L = 120;
+    const int L = 60;
     const int Ns = L*L;
 
     const double J = 1;
@@ -36,47 +36,65 @@ int main() {
     set_coordinates(spin, Ns, L);
     set_nn(spin, Ns, L);
 
-    for(int i = 31; i<=33; i++) {
+    std::vector<int> h_vec;
 
-        double h_arr[13] = {1, 2, 3, 4, 5, 6, 10, 12, 15, 20, 30, 60, 120};
-        double D = (double)i*(0.3/30.);
+    for(int f=1; f<=(L/2); f++) {
+        if(L%(2*f) == 0) {
+            h_vec.push_back(f);
+        }
+    }
+
+    h_vec.push_back(L);
+
+    std::ofstream grounds_w;
+    grounds_w.open("grounds.dat");
+
+    for(int i = 0; i<=30; i++) {
+
+        double D = (double)i*(2.5/30.);
         double ground_state = 0;
         double ground_energy = 0;
         double energy = 0;
 
-        const std::string DJ_val = std::to_string(D/J);
-        const std::string enrg_name = "DJ" + DJ_val + ".dat";
+        // const std::string DJ_val = std::to_string(D/J);
+        // const std::string L_val  = std::to_string(L);
+        // const std::string enrg_name = "DJ" + DJ_val + ".dat";
 
-        std::ofstream enrg;
-        enrg.open(enrg_name);
+        // std::ofstream enrg;
+        // enrg.open(enrg_name);
 
-        for(int j = 0; j < 13; j++) {
+        // enrg << "test" << std::endl;
 
-            if(h_arr[j]==120) {
+        for(int j = 0; j < h_vec.size(); j++) {
+
+            if(h_vec[j]==L) {
                 init_uniform(main_measurements, main_interactions, spin, Ns, L);
             } else{
-                init_stripe(main_measurements, main_interactions, spin, Ns, L, h_arr[j]);
+                init_stripe(main_measurements, main_interactions, spin, Ns, L, h_vec[j]);
             }
 
             energy = main_measurements.E_tot_var(main_interactions, main_properties, spin, Ns, L, J, D);
 
             if(j == 0) {
                 ground_energy = energy;
-                ground_state = h_arr[j];
+                ground_state = h_vec[j];
             } else {
                 if(energy < ground_energy) {
                     ground_energy = energy;
-                    ground_state = h_arr[j];
+                    ground_state = h_vec[j];
                 }
             }
-            enrg << h_arr[j] << "\t" << energy << std::endl;
+            // enrg << h_vec[j] << "\t" << energy << std::endl;
 
-            if(j == 12) {
-                enrg << "Ground State: h = " << ground_state << std::endl;
+            if(j == h_vec.size() - 1) {
+                // enrg << "Ground State: h = " << ground_state << std::endl;
+                grounds_w << D/J << ", " << ground_state << std::endl;
             }
         }
-        enrg.close();
+        // enrg.close();
     }
+
+    grounds_w.close();
 
     delete[] main_interactions.Vd;
     delete[] spin;
