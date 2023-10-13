@@ -88,29 +88,26 @@ void Metropolis_MC_Sim_var(Interactions main_interactions, Measurements main_mea
     double t_diff = 0;
 
     int thermalize = 1000;
-    int nsweep = 1;
-    int ndata = 5000;
+    int nsweep = 10;
+    int ndata = 500;
 
     //Run 20000 sweeps of the system to achieve equilibrium
     double accepted = 0;
 
     double fb[2];
-
-    std::cout << "Thermalizing..." << std::endl;
     
     for (int i = 0; i < thermalize; i++) {
         if(i%100 == 0) {
-            std::cout << "i = " << i << std::endl;
+            std::cout << "Thermalizing... i = " << i << std::endl;
         }
         accepted += MC_sweep_var(main_measurements, main_interactions, main_properties, beta, spin, Ns, L, D, J);
     }
     std::cout << "spin update rate = " << accepted/((double) thermalize) << std::endl;
 
     const std::string T_val = std::to_string(1./beta);
-    const std::string config_name = "config_T" + T_val;
 
     std::ofstream config;
-    config.open("./heatsims1/L=" + L_name + "_heat/DJ" + D_name + "/" + config_name + ".dat", std::fstream::app);
+    config.open("./heatsims1/L=" + L_name + "/DJ" + D_name + "/T=" + T_val + "/config.dat", std::fstream::app);
 
     for(int i = 0; i < Ns; i++) {
         config << spin[i].x << ", " << spin[i].y << ", " << spin[i].potts << ", " << spin[i].Sz << std::endl;
@@ -129,7 +126,7 @@ void Metropolis_MC_Sim_var(Interactions main_interactions, Measurements main_mea
     
     for (int n = 0; n < ndata; n++) {
 
-        if(n % 1000 == 0) {
+        if(n % 100 == 0) {
             std::cout << "n = " << n << std::endl;
         }
 
@@ -178,5 +175,5 @@ void Metropolis_MC_Sim_var(Interactions main_interactions, Measurements main_mea
     t_now = clock();
     t_diff = (double)((t_now - t_start)/CLOCKS_PER_SEC);
 
-    print(L_name, D_name, E1, E2, E1_j, E1_d, PM1, PM2, PM4, IM1, IM2, IM4, F1, F2, F4, beta, Ns, t_diff);
+    print(L_name, D_name, T_val, E1, E2, E1_j, E1_d, PM1, PM2, PM4, IM1, IM2, IM4, F1, F2, F4, beta, Ns, t_diff);
 }
