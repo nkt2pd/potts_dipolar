@@ -51,8 +51,6 @@ int update_site_var(Measurements main_measurements, Interactions main_interactio
     //spin flip or not
     double r = rand1();
 
-    double exp_check = exp(-delE * beta);
-
     if (delE == 0) {
         //if there is no change in the energy, coin flip to see if accepted
         if (r < 0.5) {
