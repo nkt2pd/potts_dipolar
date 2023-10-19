@@ -46,10 +46,12 @@ int update_site_var(Measurements main_measurements, Interactions main_interactio
     }
 
     //change in energy when spin is flipped
-    delE = (J * delPSpin) + (D * delISpin);
+    delE = (-1 * J * delPSpin) + (D * delISpin);
 
     //spin flip or not
     double r = rand1();
+
+    double exp_check = exp(-delE * beta);
 
     if (delE == 0) {
         //if there is no change in the energy, coin flip to see if accepted

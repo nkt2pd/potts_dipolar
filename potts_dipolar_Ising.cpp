@@ -63,8 +63,12 @@ int main(int argc, char *argv[]) {
 
     Vd_read.close();
 
-    init_stripe(main_measurements, main_interactions, spin, Ns, L, h);
-    
+    if(h==L) {
+        init_uniform(main_measurements, main_interactions, spin, Ns, L);
+    } else {
+        init_stripe(main_measurements, main_interactions, spin, Ns, L, h);
+    }
+
     set_coordinates(spin, Ns, L);
     
     set_nn(spin, Ns, L);
@@ -76,6 +80,16 @@ int main(int argc, char *argv[]) {
 
     for(double T = 0; T<=4; T += del_T) {
 
+        if(T == 0) {
+            std::ofstream config;
+            config.open("./heatsims1/L=" + L_name + "/DJ" + D_name + "/init_config.dat", std::fstream::app);
+
+            for(int i = 0; i < Ns; i++) {
+                config << spin[i].x << ", " << spin[i].y << ", " << spin[i].potts << ", " << spin[i].Sz << std::endl;
+            }
+
+            config.close();
+        }
 
         std::cout << "T = " << T << std::endl;
     

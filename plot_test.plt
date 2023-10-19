@@ -12,4 +12,4 @@ unset key
 set grid x,y
 
 # plot "config_T0.260000_L36_n4500.dat" u 1:2:(myPt(4)):(myColor(4)) w p ps 1 pt var lc rgb var
-plot "stripe_h1_.dat" u 1:2:(myPt(4)):(myColor(4)) w p ps 1 pt var lc rgb var
+plot "configtest.dat" u 1:2:(myPt(4)):(myColor(4)) w p ps 1 pt var lc rgb var
