@@ -47,7 +47,7 @@ int main() {
     h_vec.push_back(L);
 
     std::ofstream grounds_w;
-    grounds_w.open("grounds.dat");
+    grounds_w.open("grounds2.dat");
 
     for(int i = 0; i<=30; i++) {
 
@@ -55,15 +55,6 @@ int main() {
         double ground_state = 0;
         double ground_energy = 0;
         double energy = 0;
-
-        // const std::string DJ_val = std::to_string(D/J);
-        // const std::string L_val  = std::to_string(L);
-        // const std::string enrg_name = "DJ" + DJ_val + ".dat";
-
-        // std::ofstream enrg;
-        // enrg.open(enrg_name);
-
-        // enrg << "test" << std::endl;
 
         for(int j = 0; j < h_vec.size(); j++) {
 
@@ -84,14 +75,11 @@ int main() {
                     ground_state = h_vec[j];
                 }
             }
-            // enrg << h_vec[j] << "\t" << energy << std::endl;
 
             if(j == h_vec.size() - 1) {
-                // enrg << "Ground State: h = " << ground_state << std::endl;
                 grounds_w << D/J << ", " << ground_state << std::endl;
             }
         }
-        // enrg.close();
     }
 
     grounds_w.close();
