@@ -26,26 +26,26 @@ void clear_files(const std::string L_name) {
 
 }
 
-void print(const std::string L_name, const std::string D_name, double E1, double E2, 
+void print(const std::string L_name, const std::string D_name, const std::string new_dir_name, double E1, double E2, 
            double E1_j, double E1_d, double PM1, double PM2, double PM4, double IM1, double IM2, double IM4, 
            double F1, double F2, double F4, double beta, int Ns, int t_diff) {
 
         std::ofstream energy;
-        energy.open("./heatsims1/L=" + L_name + "/DJ" + D_name + "/energy.dat", std::fstream::app);
+        energy.open("./" + new_dir_name + "/L=" + L_name + "/DJ" + D_name + "/energy.dat", std::fstream::app);
         std::ofstream energy_parts;
-        energy_parts.open("./heatsims1/L=" + L_name + "/DJ" + D_name + "/energyParts.dat", std::fstream::app);
+        energy_parts.open("./" + new_dir_name + "/L=" + L_name + "/DJ" + D_name + "/energyParts.dat", std::fstream::app);
         std::ofstream heat;
-        heat.open("./heatsims1/L=" + L_name + "/DJ" + D_name + "/heat.dat", std::fstream::app);
+        heat.open("./" + new_dir_name + "/L=" + L_name + "/DJ" + D_name + "/heat.dat", std::fstream::app);
         std::ofstream Potts_m;
-        Potts_m.open("./heatsims1/L=" + L_name + "/DJ" + D_name + "/Potts_m.dat", std::fstream::app);
+        Potts_m.open("./" + new_dir_name + "/L=" + L_name + "/DJ" + D_name + "/Potts_m.dat", std::fstream::app);
         std::ofstream Ising_m;
-        Ising_m.open("./heatsims1/L=" + L_name + "/DJ" + D_name + "/Ising_m.dat", std::fstream::app);
+        Ising_m.open("./" + new_dir_name + "/L=" + L_name + "/DJ" + D_name + "/Ising_m.dat", std::fstream::app);
         std::ofstream susceptibility;
-        susceptibility.open("./heatsims1/L=" + L_name + "/DJ" + D_name + "/susceptibility.dat", std::fstream::app);
+        susceptibility.open("./" + new_dir_name + "/L=" + L_name + "/DJ" + D_name + "/susceptibility.dat", std::fstream::app);
         std::ofstream binder4;
-        binder4.open("./heatsims1/L=" + L_name + "/DJ" + D_name + "/binder4.dat", std::fstream::app);
+        binder4.open("./" + new_dir_name + "/L=" + L_name + "/DJ" + D_name + "/binder4.dat", std::fstream::app);
         std::ofstream fb;
-        fb.open("./heatsims1/L=" + L_name + "/DJ" + D_name + "/fb.dat", std::fstream::app);
+        fb.open("./" + new_dir_name + "/L=" + L_name + "/DJ" + D_name + "/fb.dat", std::fstream::app);
 
         energy << 1./beta << ", " << E1/((double) Ns) << std::endl;
         energy_parts << 1./beta << ", " << E1_j/((double) Ns) << ", " << E1_d/((double) Ns) << std::endl;
@@ -66,7 +66,7 @@ void print(const std::string L_name, const std::string D_name, double E1, double
         fb.close();
 
         std::ofstream time;
-        time.open("./heatsims1/L=" + L_name + "/DJ" + D_name + "/time.dat", std::fstream::app);
+        time.open("./" + new_dir_name + "/L=" + L_name + "/DJ" + D_name + "/time.dat", std::fstream::app);
 
         time << 1./beta << ", " << t_diff << std::endl;
 

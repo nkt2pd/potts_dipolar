@@ -89,7 +89,7 @@ double MC_sweep(Measurements main_measurements, Interactions main_interactions, 
     return ((double) hits)/((double) Ns);      // success rate
 }
 
-void Metropolis_MC_Sim(Interactions main_interactions, Measurements main_measurements, Properties main_properties, double beta, Site *spin, int Ns, int L, const std::string L_name, const std::string D_name, int print_config) {
+void Metropolis_MC_Sim(Interactions main_interactions, Measurements main_measurements, Properties main_properties, double beta, Site *spin, int Ns, int L, const std::string L_name, const std::string D_name, const std::string new_dir_name, int print_config) {
 
     clock_t t_start = clock();
     clock_t t_now;
@@ -186,7 +186,7 @@ void Metropolis_MC_Sim(Interactions main_interactions, Measurements main_measure
     t_now = clock();
     t_diff = (double)((t_now - t_start)/CLOCKS_PER_SEC);
 
-    print(L_name, D_name, E1, E2, E1_j, E1_d, PM1, PM2, PM4, IM1, IM2, IM4, F1, F2, F4, beta, Ns, t_diff);
+    print(L_name, D_name, new_dir_name, E1, E2, E1_j, E1_d, PM1, PM2, PM4, IM1, IM2, IM4, F1, F2, F4, beta, Ns, t_diff);
 }
 
 
@@ -383,7 +383,7 @@ double sweep_cluster(Cluster main_cluster, Measurements main_measurements, Inter
     return ((double)hits / (double)num_sweeps);
 }
 
-void Wolff_MC_Sim(Cluster main_cluster, Measurements main_measurements, Interactions main_interactions, Properties main_properties, Site *spin, int Ns, int L, double beta, const std::string L_name, const std::string D_name) {
+void Wolff_MC_Sim(Cluster main_cluster, Measurements main_measurements, Interactions main_interactions, Properties main_properties, Site *spin, int Ns, int L, double beta, const std::string L_name, const std::string D_name, const std::string new_dir_name) {
     
     clock_t t_start = clock();
     clock_t t_now;
@@ -460,5 +460,5 @@ void Wolff_MC_Sim(Cluster main_cluster, Measurements main_measurements, Interact
     t_now = clock();
     t_diff = (double)((t_now - t_start)/CLOCKS_PER_SEC);
 
-    print(L_name, D_name, E1, E2, E1_j, E1_d, PM1, PM2, PM4, IM1, IM2, IM4, F1, F2, F4, beta, Ns, t_diff);
+    print(L_name, D_name, new_dir_name, E1, E2, E1_j, E1_d, PM1, PM2, PM4, IM1, IM2, IM4, F1, F2, F4, beta, Ns, t_diff);
 }

@@ -81,7 +81,7 @@ double MC_sweep_var(Measurements main_measurements, Interactions main_interactio
     return ((double) hits)/((double) Ns);      // success rate
 }
 
-void Metropolis_MC_Sim_var(Interactions main_interactions, Measurements main_measurements, Properties main_properties, double beta, Site *spin, int Ns, int L, const std::string L_name, const std::string D_name, double D, double J) {
+void Metropolis_MC_Sim_var(Interactions main_interactions, Measurements main_measurements, Properties main_properties, double beta, Site *spin, int Ns, int L, const std::string L_name, const std::string D_name, const std::string new_dir_name, double D, double J) {
 
     clock_t t_start = clock();
     clock_t t_now;
@@ -107,7 +107,7 @@ void Metropolis_MC_Sim_var(Interactions main_interactions, Measurements main_mea
     const std::string T_val = std::to_string(1./beta);
 
     std::ofstream config;
-    config.open("./heatsims1/L=" + L_name + "/DJ" + D_name + "/T=" + T_val + "_config.dat", std::fstream::app);
+    config.open("./" + new_dir_name + "/L=" + L_name + "/DJ" + D_name + "/T=" + T_val + "_config.dat", std::fstream::app);
 
     for(int i = 0; i < Ns; i++) {
         config << spin[i].x << ", " << spin[i].y << ", " << spin[i].potts << ", " << spin[i].Sz << std::endl;
@@ -175,5 +175,5 @@ void Metropolis_MC_Sim_var(Interactions main_interactions, Measurements main_mea
     t_now = clock();
     t_diff = (double)((t_now - t_start)/CLOCKS_PER_SEC);
 
-    print(L_name, D_name, E1, E2, E1_j, E1_d, PM1, PM2, PM4, IM1, IM2, IM4, F1, F2, F4, beta, Ns, t_diff);
+    print(L_name, D_name, new_dir_name, E1, E2, E1_j, E1_d, PM1, PM2, PM4, IM1, IM2, IM4, F1, F2, F4, beta, Ns, t_diff);
 }

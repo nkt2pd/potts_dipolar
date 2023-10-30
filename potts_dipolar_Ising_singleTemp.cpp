@@ -37,6 +37,8 @@ int main(int argc, char *argv[]) {
     Interactions main_interactions(L);
     Measurements main_measurements;
 
+    const std::string D_name = "";
+    const std::string new_dir_name = "";
     const std::string L_size(argv[1]);
     const std::string L_name = "Potts_Metrop" + L_size;
     
@@ -61,7 +63,7 @@ int main(int argc, char *argv[]) {
 
     main_properties.set_pb(1./T);
     
-    Metropolis_MC_Sim(main_interactions, main_measurements, main_properties, 1./T, spin, Ns, L, L_name, print_config);
+    Metropolis_MC_Sim(main_interactions, main_measurements, main_properties, 1./T, spin, Ns, L, D_name, L_name, new_dir_name, print_config);
 
     delete[] main_interactions.Vd;
     delete[] spin;

@@ -58,8 +58,9 @@ int main(int argc, char *argv[]) {
         }
     }
 
+    const std::string new_dir_name = "heatsims2";
     const std::string D_name = std::to_string(D/J);
-    std::filesystem::create_directories("./heatsims1/L=" + L_name + "/DJ" + D_name);
+    std::filesystem::create_directories("./" + new_dir_name + "/L=" + L_name + "/DJ" + D_name);
 
     Vd_read.close();
 
@@ -82,7 +83,7 @@ int main(int argc, char *argv[]) {
 
         if(T == 0) {
             std::ofstream config;
-            config.open("./heatsims2/L=" + L_name + "/DJ" + D_name + "/init_config.dat", std::fstream::app);
+            config.open("./" + new_dir_name + "/L=" + L_name + "/DJ" + D_name + "/init_config.dat", std::fstream::app);
 
             for(int i = 0; i < Ns; i++) {
                 config << spin[i].x << ", " << spin[i].y << ", " << spin[i].potts << ", " << spin[i].Sz << std::endl;
@@ -93,7 +94,7 @@ int main(int argc, char *argv[]) {
 
         std::cout << "T = " << T << std::endl;
     
-        Metropolis_MC_Sim_var(main_interactions, main_measurements, main_properties, 1./T, spin, Ns, L, L_name, D_name, D, J);
+        Metropolis_MC_Sim_var(main_interactions, main_measurements, main_properties, 1./T, spin, Ns, L, L_name, D_name, new_dir_name, D, J);
         
         if(T>=0.1) {
             del_T = 0.05;
