@@ -66,7 +66,7 @@ int main(int argc, char *argv[]) {
     if(h==L) {
         init_uniform(main_measurements, main_interactions, spin, Ns, L);
     } else {
-        init_stripe(main_measurements, main_interactions, spin, Ns, L, h);
+        init_dstripe(main_measurements, main_interactions, spin, Ns, L, h);
     }
 
     set_coordinates(spin, Ns, L);

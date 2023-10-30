@@ -23,24 +23,20 @@ int main() {
     Interactions main_interactions(L);
     Measurements main_measurements;
 
-    // init_stripe(main_measurements, main_interactions, spin, Ns, L, 60);
+    init_dstripe(main_measurements, main_interactions, spin, Ns, L, 3);
 
-    // set_coordinates(spin, Ns, L);
+    set_coordinates(spin, Ns, L);
     
-    // set_nn(spin, Ns, L);
+    set_nn(spin, Ns, L);
 
-    // std::ofstream config;
-    // config.open("configtest.dat");
+    std::ofstream config;
+    config.open("config_dtest.dat");
 
-    // for(int i = 0; i < Ns; i++) {
-    //     config << spin[i].x << ", " << spin[i].y << ", " << spin[i].potts << ", " << spin[i].Sz << std::endl;
-    // }
+    for(int i = 0; i < Ns; i++) {
+        config << spin[i].x << ", " << spin[i].y << ", " << spin[i].potts << ", " << spin[i].Sz << std::endl;
+    }
 
-    // config.close();
-
-    double beta = 1./0.;
-    
-    std::cout << exp(-beta) << std::endl;
+    config.close();
 
     return 0;
 }

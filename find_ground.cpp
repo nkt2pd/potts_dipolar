@@ -49,7 +49,7 @@ int main(int argc, char *argv[]) {
         std::ofstream stripe_config;
         stripe_config.open(stripe_name);
 
-        init_stripe(main_measurements, main_interactions, spin, Ns, L, h_arr[i]);
+        init_dstripe(main_measurements, main_interactions, spin, Ns, L, h_arr[i]);
 
         ground_energy = main_measurements.E_tot(main_interactions, main_properties, spin, Ns, L);
 
