@@ -47,11 +47,11 @@ int main() {
     h_vec.push_back(L);
 
     std::ofstream grounds_w;
-    grounds_w.open("grounds2.dat");
+    grounds_w.open("grounds_diag.dat");
 
     for(int i = 0; i<=30; i++) {
 
-        double D = (double)i*(2.5/30.);
+        double D = (double)i*(.5/30.);
         double ground_state = 0;
         double ground_energy = 0;
         double energy = 0;
@@ -61,7 +61,7 @@ int main() {
             if(h_vec[j]==L) {
                 init_uniform(main_measurements, main_interactions, spin, Ns, L);
             } else{
-                init_stripe(main_measurements, main_interactions, spin, Ns, L, h_vec[j]);
+                init_dstripe(main_measurements, main_interactions, spin, Ns, L, h_vec[j]);
             }
 
             energy = main_measurements.E_tot_var(main_interactions, main_properties, spin, Ns, L, J, D);

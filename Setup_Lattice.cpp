@@ -39,6 +39,23 @@ void init_stripe(Measurements main_measurements, Interactions main_interactions,
     }
 }
 
+void init_dstripe(Measurements main_measurements, Interactions main_interactions, Site *spin, int Ns, int L, int h) {
+    for (int y = 0; y < L; y++) {
+        int p = 0;
+        for (int x = 0; x < L; x++) {
+            
+            if(x%h == 0) {
+                p == 0 ? p=1 : p=0;
+            }
+
+            int i = y*L + x;
+
+            spin[i].potts = p;
+            spin[i].Sz = (spin[i].potts % 2 == 0) ? 1 : -1;
+        }
+    }
+}
+
 inline int index(int x, int y, int L) {
     return y*L+x;
 }
