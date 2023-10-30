@@ -1,5 +1,7 @@
 set xrange [0.01:4]
-set yrange [0:5]
+set yrange [0:35]
+
+set key
 
 set logscale x
 unset logscale y
