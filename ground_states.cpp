@@ -47,11 +47,13 @@ int main() {
     h_vec.push_back(L);
 
     std::ofstream grounds_w;
-    grounds_w.open("grounds_diag.dat");
+    grounds_w.open("grounds_hz_diag3.dat");
 
-    for(int i = 0; i<=30; i++) {
+    int diag = 1;
 
-        double D = (double)i*(.5/30.);
+    for(int i = 0; i<=80; i++) {
+
+        double D = (double)i*(0.8/80.);
         double ground_state = 0;
         double ground_energy = 0;
         double energy = 0;
@@ -69,16 +71,39 @@ int main() {
             if(j == 0) {
                 ground_energy = energy;
                 ground_state = h_vec[j];
+                diag = 1;
             } else {
                 if(energy < ground_energy) {
                     ground_energy = energy;
                     ground_state = h_vec[j];
+                    diag = 1;
                 }
             }
 
-            if(j == h_vec.size() - 1) {
-                grounds_w << D/J << ", " << ground_state << std::endl;
+            if(h_vec[j]==L) {
+                init_uniform(main_measurements, main_interactions, spin, Ns, L);
+            } else{
+                init_stripe(main_measurements, main_interactions, spin, Ns, L, h_vec[j]);
             }
+
+            energy = main_measurements.E_tot_var(main_interactions, main_properties, spin, Ns, L, J, D);
+
+            if(energy < ground_energy) {
+                ground_energy = energy;
+                ground_state = h_vec[j];
+                diag = 0;
+            }
+
+            if (diag == 1) {
+                if(j == h_vec.size() - 1) {
+                    grounds_w << D/J << ", " << ground_state << ", Diagonal" << std::endl;
+                }
+            } else {
+                if(j == h_vec.size() - 1) {
+                    grounds_w << D/J << ", " << ground_state << ", Horizontal" << std::endl;
+                }
+            }
+            
         }
     }
 
