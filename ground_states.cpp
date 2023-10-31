@@ -47,13 +47,13 @@ int main() {
     h_vec.push_back(L);
 
     std::ofstream grounds_w;
-    grounds_w.open("grounds_hz_diag3.dat");
+    grounds_w.open("grounds_hz_diag4.dat");
 
     int diag = 1;
 
-    for(int i = 0; i<=80; i++) {
+    for(int i = 0; i<=30; i++) {
 
-        double D = (double)i*(0.8/80.);
+        double D = (double)i*(0.75/30.);
         double ground_state = 0;
         double ground_energy = 0;
         double energy = 0;
