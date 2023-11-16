@@ -1,9 +1,8 @@
 set xrange [0.01:4]
-set yrange [-0.01:3]
+set yrange [0:3]
 
 set key
 
-set y2tics
 set logscale x
 unset logscale y
 
@@ -12,8 +11,7 @@ set ylabel "C/J"
 
 set title "D/J = 0"
 
-plot "./DJ0.000000/heat.dat" using 1:2 axes x1y1 title "Specific Heat" with linespoints lc rgb 0xFF0000, \
-     "./DJ0.000000/fb.dat" using 1:2 axes x1y2 with linespoints lc rgb 0x0000FF
+plot "./DJ0.000000/heat.dat" using 1:2 title "Specific Heat" with linespoints lc rgb 0xFF0000
 pause -1 "Hit return to continue"
 
 set title "D/J = 0.025"
