@@ -91,7 +91,7 @@ void Metropolis_MC_Sim_var(Interactions main_interactions, Measurements main_mea
     int nsweep = 10;
     int ndata = 500;
 
-    //Run 20000 sweeps of the system to achieve equilibrium
+    //Run 1000 sweeps of the system to achieve equilibrium
     double accepted = 0;
 
     double fb[2];
