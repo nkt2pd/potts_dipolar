@@ -47,7 +47,7 @@ int main(int argc, char *argv[]) {
 
     //init potts and ising
 
-    std::string file_name = "C:\\users\\quent\\Projects\\Research\\potts_dipolar\\potts_dipolar\\smoothed_sims\\L=60\\DJ" + D_name + "\\T=0.200000_config.dat";
+    std::string file_name = "C:\\users\\quent\\Projects\\Research\\potts_dipolar\\potts_dipolar\\smoothed\\L=60\\DJ" + D_name + "\\T=0.200000_config.dat";
 
     std::ifstream config(file_name);
 
