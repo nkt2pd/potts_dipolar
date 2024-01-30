@@ -21,7 +21,7 @@ int main(int argc, char *argv[]) {
     double J = 1.;
     double D = 0.025;
 
-    const int L = atoi(argv[1]);;
+    const int L = 36 + 12*atoi(argv[1]);
     const int Ns = L * L;
 
     Site* spin = new Site[Ns];
