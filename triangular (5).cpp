@@ -293,7 +293,7 @@ int generate_cluster(void) {
     _qr = (int) (rand1()*N_potts);
     int s0 = (int) (rand1()*Ns);
     
-    //cout << "_qr = " << _qr << endl;
+    //std::cout << "_qr = " << _qr << endl;
     
     cluster.push_back(s0);
     spin[s0].cluster_tag = 1;
@@ -304,7 +304,7 @@ int generate_cluster(void) {
     lst_1.push_back(s0);
     list<int>::const_iterator m;
 
-    //cout << spin[s0].potts << endl;
+    //std::cout << spin[s0].potts << endl;
     
     int i, j;
     
@@ -323,7 +323,7 @@ int generate_cluster(void) {
                     cluster.push_back(j);
                     spin[j].cluster_tag = 1;
                     
-                    //cout << spin[j].potts << endl;
+                    //std::cout << spin[j].potts << endl;
                     
                     lst_2.push_back(j);
                 }
@@ -382,7 +382,7 @@ int flip_cluster(double beta) {
         spin[i].cluster_tag = 0;
     }
     double Ed_new = E_dip();
-    cout << (Ed_new - Ed_curr) << "\t : \t" << delta_E << endl;
+    std::cout << (Ed_new - Ed_curr) << "\t : \t" << delta_E << endl;
     */
     
     
@@ -567,7 +567,7 @@ void test(void) {
     for(int p2 = 0; p2 < N_potts; p2++) {
             
     
-        cout << "(" << p1 << ", " << p2 << "):\t" << "\t " << V_clock[p1][p2] << endl;
+        std::cout << "(" << p1 << ", " << p2 << "):\t" << "\t " << V_clock[p1][p2] << endl;
     }
     
     FILE *fp = fopen("v.dat", "w");
@@ -628,7 +628,7 @@ void test3(void) {
 
     // int cls = generate_cluster();
     
-    // cout << "cluster size = " << cls << endl;
+    // std::cout << "cluster size = " << cls << endl;
     
     // int hs = flip_cluster(1./2);
     
@@ -650,17 +650,17 @@ void compare_energy(void) {
     for(int i=0; i<Ns; i++) fprintf(fp, "%f\t %f\t %d\n", spin[i].position[0], spin[i].position[1], spin[i].sz);
     fclose(fp);
     
-    cout << "E (uniform) = " << E_curr << "\t E_J1 = " << E_j << "\t E_d = " << E_d << endl;
+    std::cout << "E (uniform) = " << E_curr << "\t E_J1 = " << E_j << "\t E_d = " << E_d << endl;
 
     exit(1);
     */
     
     
     fp = fopen("eg.dat", "w");
-    
+
     for(int h=1; h<66; h++) {
         
-        //cout << "h = " << h << endl;
+        //std::cout << "h = " << h << endl;
         
         init_stripe(h);
         
@@ -676,36 +676,30 @@ void compare_energy(void) {
 }
 
 int main(int argc, char* argv[]) {
-    
+    std::cout << "test" << std::endl;
     init_lattice();
     init_stripe(3);
-    
-    ofstream stripe;
-    stripe.open("chernstripe.dat");
 
-    for(int i = 0; i < Ns; i++) {
-        stripe << spin[i].x << ", " << spin[i].y << ", " << spin[i].Sz << endl;
-    }
-
-    stripe.close();
-
-    double _T0 = argc > 1 ? atof(argv[1]) : 1;
-    cout << "T = " << _T0 << endl;
+    // double _T0 = argc > 1 ? atof(argv[1]) : 1;
+    double _T0 = 4;
+    std::cout << "T = " << _T0 << endl;
     
     int rand_s0 = argc > 2 ? atoi(argv[2]) : 0;
 
-    
     int h0 = argc > 3 ? atoi(argv[3]) : 3;
     
-    cout << "h0 = " << h0 << endl;
+    std::cout << "h0 = " << h0 << endl;
     
-    cout << "L = " << L << endl;
+    std::cout << "L = " << L << endl;
     
     FILE *fp;
     
     init_basis();
 	init_lattice();
+
+    std::cout << "Computing Vd" << std::endl;
     compute_Vd(200);
+    std::cout << "Done Computing Vd" << std::endl;
 
     //test();
     //test2();
@@ -718,36 +712,40 @@ int main(int argc, char* argv[]) {
     init_uniform();
     E_j = E_clock();
     E_d = Ed_curr;
-    cout << "E (uniform) = " << E_j + E_d << "\t E_J1 = " << E_j << "\t E_d = " << E_d << endl;
+    std::cout << "E (uniform) = " << E_j + E_d << "\t E_J1 = " << E_j << "\t E_d = " << E_d << endl;
     
     init_random();
     E_j = E_clock();
     E_d = Ed_curr;
-    cout << "E (random) = " << E_j + E_d << "\t E_J1 = " << E_j << "\t E_d = " << E_d << endl;
+    std::cout << "E (random) = " << E_j + E_d << "\t E_J1 = " << E_j << "\t E_d = " << E_d << endl;
 
     
     int ntherm = 2000;
     int nth_sweep = 2;
     int nth_cls = 2;
-	int nth_save = 10;
+	int nth_save = 100;
 	
-	long int npts = 50000000;
+	long int npts = 50000;
 	int nsweep = 10;
     int nsweep_cls = 2;
 	
-	int n_save = 50;
+	int n_save = 100;
 	double hits = 0;
     double hits_cls = 0;
     
     init_stripe(h0);
     E_j = E_clock();
     E_d = Ed_curr;
-    cout << "E (stripe-" << h0 << ") = " << E_j + E_d << "\t E_J1 = " << E_j << "\t E_d = " << E_d << endl;
+    std::cout << "E (stripe-" << h0 << ") = " << E_j + E_d << "\t E_J1 = " << E_j << "\t E_d = " << E_d << endl;
+
+    init_random();
+    E_j = E_clock();
+    E_d = Ed_curr;
     
-    for(double _T = _T0; _T > _T0 - 0.001; _T -= 0.1) {
+    for(double _T = _T0; _T > 0; _T -= 0.1) {
 		
 	    double beta = 1./_T;
-		cout << "beta = " << beta << ",  thermalizing ..." << endl;
+		std::cout << "beta = " << beta << ",  thermalizing ..." << endl;
 		
 		fp = fopen("r.dat", "w");
 		fclose(fp);
@@ -760,23 +758,17 @@ int main(int argc, char* argv[]) {
 			
 			if(n % nth_save == 0) {
 
-				fp = fopen("r.dat", "a");
-                E_j = E_clock();
-                E_d = Ed_curr;
-				fprintf(fp, "%d\t %f\t %f\t %f\t %f\n", n, E_j + E_d, E_j, E_d, hits/(n*nth_sweep + 0.1));
-				fclose(fp);
-                
-                //plot_spin();
+				std::cout << "n = " << n << std::endl;
 			}
 			
             for(int r=0; r<nth_sweep; r++) hits += sweep(beta);
 			hits_cls += sweep_cluster(beta, nth_cls);
 		}
-		cout << "average spin hits: " << hits/((double) ntherm*nth_sweep) << endl;
-        cout << "average cls  hits: " << hits_cls/((double) ntherm) << endl;
+		std::cout << "average spin hits: " << hits/((double) ntherm*nth_sweep) << endl;
+        std::cout << "average cls  hits: " << hits_cls/((double) ntherm) << endl;
 		
 		// ------------------ take data: ----------------------------
-		cout << "gathering data ..." << endl;
+		std::cout << "gathering data ..." << endl;
 		
 		double E1 = 0, E2 = 0;
         double E1_J1 = 0, E1_Dp = 0;
@@ -841,43 +833,52 @@ int main(int argc, char* argv[]) {
             
 			if(n % n_save == 0) {
 				
-				fp = fopen("a.dat", "w");
-				fprintf(fp, "%f\t %12.10f\t %12.10f\t %12.10f\t %12.10f\t %12.10f\t %12.10f\t %12.10f\t %12.10f\t %12.10f\t %12.10f\t %12.10f\t %12.10f\t %12.10f\t %10.8f\t %10.8f\t %10.8f\t %10.8f\t %d\n", 
-						_T, E1/((double) Ns), beta*beta*(E2-E1*E1)/((double) Ns), E1_J1/((double) Ns), E1_Dp/((double) Ns),
-                        F1, (F2 - pow(F1, 2))*beta, 1. - F4/pow(F2, 2)/3.,
-                        P1, (P2 - pow(P1, 2))*beta, 1. - P4/pow(P2, 2)/3.,
-                        S1, (S2 - pow(S1, 2))*beta, 1. - S4/pow(S2, 2)/3.,
-                        p_spin, p_cls, p_size, p_flip, n);
-				fclose(fp);
-                
-        
-                t_now = clock();
-                
-                fp = fopen("time.dat", "w");
-                fprintf(fp, "# of runs = %d\t time spent = %f\n", n, (double) (t_now - t_start)/CLOCKS_PER_SEC/3600.0);
-                fprintf(fp, "\n\n=====================================================\n\n");
-                fclose(fp);
-
-                //plot_spin();
-                
-                /*
-                fp = fopen("spin.dat", "w");
-                for(int i=0; i<Ns; i++) fprintf(fp, "%d\n", spin[i].potts);
-                fclose(fp);
-                */
-                /*
-                fp = fopen("pz.dat", "w");
-                for(int i=0; i<Ns; i++) fprintf(fp, "%f\t %f\t %d\n", spin[i].position[0], spin[i].position[1], spin[i].potts);
-                fclose(fp);
-                
-                fp = fopen("sz.dat", "w");
-                for(int i=0; i<Ns; i++) fprintf(fp, "%f\t %f\t %d\n", spin[i].position[0], spin[i].position[1], spin[i].sz);
-                fclose(fp);
-                */
+				std::cout << "n = " << n << std::endl;
 
  			}
 			
 		}
+        std::ofstream energy;
+        energy.open("./cherntest/energy.dat", std::fstream::app);
+        std::ofstream energy_parts;
+        energy_parts.open("./cherntest/energyParts.dat", std::fstream::app);
+        std::ofstream heat;
+        heat.open("./cherntest/heat.dat", std::fstream::app);
+        std::ofstream Potts_m;
+        Potts_m.open("./cherntest/Potts_m.dat", std::fstream::app);
+        std::ofstream Ising_m;
+        Ising_m.open("./cherntest/Ising_m.dat", std::fstream::app);
+        std::ofstream susceptibility;
+        susceptibility.open("./cherntest/susceptibility.dat", std::fstream::app);
+        std::ofstream binder4;
+        binder4.open("./cherntest/binder4.dat", std::fstream::app);
+        std::ofstream fb;
+        fb.open("./cherntest/fb.dat", std::fstream::app);
+
+        energy << 1./beta << ", " << E1/((double) Ns) << std::endl;
+        energy_parts << 1./beta << ", " << E_j/((double) Ns) << ", " << E_d/((double) Ns) << std::endl;
+        heat << 1./beta << ", " << pow(beta, 2) * (E2 - E1*E1) / ((double) Ns) << std::endl;
+        Potts_m << 1./beta << ", " << P1 << std::endl;
+        Ising_m << 1./beta << ", " << S1 << std::endl;
+        susceptibility << 1./beta << ", " << beta*(P2 - P1*P1) << std::endl;
+        binder4 << 1./beta << ", " << 1. - (P4/(3 * pow(P2, 2))) << std::endl;
+        fb << 1./beta << ", " << F1 << ", " << F2 << ", " << F4 << std::endl;
+
+        Potts_m.close();
+        Ising_m.close();
+        susceptibility.close();
+        binder4.close();
+        energy.close();
+        energy_parts.close();
+        heat.close();
+        fb.close();
+
+        // std::ofstream time;
+        // time.open("./" + new_dir_name + "/L=" + L_name + "/DJ" + D_name + "/time.dat", std::fstream::app);
+
+        // time << 1./beta << ", " << t_diff << std::endl;
+
+        // time.close();
 		
         
 	}
