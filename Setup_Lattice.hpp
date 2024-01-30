@@ -14,7 +14,7 @@ void init_stripe(Measurements main_measurements, Interactions main_interactions,
 
 void init_dstripe(Measurements main_measurements, Interactions main_interactions, Site *spin, int Ns, int L, int h);
 
-inline int index(int x, int y, int L);
+int index(int x, int y, int L);
 
 void set_coordinates(Site *spin, int Ns, int L);
 

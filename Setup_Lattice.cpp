@@ -56,7 +56,7 @@ void init_dstripe(Measurements main_measurements, Interactions main_interactions
     }
 }
 
-inline int index(int x, int y, int L) {
+int index(int x, int y, int L) {
     return y*L+x;
 }
 
