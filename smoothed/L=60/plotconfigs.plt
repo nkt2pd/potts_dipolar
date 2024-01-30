@@ -23,22 +23,23 @@ unset ylabel
 unset y2label
 set grid x,y
 
-set title "Stripe Region - Ising"
-
-plot "./DJ0.675000/T=0.200000_config.dat" using (myShift(1)):2:(myPt(4)):(myColor(4)) w p ps 1 pt var lc rgb var
+plot "./DJ0.500000/init_config.dat" using (myShift(1)):2:(myPt(4)):(myColor(4)) w p ps 1 pt var lc rgb var
 pause -1 "Hit return to continue"
 
-set title "In Between 2 KT - Ising"
-
-plot "./DJ0.675000/T=1.250000_config.dat" using (myShift(1)):2:(myPt(4)):(myColor(4)) w p ps 1 pt var lc rgb var
+plot "./DJ0.500000/T=0.070000_config.dat" using (myShift(1)):2:(myPt(4)):(myColor(4)) w p ps 1 pt var lc rgb var
 pause -1 "Hit return to continue"
 
-set title "FM Potts 2 - Ising"
-
-plot "./DJ0.675000/T=0.600000_config.dat" using (myShift(1)):2:(myPt(4)):(myColor(4)) w p ps 1 pt var lc rgb var
+plot "./DJ0.500000/T=0.090000_config.dat" using (myShift(1)):2:(myPt(4)):(myColor(4)) w p ps 1 pt var lc rgb var
 pause -1 "Hit return to continue"
 
-set title "FM Potts 1 - Ising"
+plot "./DJ0.500000/T=0.100000_config.dat" using (myShift(1)):2:(myPt(4)):(myColor(4)) w p ps 1 pt var lc rgb var
+pause -1 "Hit return to continue"
 
-plot "./DJ0.025000/T=0.600000_config.dat" using (myShift(1)):2:(myPt(4)):(myColor(4)) w p ps 1 pt var lc rgb var
+plot "./DJ0.500000/T=0.150000_config.dat" using (myShift(1)):2:(myPt(4)):(myColor(4)) w p ps 1 pt var lc rgb var
+pause -1 "Hit return to continue"
+
+plot "./DJ0.500000/T=0.400000_config.dat" using (myShift(1)):2:(myPt(4)):(myColor(4)) w p ps 1 pt var lc rgb var
+pause -1 "Hit return to continue"
+
+plot "./DJ0.500000/T=0.650000_config.dat" using (myShift(1)):2:(myPt(4)):(myColor(4)) w p ps 1 pt var lc rgb var
 pause -1 "Hit return to continue"
