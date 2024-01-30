@@ -23,50 +23,22 @@ unset ylabel
 unset y2label
 set grid x,y
 
-plot "./DJ0.100000/init_config.dat" using (myShift(1)):2:(myPt(4)):(myColor(4)) w p ps 1 pt var lc rgb var
+set title "Stripe Region - Ising"
+
+plot "./DJ0.675000/T=0.200000_config.dat" using (myShift(1)):2:(myPt(4)):(myColor(4)) w p ps 1 pt var lc rgb var
 pause -1 "Hit return to continue"
 
-plot "./DJ0.100000/T=0.080000_config.dat" using (myShift(1)):2:(myPt(4)):(myColor(4)) w p ps 1 pt var lc rgb var
+set title "In Between 2 KT - Ising"
+
+plot "./DJ0.675000/T=1.250000_config.dat" using (myShift(1)):2:(myPt(4)):(myColor(4)) w p ps 1 pt var lc rgb var
 pause -1 "Hit return to continue"
 
-plot "./DJ0.100000/T=0.090000_config.dat" using (myShift(1)):2:(myPt(4)):(myColor(4)) w p ps 1 pt var lc rgb var
+set title "FM Potts 2 - Ising"
+
+plot "./DJ0.675000/T=0.600000_config.dat" using (myShift(1)):2:(myPt(4)):(myColor(4)) w p ps 1 pt var lc rgb var
 pause -1 "Hit return to continue"
 
-plot "./DJ0.100000/T=0.100000_config.dat" using (myShift(1)):2:(myPt(4)):(myColor(4)) w p ps 1 pt var lc rgb var
+set title "FM Potts 1 - Ising"
+
+plot "./DJ0.025000/T=0.600000_config.dat" using (myShift(1)):2:(myPt(4)):(myColor(4)) w p ps 1 pt var lc rgb var
 pause -1 "Hit return to continue"
-
-plot "./DJ0.100000/T=0.350000_config.dat" using (myShift(1)):2:(myPt(4)):(myColor(4)) w p ps 1 pt var lc rgb var
-pause -1 "Hit return to continue"
-
-plot "./DJ0.100000/T=0.400000_config.dat" using (myShift(1)):2:(myPt(4)):(myColor(4)) w p ps 1 pt var lc rgb var
-pause -1 "Hit return to continue"
-
-plot "./DJ0.100000/T=0.450000_config.dat" using (myShift(1)):2:(myPt(4)):(myColor(4)) w p ps 1 pt var lc rgb var
-pause -1 "Hit return to continue"
-
-# plot "./DJ0.166667/T=0.090000_config.dat" using (myShift(1)):2:(myPt(4)):(myColor(4)) w p ps 1 pt var lc rgb var
-# pause -1 "Hit return to continue"
-
-# plot "./DJ0.166667/T=0.100000_config.dat" using (myShift(1)):2:(myPt(4)):(myColor(4)) w p ps 1 pt var lc rgb var
-# pause -1 "Hit return to continue"
-
-# plot "./DJ0.166667/T=0.150000_config.dat" using (myShift(1)):2:(myPt(4)):(myColor(4)) w p ps 1 pt var lc rgb var
-# pause -1 "Hit return to continue"
-
-# plot "./DJ0.166667/T=0.250000_config.dat" using (myShift(1)):2:(myPt(4)):(myColor(4)) w p ps 1 pt var lc rgb var
-# pause -1 "Hit return to continue"
-
-# plot "./DJ0.166667/T=0.450000_config.dat" using (myShift(1)):2:(myPt(4)):(myColor(4)) w p ps 1 pt var lc rgb var
-# pause -1 "Hit return to continue"
-
-# plot "./DJ0.166667/T=0.550000_config.dat" using (myShift(1)):2:(myPt(4)):(myColor(4)) w p ps 1 pt var lc rgb var
-# pause -1 "Hit return to continue"
-
-# plot "./DJ0.166667/T=0.700000_config.dat" using (myShift(1)):2:(myPt(4)):(myColor(4)) w p ps 1 pt var lc rgb var
-# pause -1 "Hit return to continue"
-
-# plot "./DJ0.166667/T=1.750000_config.dat" using (myShift(1)):2:(myPt(4)):(myColor(4)) w p ps 1 pt var lc rgb var
-# pause -1 "Hit return to continue"
-
-# plot "./DJ0.166667/T=4.000000_config.dat" using (myShift(1)):2:(myPt(4)):(myColor(4)) w p ps 1 pt var lc rgb var
-# pause -1 "Hit return to continue"
