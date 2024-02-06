@@ -7,7 +7,7 @@
             "args": [
                 "-fdiagnostics-color=always",
                 "-g",
-                "${file}","Site.hpp","Rand.hpp",
+                "${file}","C:\\Users\\quent\\Projects\\Research\\potts_dipolar\\potts_dipolar\\Site.hpp","C:\\Users\\quent\\Projects\\Research\\potts_dipolar\\potts_dipolar\\Rand.hpp",
                 "-o",
                 "${fileDirname}\\${fileBasenameNoExtension}.exe"               
             ],

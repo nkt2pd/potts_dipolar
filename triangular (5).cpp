@@ -5,8 +5,9 @@
 #include <iostream>
 #include <list>
 #include <fstream>
+#include <random>
+#include <chrono>
 #include "Site.hpp" 
-#include "Rand.hpp"
 
 #define PI 3.1415926535897932384
 
@@ -28,6 +29,16 @@ const int N_potts = 6;
 double V_clock[N_potts][N_potts];
 
 int idx_m[N_potts][N_potts];
+
+std::mt19937 rng(std::chrono::steady_clock::now().time_since_epoch().count());
+
+double rand1() {
+    
+    std::uniform_real_distribution<double> dis(0.0, 1.0);
+    double rand1 = dis(rng);
+    
+    return rand1;
+}
 
 void init_basis(void) {
 
@@ -474,7 +485,7 @@ void init_stripe(int h) {
         for(int y=0; y<L; y++) {
             
             int i = index(x, y);
-            //spin[i].potts = mod(p, N_potts);
+            //spin[i].potts = mofd(p, N_potts);
             spin[i].potts = mod(p, 2);
             
             spin[i].Sz = (spin[i].potts % 2 == 0) ? 1 : -1;
@@ -678,15 +689,14 @@ void compare_energy(void) {
 int main(int argc, char* argv[]) {
     std::cout << "test" << std::endl;
     init_lattice();
-    init_stripe(3);
 
     // double _T0 = argc > 1 ? atof(argv[1]) : 1;
-    double _T0 = 4;
+    double _T0 = 2;
     std::cout << "T = " << _T0 << endl;
     
     int rand_s0 = argc > 2 ? atoi(argv[2]) : 0;
 
-    int h0 = argc > 3 ? atoi(argv[3]) : 3;
+    int h0 = 5;
     
     std::cout << "h0 = " << h0 << endl;
     
@@ -720,12 +730,12 @@ int main(int argc, char* argv[]) {
     std::cout << "E (random) = " << E_j + E_d << "\t E_J1 = " << E_j << "\t E_d = " << E_d << endl;
 
     
-    int ntherm = 2000;
+    int ntherm = 100;
     int nth_sweep = 2;
     int nth_cls = 2;
 	int nth_save = 100;
 	
-	long int npts = 50000;
+	long int npts = 500;
 	int nsweep = 10;
     int nsweep_cls = 2;
 	
@@ -737,18 +747,13 @@ int main(int argc, char* argv[]) {
     E_j = E_clock();
     E_d = Ed_curr;
     std::cout << "E (stripe-" << h0 << ") = " << E_j + E_d << "\t E_J1 = " << E_j << "\t E_d = " << E_d << endl;
-
-    init_random();
-    E_j = E_clock();
-    E_d = Ed_curr;
     
-    for(double _T = _T0; _T > 0; _T -= 0.1) {
+    double del_T = 0.1;
+
+    for(double _T = _T0; _T > 0; _T -= del_T) {
 		
 	    double beta = 1./_T;
 		std::cout << "beta = " << beta << ",  thermalizing ..." << endl;
-		
-		fp = fopen("r.dat", "w");
-		fclose(fp);
 		
         set_pb(beta);
         
@@ -839,21 +844,21 @@ int main(int argc, char* argv[]) {
 			
 		}
         std::ofstream energy;
-        energy.open("./cherntest/energy.dat", std::fstream::app);
+        energy.open("C:\\Users\\quent\\Projects\\Research\\potts_dipolar\\potts_dipolar\\cherntest\\energy.dat", std::fstream::app);
         std::ofstream energy_parts;
-        energy_parts.open("./cherntest/energyParts.dat", std::fstream::app);
+        energy_parts.open("C:\\Users\\quent\\Projects\\Research\\potts_dipolar\\potts_dipolar\\cherntest\\energyParts.dat", std::fstream::app);
         std::ofstream heat;
-        heat.open("./cherntest/heat.dat", std::fstream::app);
+        heat.open("C:\\Users\\quent\\Projects\\Research\\potts_dipolar\\potts_dipolar\\cherntest\\heat.dat", std::fstream::app);
         std::ofstream Potts_m;
-        Potts_m.open("./cherntest/Potts_m.dat", std::fstream::app);
+        Potts_m.open("C:\\Users\\quent\\Projects\\Research\\potts_dipolar\\potts_dipolar\\cherntest\\Potts_m.dat", std::fstream::app);
         std::ofstream Ising_m;
-        Ising_m.open("./cherntest/Ising_m.dat", std::fstream::app);
+        Ising_m.open("C:\\Users\\quent\\Projects\\Research\\potts_dipolar\\potts_dipolar\\cherntest\\Ising_m.dat", std::fstream::app);
         std::ofstream susceptibility;
-        susceptibility.open("./cherntest/susceptibility.dat", std::fstream::app);
+        susceptibility.open("C:\\Users\\quent\\Projects\\Research\\potts_dipolar\\potts_dipolar\\cherntest\\susceptibility.dat", std::fstream::app);
         std::ofstream binder4;
-        binder4.open("./cherntest/binder4.dat", std::fstream::app);
+        binder4.open("C:\\Users\\quent\\Projects\\Research\\potts_dipolar\\potts_dipolar\\cherntest\\binder4.dat", std::fstream::app);
         std::ofstream fb;
-        fb.open("./cherntest/fb.dat", std::fstream::app);
+        fb.open("C:\\Users\\quent\\Projects\\Research\\potts_dipolar\\potts_dipolar\\cherntest\\fb.dat", std::fstream::app);
 
         energy << 1./beta << ", " << E1/((double) Ns) << std::endl;
         energy_parts << 1./beta << ", " << E_j/((double) Ns) << ", " << E_d/((double) Ns) << std::endl;
@@ -873,13 +878,18 @@ int main(int argc, char* argv[]) {
         heat.close();
         fb.close();
 
-        // std::ofstream time;
-        // time.open("./" + new_dir_name + "/L=" + L_name + "/DJ" + D_name + "/time.dat", std::fstream::app);
+        std::ofstream config;
+        config.open("C:\\Users\\quent\\Projects\\Research\\potts_dipolar\\potts_dipolar\\cherntest\\T=" + std::to_string(1./beta) + "_config.dat", std::fstream::app);
 
-        // time << 1./beta << ", " << t_diff << std::endl;
+        for(int i = 0; i < Ns; i++) {
+            config << spin[i].x << ", " << spin[i].y << ", " << spin[i].potts << ", " << spin[i].Sz << std::endl;
+        }
 
-        // time.close();
+        config.close();
 		
+        if(_T <= 0.1) {
+            del_T = 0.01;
+        }
         
 	}
 }
