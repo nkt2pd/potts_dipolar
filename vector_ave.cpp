@@ -4,7 +4,7 @@
 #include <cmath>
 #include <string>
 
-int main() {
+int main(int argc, char* argv[]) {
 
     std::string file_name_in = "./smoothed/L=60/DJ0.675000/T=4.000000_config.dat";
     std::string file_name_out = "./figs/disordered_hist.dat";
