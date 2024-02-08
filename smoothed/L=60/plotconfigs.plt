@@ -23,12 +23,12 @@ set grid x,y
 
 set terminal qt font "Helvetica,20"
 
-set object 1 rect from 20,15 to 40,35 lw 5 front fs empty border lc rgb "green"
+#set object 1 rect from 20,15 to 40,35 lw 5 front fs empty border lc rgb "green"
 
 unset title
 set ylabel "Stripe Region"
 
-plot "./DJ0.675000/T=0.200000_config.dat" using (myShift(1)):2:(myPt(4)):(myColor(4)) w p ps 1.5 pt var lc rgb var
+plot "./DJ0.675000/T=0.700000_config.dat" using (myShift(1)):2:(myPt(4)):(myColor(4)) w p ps 1.5 pt var lc rgb var
 pause -1 "Hit return to continue"
 
 unset title
