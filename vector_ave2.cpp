@@ -17,68 +17,11 @@
 
 int main(int argc, char* argv[]) {
 
-    //get new configuration
-
-    double J = 1.;
-    double D = 0.675;
-    double T = 0.7;
-
-    const int L = 60;
-    const int Ns = L * L;
-
-    Site* spin = new Site[Ns];
-    Properties main_properties;
-    Interactions main_interactions(L);
-    Measurements main_measurements;
-
-    const std::string L_name = std::to_string(L);
-    
-    std::ifstream Vd_read;
-    Vd_read.open("Vd_file.dat");
-
-    for(int y = 0; y < L; y++) {
-        for(int x = 0; x < L; x++) {
-            Vd_read >> main_interactions.Vd[y*L + x];
-        }
-    }
-
-    Vd_read.close();
-
-    const std::string new_dir_name = "figs\\configs";
-    const std::string D_name = std::to_string(D/J);
-    const std::string T_name = std::to_string(T);
-
-    init_stripe(main_measurements, main_interactions, spin, Ns, L, 3);
-
-    set_coordinates(spin, Ns, L);
-    
-    set_nn(spin, Ns, L);
-
-    double thermalize = 10000;
-    double accepted = 0;
-    double beta = 1./T;
-
-    for (int i = 0; i < thermalize; i++) {
-        if(i%100 == 0) {
-            std::cout << i/100 << "%" << std::endl;
-        }
-        accepted += MC_sweep(main_measurements, main_interactions, main_properties, beta, spin, Ns, L);
-    }
-    std::cout << "spin update rate = " << accepted/((double) thermalize) << std::endl;
-
-    std::ofstream config("C:\\users\\quent\\Projects\\Research\\potts_dipolar\\potts_dipolar\\figs\\hist_configs\\L=" + L_name + "\\DJ" + D_name + "\\T=" + T_name + "thermed_config.dat");
-
-    for(int i = 0; i < Ns; i++) {
-        config << spin[i].x << ", " << spin[i].y << ", " << spin[i].potts << ", " << spin[i].Sz << std::endl;
-    }
-
-    config.close();
-
     //collect data for histogram
 
-    std::string file_name_in = "C:\\users\\quent\\Projects\\Research\\potts_dipolar\\potts_dipolar\\figs\\hist_configs\\L=" + L_name + "\\DJ" + D_name + "\\T=" + T_name + "thermed_config.dat";
+    std::string file_name_in = "C:\\users\\quent\\Projects\\Research\\potts_dipolar\\potts_dipolar\\heatsims8\\L=60\\DJ0.675000\\T=0.700000_config.dat";
 
-    std::string file_name_out = "C:\\users\\quent\\Projects\\Research\\potts_dipolar\\potts_dipolar\\figs\\bwFOnKT_2_hist.dat";
+    std::string file_name_out = "C:\\users\\quent\\Projects\\Research\\potts_dipolar\\potts_dipolar\\figs\\bwFOnKT_7_hist.dat";
 
     std::ifstream config_in(file_name_in);
     std::ofstream config_out(file_name_out);
