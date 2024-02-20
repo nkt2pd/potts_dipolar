@@ -21,7 +21,7 @@ int main(int argc, char* argv[]) {
 
     double J = 1.;
     double D = 0.675;
-    double T = 0.7;
+    double T = 1.25;
 
     const int L = 60;
     const int Ns = L * L;
@@ -66,7 +66,7 @@ int main(int argc, char* argv[]) {
     }
     std::cout << "spin update rate = " << accepted/((double) thermalize) << std::endl;
 
-    std::ofstream config("C:\\users\\quent\\Projects\\Research\\potts_dipolar\\potts_dipolar\\figs\\hist_configs\\L=" + L_name + "\\DJ" + D_name + "\\T=" + T_name + "thermed_config.dat");
+    std::ofstream config("C:\\users\\quent\\Projects\\Research\\potts_dipolar\\figs\\hist_configs\\L=" + L_name + "\\DJ" + D_name + "\\T=" + T_name + "thermed_config.dat");
 
     for(int i = 0; i < Ns; i++) {
         config << spin[i].x << ", " << spin[i].y << ", " << spin[i].potts << ", " << spin[i].Sz << std::endl;
@@ -76,9 +76,9 @@ int main(int argc, char* argv[]) {
 
     //collect data for histogram
 
-    std::string file_name_in = "C:\\users\\quent\\Projects\\Research\\potts_dipolar\\potts_dipolar\\figs\\hist_configs\\L=" + L_name + "\\DJ" + D_name + "\\T=" + T_name + "thermed_config.dat";
+    std::string file_name_in = "C:\\users\\quent\\Projects\\Research\\potts_dipolar\\figs\\hist_configs\\L=" + L_name + "\\DJ" + D_name + "\\T=" + T_name + "thermed_config.dat";
 
-    std::string file_name_out = "C:\\users\\quent\\Projects\\Research\\potts_dipolar\\potts_dipolar\\figs\\bwFOnKT_2_hist.dat";
+    std::string file_name_out = "C:\\users\\quent\\Projects\\Research\\potts_dipolar\\figs\\hist_configs\\bwKT_2_hist.dat";
 
     std::ifstream config_in(file_name_in);
     std::ofstream config_out(file_name_out);
@@ -102,64 +102,66 @@ int main(int argc, char* argv[]) {
     //then in a while loop, check the x position of each line until it matches. if it does,
     //see if the y position matches. if it does, we have our line and we can go on to get its potts variable
 
-    for(int i = 0; i < 11; i++) { //x position of lower left corner of box
-        for(int j = 0; j < 11; j++) { //y position of lower left corner of box
-            count = 0;
-            sum_x = 0;
-            sum_y = 0;
-            ave_x = 0;
-            ave_y = 0;
 
-            for(int k = 0; k < 10; k++) { //y position within box from left
-                for(int l = 0; l < 10; l++) { //x position within box from bottom
+    config_in.clear();
+    config_in.seekg(0);
+        for(int i = 0; i < 11; i++) { //x position of lower left corner of box
+            for(int j = 0; j < 11; j++) { //y position of lower left corner of box
+                count = 0;
+                sum_x = 0;
+                sum_y = 0;
+                ave_x = 0;
+                ave_y = 0;
 
-                    idx_x = 5*i + l;
-                    idx_y = 5*j + k;
+                for(int k = 0; k < 10; k++) { //y position within box from left
+                    for(int l = 0; l < 10; l++) { //x position within box from bottom
 
-                    x = (double)idx_x + 0.5*(double)idx_y;
-                    y = 0.5*sqrt(3)*(double)idx_y;
+                        idx_x = 5*i + l;
+                        idx_y = 5*j + k;
 
-                    while(!config_in.eof()){
-                        config_in >> buffer;
+                        x = (double)idx_x + 0.5*(double)idx_y;
+                        y = 0.5*sqrt(3)*(double)idx_y;
 
-                        if(stod(buffer) <= x + 0.1 && stod(buffer) >= x - 0.1) {
+                        while(!config_in.eof()){
                             config_in >> buffer;
-                            if(stod(buffer) <= y + 0.1 && stod(buffer) >= y - 0.1) {
+
+                            if(stod(buffer) <= x + 0.1 && stod(buffer) >= x - 0.1) {
                                 config_in >> buffer;
+                                if(stod(buffer) <= y + 0.1 && stod(buffer) >= y - 0.1) {
+                                    config_in >> buffer;
 
-                                p = stod(buffer);
-                                px = cos(PI*p/3);
-                                py = sin(PI*p/3);
+                                    p = stod(buffer);
+                                    px = cos(PI*p/3);
+                                    py = sin(PI*p/3);
                                 
-                                sum_x += px;
-                                sum_y += py;
-                                count++;
+                                    sum_x += px;
+                                    sum_y += py;
+                                    count++;
 
-                                config_in.clear();
-                                config_in.seekg(0);
-                                break;
+                                    config_in.clear();
+                                    config_in.seekg(0);
+                                    break;
 
+                                } else {
+                                    config_in >> buffer;
+                                    config_in >> buffer;
+
+                                }
                             } else {
+                                config_in >> buffer;
                                 config_in >> buffer;
                                 config_in >> buffer;
 
                             }
-                        } else {
-                            config_in >> buffer;
-                            config_in >> buffer;
-                            config_in >> buffer;
-
                         }
+
                     }
-
                 }
+                ave_x = sum_x/count;
+                ave_y = sum_y/count;
+                config_out << ave_x << ", " << ave_y << std::endl;
             }
-            ave_x = sum_x/count;
-            ave_y = sum_y/count;
-            config_out << ave_x << ", " << ave_y << std::endl;
         }
-    }
-
     config_in.close();
     config_out.close();
 
