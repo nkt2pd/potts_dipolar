@@ -19,8 +19,8 @@
 int main() {
 
     double J = 1.;
-    double D = 0.675;
-    double T = 1.25;
+    double D = 0.025;
+    double T = 0.7;
 
     const int L = 60;
     const int Ns = L * L;
@@ -30,8 +30,8 @@ int main() {
     const std::string D_name = std::to_string(D/J);
     const std::string T_name = std::to_string(T);
 
-    std::string file_name_in =  "C:\\users\\quent\\Projects\\Research\\potts_dipolar\\figs\\hist_configs\\L=" + L_name + "\\DJ" + D_name + "\\T=" + T_name + "thermed_config.dat";
-    std::string file_name_out = "C:\\users\\quent\\Projects\\Research\\potts_dipolar\\figs\\hist_configs\\bwKT_rot1_hist.dat";
+    std::string file_name_in =  "C:\\users\\quent\\Projects\\Research\\potts_dipolar\\potts_dipolar\\smoothed\\L=" + L_name + "\\DJ" + D_name + "\\T=" + T_name + "_config.dat";
+    std::string file_name_out = "C:\\users\\quent\\Projects\\Research\\potts_dipolar\\potts_dipolar\\figs\\hist_configs\\a2KT_rot5_hist.dat";
     
     std::ifstream config_in(file_name_in);
     std::ofstream config_out(file_name_out);
@@ -50,10 +50,10 @@ int main() {
         config_out << stod(buffer) << ", ";
 
         config_in >> buffer;
-        config_out << mod(stoi(buffer) + 2, 6) << ", ";
+        config_out << mod(stoi(buffer) + 5, 6) << ", ";
 
         config_in >> buffer;
-        config_out << buffer;
+        config_out << buffer << std::endl;
     }
 
     return 0;
