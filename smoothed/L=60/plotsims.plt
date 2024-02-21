@@ -1,5 +1,5 @@
-set xrange [0.01:4]
-set yrange [-0.01:2]
+set xrange [0:4]
+set yrange [0:2]
 set y2range [0:1]
 
 set key inside left top
@@ -13,19 +13,31 @@ unset logscale y
 set xlabel "T/J"
 set ylabel "C/J"
 
-set title "D/J = 0"
-
-plot "./DJ0.000000/heat.dat" using 1:2 axes x1y1 title "Specific Heat" with linespoints lc rgb 0xFF0000, \
-     "./DJ0.000000/fb.dat" using 1:2 axes x1y2 title "stripe order"  with linespoints lc rgb 0x0000FF, \
-     "./DJ0.000000/Potts_m.dat" using 1:2 axes x1y2 title "Potts Order" with linespoints lc rgb 0x00FF00
-pause -1 "Hit return to continue"
-
 set title "D/J = 0.025"
 unset y2tics
-plot "./DJ0.025000/heat.dat" using 1:2 title "Specific Heat" with linespoints lc rgb 0xFF0000, \
-     # "./DJ0.025000/fb.dat" using 1:2 axes x1y2 title "stripe order" with linespoints lc rgb 0x0000FF, \
-     # "./DJ0.025000/Potts_m.dat" using 1:2 axes x1y2 title "Potts Order" with linespoints lc rgb 0x00FF00
+unset key
+set multiplot layout 2,1 rowsfirst
+unset xtics
+unset logscale
+unset xlabel
+
+set tmargin at screen 0.90; set bmargin at screen 0.6
+
+plot "./DJ0.025000/heat.dat" using 1:2 title "Specific Heat" with linespoints lc rgb 0xFF0000
+
+unset title
+set ylabel "Potts order"
+set xlabel "T/J"
+
+set yrange [0:1]
+
+set tmargin at screen 0.5; set bmargin at screen 0.2
+
+plot "./DJ0.025000/Potts_m.dat" using 1:2 axes x1y1 title "Potts Order" with linespoints lc rgb 0x00FF00
 pause -1 "Hit return to continue"
+
+unset multiplot
+set key
 
 set title "D/J = 0.05"
 

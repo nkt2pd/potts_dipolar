@@ -2,8 +2,8 @@
 #Red = -1 + circle
 
 unset logscale
-set xrange [-1:60]
-set yrange [-0.5:52]
+set xrange [20:40]
+set yrange [15:35]
 
 set size square
 
@@ -16,22 +16,28 @@ unset tics
 unset title
 set grid x,y
 
-set title "Stripe Region - Potts"
+unset style
+unset object 1
+
+unset multiplot
+
+unset title
+unset ylabel
+
+set terminal qt font "Helvetica,20"
 
 plot "./DJ0.675000/T=0.200000_config.dat" using (myShift(1)):2:(0.8*cos($3*pi/3)):(0.8*sin($3*pi/3)) w vector
 pause -1 "Hit return to continue"
 
-set title "In between 2 KT - Potts"
+unset title
 
 plot "./DJ0.675000/T=1.250000_config.dat" using (myShift(1)):2:(0.8*cos($3*pi/3)):(0.8*sin($3*pi/3)) w vector
 pause -1 "Hit return to continue"
 
-set title "FM Potts 2 - Potts"
-
 plot "./DJ0.675000/T=0.600000_config.dat" using (myShift(1)):2:(0.8*cos($3*pi/3)):(0.8*sin($3*pi/3)) w vector
 pause -1 "Hit return to continue"
 
-set title "FM Potts 1 - Potts"
+set title "Potts variable"
 
 plot "./DJ0.025000/T=0.600000_config.dat" using (myShift(1)):2:(0.8*cos($3*pi/3)):(0.8*sin($3*pi/3)) w vector
 pause -1 "Hit return to continue"
