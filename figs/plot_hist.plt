@@ -36,7 +36,10 @@ set xlabel "Critical KT"
 plot "hex.dat" using 1:2 with lines dt 2 lc rgb "blue", \
      "bwKT_rot0_hist.dat" using 1:2 with points pt 7 lc rgb "red", \
      "./hist_data_simmed/bwKT_rot1_hist_simmed.dat" using 1:2 with points pt 7 lc rgb "red", \
-     "./hist_data_simmed/bwKT_rot2_hist_simmed.dat" using 1:2 with points pt 7 lc rgb "red"
+     "./hist_data_simmed/bwKT_rot2_hist_simmed.dat" using 1:2 with points pt 7 lc rgb "red", \
+     "./hist_data_simmed/bwKT_rot3_hist_simmed.dat" using 1:2 with points pt 7 lc rgb "red", \
+     "./hist_data_simmed/bwKT_rot4_hist_simmed.dat" using 1:2 with points pt 7 lc rgb "red", \
+     "./hist_data_simmed/bwKT_rot5_hist_simmed.dat" using 1:2 with points pt 7 lc rgb "red"
 pause -1 "hit return to continue"
 
 set xlabel "Disorder"

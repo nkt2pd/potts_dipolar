@@ -19,8 +19,8 @@
 int main() {
 
     double J = 1.;
-    double D = 0.025;
-    double T = 0.7;
+    double D = 0.675;
+    double T = 1.25;
 
     const int L = 60;
     const int Ns = L * L;
@@ -31,7 +31,7 @@ int main() {
     const std::string T_name = std::to_string(T);
 
     std::string file_name_in =  "C:\\users\\quent\\Projects\\Research\\potts_dipolar\\potts_dipolar\\smoothed\\L=" + L_name + "\\DJ" + D_name + "\\T=" + T_name + "_config.dat";
-    std::string file_name_out = "C:\\users\\quent\\Projects\\Research\\potts_dipolar\\potts_dipolar\\figs\\hist_configs\\a2KT_rot5_hist.dat";
+    std::string file_name_out = "C:\\users\\quent\\Projects\\Research\\potts_dipolar\\potts_dipolar\\figs\\hist_configs\\bwKT_rot5_hist.dat";
     
     std::ifstream config_in(file_name_in);
     std::ofstream config_out(file_name_out);

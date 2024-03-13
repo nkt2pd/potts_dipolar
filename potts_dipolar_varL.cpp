@@ -33,49 +33,49 @@ int main(int argc, char *argv[]) {
     const std::string D_name = std::to_string(D);
     const std::string new_dir_name = "smoothed";
     
-    main_interactions.compute_Vd(L, 200);
+    // main_interactions.compute_Vd(L, 200);
 
-    // std::ifstream Vd_read;
-    // Vd_read.open("Vd_file.dat");
+    std::ifstream Vd_read;
+    Vd_read.open("Vd_file.dat");
 
-    // for(int y = 0; y < L; y++) {
-    //     for(int x = 0; x < L; x++) {
-    //         Vd_read >> main_interactions.Vd[y*L + x];
-    //     }
-    // }
+    for(int y = 0; y < L; y++) {
+        for(int x = 0; x < L; x++) {
+            Vd_read >> main_interactions.Vd[y*L + x];
+        }
+    }
     
-    // Vd_read.close();
+    Vd_read.close();
 
-    //init potts and ising
+    // init potts and ising
 
-    // std::string file_name = "C::\\users\\quent\\Projects\\Research\\potts_dipolar\\potts_dipolar\\" + new_dir_name + "\\L=" + L_name + "\\DJ0.025000\\init_config.dat";
+    std::string file_name = "./" + new_dir_name + "/L=" + L_name + "/DJ0.025000/T=1.840000_config.dat";
 
-    // std::ifstream config(file_name);
+    std::ifstream config(file_name);
 
-    // if (config.fail()) {
-    //     throw std::runtime_error("Failed to open config");
-    // }
+    if (config.fail()) {
+        throw std::runtime_error("Failed to open config");
+    }
 
-    // int iter = 0;
-    // std::string buffer = "";
+    int iter = 0;
+    std::string buffer = "";
 
-    // while(!config.eof()) { //feed in potts and ising of each config
-    //     config >> buffer;
-    //     if(config.eof()) {
-    //         break;
-    //     }
+    while(!config.eof()) { //feed in potts and ising of each config
+        config >> buffer;
+        if(config.eof()) {
+            break;
+        }
 
-    //     config >> buffer;
+        config >> buffer;
 
-    //     config >> buffer;
-    //     buffer.erase(buffer.size()-1);
-    //     spin[iter].potts = std::stoi(buffer);
+        config >> buffer;
+        buffer.erase(buffer.size()-1);
+        spin[iter].potts = std::stoi(buffer);
 
-    //     config >> buffer;
-    //     spin[iter].Sz = std::stoi(buffer);
+        config >> buffer;
+        spin[iter].Sz = std::stoi(buffer);
 
-    //     iter++;
-    // }
+        iter++;
+    }
 
     set_coordinates(spin, Ns, L);
     
@@ -88,18 +88,7 @@ int main(int argc, char *argv[]) {
     std::cout << "Thank you for choosing the Potts Model :)" << std::endl;
     std::cout << "Lattice Length = " << L << std::endl;
 
-    for(double T = 0.7; T<=2.5; T += del_T) {
-
-        // if(T == 0) {
-        //     std::ofstream config;
-        //     config.open("./" + new_dir_name + "/L=" + L_name + "/DJ0.025000/init_config.dat", std::fstream::app);
-
-        //     for(int i = 0; i < Ns; i++) {
-        //         config << spin[i].x << ", " << spin[i].y << ", " << spin[i].potts << ", " << spin[i].Sz << std::endl;
-        //     }
-
-        //     config.close();
-        // }
+    for(double T = 1.84; T<=2.5; T += del_T) {
 
         std::cout << "T = " << T << std::endl;
     

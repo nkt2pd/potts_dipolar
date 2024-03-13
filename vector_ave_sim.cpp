@@ -27,12 +27,12 @@ int main(int argc, char* argv[]) {
     //sim configs
 
     std::string hist_type = "bwKT";
-    std::string hist_name = hist_type + "_rot1";
+    std::string hist_name = hist_type + "_rot5";
 
     if(hist_type == "a2KT") {
         T = 0.7;
         D = 0.025;
-    } else if(hist_type == "bw2KT") {
+    } else if(hist_type == "bwKT") {
         T = 1.25;
         D = 0.675;
     } else {
