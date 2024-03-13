@@ -81,8 +81,6 @@ int main(int argc, char *argv[]) {
     
     set_nn(spin, Ns, L);
 
-    init_uniform(main_measurements, main_interactions, spin, Ns, L);
-
     double del_T = 0.02;
 
     std::cout << "Thank you for choosing the Potts Model :)" << std::endl;
