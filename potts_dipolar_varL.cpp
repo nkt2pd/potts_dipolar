@@ -14,7 +14,7 @@
 
 int main(int argc, char *argv[]) {
     if (argc != 2) {
-        std::cout << "Usage: ./potts_dipolar_Ising <L> " << std::endl;
+        std::cout << "Usage: ./potts_dipolar_varL <L> " << std::endl;
         return 1;
     }
 
@@ -31,7 +31,7 @@ int main(int argc, char *argv[]) {
 
     const std::string L_name = std::to_string(L);
     const std::string D_name = std::to_string(D);
-    const std::string new_dir_name = "smoothed";
+    const std::string new_dir_name = "highres_sim";
     
     main_interactions.compute_Vd(L, 200);
 
@@ -88,7 +88,7 @@ int main(int argc, char *argv[]) {
     std::cout << "Thank you for choosing the Potts Model :)" << std::endl;
     std::cout << "Lattice Length = " << L << std::endl;
 
-    for(double T = 0.7; T<=2.5; T += del_T) {
+    for(double T = 0.5; T<=2.5; T += del_T) {
 
         // if(T == 0) {
         //     std::ofstream config;
