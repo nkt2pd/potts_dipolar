@@ -553,7 +553,7 @@ double compute_ising_order(void) {
 
 void plot_spin(void) {
     
-    double sv = 0.35;
+    // double sv = 0.35;
     
     FILE *fp = fopen("p.dat","w");
     FILE *fp1 = fopen("sp.dat", "w");
@@ -694,7 +694,7 @@ int main(int argc, char* argv[]) {
     double _T0 = 0.5;
     std::cout << "T = " << _T0 << endl;
     
-    int rand_s0 = argc > 2 ? atoi(argv[2]) : 0;
+    // int rand_s0 = argc > 2 ? atoi(argv[2]) : 0;
 
     int h0 = 5;
     
@@ -702,7 +702,7 @@ int main(int argc, char* argv[]) {
     
     std::cout << "L = " << L << endl;
     
-    FILE *fp;
+    // FILE *fp;
     
     init_basis();
 	init_lattice();
@@ -820,8 +820,8 @@ int main(int argc, char* argv[]) {
         double p_size = 0;
         double p_flip = 0;
 
-        clock_t t_start = clock();
-        clock_t t_now;
+        // clock_t t_start = clock();
+        // clock_t t_now;
 
         
 		for(long int n=0; n < npts; n++) {
