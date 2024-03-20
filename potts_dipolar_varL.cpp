@@ -31,7 +31,7 @@ int main(int argc, char *argv[]) {
 
     const std::string L_name = std::to_string(L);
     const std::string D_name = std::to_string(D);
-    const std::string new_dir_name = "highres_sim";
+    const std::string new_dir_name = "cherncompare_sim";
     
     // main_interactions.compute_Vd(L, 200);
 
@@ -48,7 +48,7 @@ int main(int argc, char *argv[]) {
 
     // init potts and ising
 
-    std::string file_name = "./smoothed/L=" + L_name + "/DJ0.150000/T=1.840000_config.dat";
+    std::string file_name = "./smoothed/L=" + L_name + "/DJ0.150000/T=init_config.dat";
 
     std::ifstream config(file_name);
 
@@ -77,11 +77,13 @@ int main(int argc, char *argv[]) {
         iter++;
     }
 
+    config.close();
+
     set_coordinates(spin, Ns, L);
     
     set_nn(spin, Ns, L);
 
-    double del_T = 0.02;
+    double del_T = 0.05;
 
     std::cout << "Thank you for choosing the Potts Model :)" << std::endl;
     std::cout << "Lattice Length = " << L << std::endl;
