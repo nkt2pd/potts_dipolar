@@ -19,7 +19,7 @@ using namespace std;
 const int L = 60;
 
 double J1 = 1;
-double Dp = 0.14;
+double Dp = 0.15;
 
 const int Ns = L*L;
 
@@ -691,7 +691,7 @@ int main(int argc, char* argv[]) {
     init_lattice();
 
     // double _T0 = argc > 1 ? atof(argv[1]) : 1;
-    double _T0 = 2;
+    double _T0 = 0.5;
     std::cout << "T = " << _T0 << endl;
     
     int rand_s0 = argc > 2 ? atoi(argv[2]) : 0;
@@ -724,7 +724,39 @@ int main(int argc, char* argv[]) {
     E_d = Ed_curr;
     std::cout << "E (uniform) = " << E_j + E_d << "\t E_J1 = " << E_j << "\t E_d = " << E_d << endl;
     
-    init_random();
+    // init_random();
+
+    std::string file_name = "./smoothed/L=60/DJ0.150000/T=init_config.dat";
+
+    std::ifstream config(file_name);
+
+    if (config.fail()) {
+        throw std::runtime_error("Failed to open config");
+    }
+
+    int iter = 0;
+    std::string buffer = "";
+
+    while(!config.eof()) { //feed in potts and ising of each config
+        config >> buffer;
+        if(config.eof()) {
+            break;
+        }
+
+        config >> buffer;
+
+        config >> buffer;
+        buffer.erase(buffer.size()-1);
+        spin[iter].potts = std::stoi(buffer);
+
+        config >> buffer;
+        spin[iter].Sz = std::stoi(buffer);
+
+        iter++;
+    }
+
+    config.close();
+
     E_j = E_clock();
     E_d = Ed_curr;
     std::cout << "E (random) = " << E_j + E_d << "\t E_J1 = " << E_j << "\t E_d = " << E_d << endl;
@@ -748,9 +780,9 @@ int main(int argc, char* argv[]) {
     E_d = Ed_curr;
     std::cout << "E (stripe-" << h0 << ") = " << E_j + E_d << "\t E_J1 = " << E_j << "\t E_d = " << E_d << endl;
     
-    double del_T = 0.1;
+    double del_T = 0.05;
 
-    for(double _T = _T0; _T > 0; _T -= del_T) {
+    for(double _T = _T0; _T < 2.5; _T += del_T) {
 		
 	    double beta = 1./_T;
 		std::cout << "beta = " << beta << ",  thermalizing ..." << endl;
@@ -844,21 +876,21 @@ int main(int argc, char* argv[]) {
 			
 		}
         std::ofstream energy;
-        energy.open("C:\\Users\\quent\\Projects\\Research\\potts_dipolar\\potts_dipolar\\cherntest\\energy.dat", std::fstream::app);
+        energy.open("./cherncompare_sim/L=60/DJ0.150000/energy.dat", std::fstream::app);
         std::ofstream energy_parts;
-        energy_parts.open("C:\\Users\\quent\\Projects\\Research\\potts_dipolar\\potts_dipolar\\cherntest\\energyParts.dat", std::fstream::app);
+        energy_parts.open("./cherncompare_sim/L=60/DJ0.150000/energyParts.dat", std::fstream::app);
         std::ofstream heat;
-        heat.open("C:\\Users\\quent\\Projects\\Research\\potts_dipolar\\potts_dipolar\\cherntest\\heat.dat", std::fstream::app);
+        heat.open("./cherncompare_sim/L=60/DJ0.150000/heat.dat", std::fstream::app);
         std::ofstream Potts_m;
-        Potts_m.open("C:\\Users\\quent\\Projects\\Research\\potts_dipolar\\potts_dipolar\\cherntest\\Potts_m.dat", std::fstream::app);
+        Potts_m.open("./cherncompare_sim/L=60/DJ0.150000/Potts_m.dat", std::fstream::app);
         std::ofstream Ising_m;
-        Ising_m.open("C:\\Users\\quent\\Projects\\Research\\potts_dipolar\\potts_dipolar\\cherntest\\Ising_m.dat", std::fstream::app);
+        Ising_m.open("./cherncompare_sim/L=60/DJ0.150000/Ising_m.dat", std::fstream::app);
         std::ofstream susceptibility;
-        susceptibility.open("C:\\Users\\quent\\Projects\\Research\\potts_dipolar\\potts_dipolar\\cherntest\\susceptibility.dat", std::fstream::app);
+        susceptibility.open("./cherncompare_sim/L=60/DJ0.150000/susceptibility.dat", std::fstream::app);
         std::ofstream binder4;
-        binder4.open("C:\\Users\\quent\\Projects\\Research\\potts_dipolar\\potts_dipolar\\cherntest\\binder4.dat", std::fstream::app);
+        binder4.open("./cherncompare_sim/L=60/DJ0.150000/binder4.dat", std::fstream::app);
         std::ofstream fb;
-        fb.open("C:\\Users\\quent\\Projects\\Research\\potts_dipolar\\potts_dipolar\\cherntest\\fb.dat", std::fstream::app);
+        fb.open("./cherncompare_sim/L=60/DJ0.150000/fb.dat", std::fstream::app);
 
         energy << 1./beta << ", " << E1/((double) Ns) << std::endl;
         energy_parts << 1./beta << ", " << E_j/((double) Ns) << ", " << E_d/((double) Ns) << std::endl;
@@ -879,7 +911,7 @@ int main(int argc, char* argv[]) {
         fb.close();
 
         std::ofstream config;
-        config.open("C:\\Users\\quent\\Projects\\Research\\potts_dipolar\\potts_dipolar\\cherntest\\T=" + std::to_string(1./beta) + "_config.dat", std::fstream::app);
+        config.open("./cherncompare_sim/L=60/DJ0.150000/T=" + std::to_string(1./beta) + "_config.dat", std::fstream::app);
 
         for(int i = 0; i < Ns; i++) {
             config << spin[i].x << ", " << spin[i].y << ", " << spin[i].potts << ", " << spin[i].Sz << std::endl;
