@@ -19,7 +19,7 @@ int main(int argc, char *argv[]) {
     }
 
     double J = 1.;
-    double D = 0.025;
+    double D = 0.15;
 
     const int L = 36 + 12*atoi(argv[1]);
     const int Ns = L * L;
@@ -48,7 +48,7 @@ int main(int argc, char *argv[]) {
 
     // init potts and ising
 
-    std::string file_name = "./" + new_dir_name + "/L=" + L_name + "/DJ0.025000/T=1.840000_config.dat";
+    std::string file_name = "./smoothed/L=" + L_name + "/DJ0.150000/T=1.840000_config.dat";
 
     std::ifstream config(file_name);
 
