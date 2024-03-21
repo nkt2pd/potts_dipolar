@@ -691,7 +691,7 @@ int main(int argc, char* argv[]) {
     init_lattice();
 
     // double _T0 = argc > 1 ? atof(argv[1]) : 1;
-    double _T0 = 0.5;
+    double _T0 = 0;
     std::cout << "T = " << _T0 << endl;
     
     // int rand_s0 = argc > 2 ? atoi(argv[2]) : 0;
@@ -726,7 +726,7 @@ int main(int argc, char* argv[]) {
     
     // init_random();
 
-    std::string file_name = "./smoothed/L=60/DJ0.150000/T=init_config.dat";
+    std::string file_name = "./smoothed/L=60/DJ0.150000/init_config.dat";
 
     std::ifstream config(file_name);
 
@@ -761,13 +761,12 @@ int main(int argc, char* argv[]) {
     E_d = Ed_curr;
     std::cout << "E (random) = " << E_j + E_d << "\t E_J1 = " << E_j << "\t E_d = " << E_d << endl;
 
-    
     int ntherm = 100;
     int nth_sweep = 2;
     int nth_cls = 2;
 	int nth_save = 100;
 	
-	long int npts = 500;
+	long int npts = 250;
 	int nsweep = 10;
     int nsweep_cls = 2;
 	
@@ -782,7 +781,7 @@ int main(int argc, char* argv[]) {
     
     double del_T = 0.05;
 
-    for(double _T = _T0; _T < 2.5; _T += del_T) {
+    for(double _T = _T0; _T < 2; _T += del_T) {
 		
 	    double beta = 1./_T;
 		std::cout << "beta = " << beta << ",  thermalizing ..." << endl;
@@ -918,10 +917,6 @@ int main(int argc, char* argv[]) {
         }
 
         config.close();
-		
-        if(_T <= 0.1) {
-            del_T = 0.01;
-        }
         
 	}
 }
