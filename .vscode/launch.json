@@ -5,7 +5,7 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "${fileDirname}\\${fileBasenameNoExtension}.exe",
-            "args": ["30"],
+            "args": ["36", "40", "0.025", "C:\\Users\\quent\\Projects\\Research\\potts_dipolar\\potts_dipolar\\highres_sim\\L=36\\DJ0.025000\\T=0.640000_config.dat"],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",
             "environment": [],
