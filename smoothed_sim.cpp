@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <map>
+#include <filesystem>
 #include "Constants.hpp"
 #include "Measurements.hpp"
 #include "Interactions.hpp"
@@ -40,14 +41,15 @@ int main(int argc, char *argv[]) {
         }
     }
 
-    const std::string new_dir_name = "smoothed_sims";
+    const std::string new_dir_name = "phasediagram_sims";
     const std::string D_name = std::to_string(D/J);
-
+    std::filesystem::create_directories("./" + new_dir_name + "/L=" + L_name + "/DJ" + D_name);
+    
     Vd_read.close();
 
     //init potts and ising
 
-    std::string file_name = "C:\\users\\quent\\Projects\\Research\\potts_dipolar\\potts_dipolar\\smoothed\\L=60\\DJ" + D_name + "\\T=0.200000_config.dat";
+    std::string file_name = "./smoothed/L=60/DJ" + D_name + "/T=0.200000_config.dat";
 
     std::ifstream config(file_name);
 
@@ -76,6 +78,8 @@ int main(int argc, char *argv[]) {
         iter++;
     }
 
+    config.close();
+    
     set_coordinates(spin, Ns, L);
     
     set_nn(spin, Ns, L);
@@ -88,14 +92,14 @@ int main(int argc, char *argv[]) {
     for(double T = 0; T<=4; T += del_T) {
 
         if(T == 0) {
-            std::ofstream config;
-            config.open("./" + new_dir_name + "/L=" + L_name + "/DJ" + D_name + "/init_config.dat", std::fstream::app);
+            std::ofstream config_out;
+            config_out.open("./" + new_dir_name + "/L=" + L_name + "/DJ" + D_name + "/init_config.dat", std::fstream::app);
 
             for(int i = 0; i < Ns; i++) {
-                config << spin[i].x << ", " << spin[i].y << ", " << spin[i].potts << ", " << spin[i].Sz << std::endl;
+                config_out << spin[i].x << ", " << spin[i].y << ", " << spin[i].potts << ", " << spin[i].Sz << std::endl;
             }
 
-            config.close();
+            config_out.close();
         }
 
         std::cout << "T = " << T << std::endl;
