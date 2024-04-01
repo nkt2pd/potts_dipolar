@@ -6,67 +6,83 @@
 #include "Properties.hpp"
 #include "Site.hpp"
 #include "Setup_Lattice.hpp"
-#include "MonteCarlo.hpp"
+#include "MonteCarlo_timed.hpp"
 #include "Housekeeping.hpp"
 #include "Rand.hpp"
 
 //If using this program, must clear files manually before running right now
 
 int main(int argc, char *argv[]) {
-    if (argc != 3) {
-        std::cout << "Usage: ./potts_dipolar_Ising_singleTemp <Lattice Length> <Temp>" << std::endl;
+    if (argc != 5) {
+        std::cout << "Usage: ./potts_dipolar_Ising_singleTemp <Lattice Length> <Temp index> <D> <config_name>" << std::endl;
         return 1;
     }
 
     const int L = atof(argv[1]);
-    double T = atof(argv[2]);
+    double T_idx = atof(argv[2]);
+    double T = T_idx*(1.5/40.) + 0.5;
+    double D = atof(argv[3]);
+
     const int Ns = L*L;
-
-    int print_config = 0;
-
-    if (int(T*100) % 5 == 0) {
-        print_config = 1;
-    } else {
-        print_config = 0;
-    }
-
-    T = (T*.0054)+.2246;
+    double J = 1.;
 
     Site* spin = new Site[Ns];
     Properties main_properties;
     Interactions main_interactions(L);
     Measurements main_measurements;
 
-    const std::string D_name = "";
-    const std::string new_dir_name = "";
-    const std::string L_size(argv[1]);
-    const std::string L_name = "Potts_Metrop" + L_size;
-    
+    const std::string L_name(argv[1]);
+    const std::string T_name(argv[2]);
+    const std::string D_name(argv[3]);
+    const std::string config_name(argv[4]);
+    const std::string dir_print_name = "./highres_sim_singleTemp/L=" + L_name + "DJ" + D_name;
+
     main_interactions.compute_Vd(L, 200);
-    
-    init_uniform(main_measurements, main_interactions, spin, Ns, L);
-    
+
+    // init potts and ising
+
+    std::ifstream config(config_name);
+
+    if (config.fail()) {
+        throw std::runtime_error("Failed to open config");
+    }
+
+    int iter = 0;
+    std::string buffer = "";
+
+    while(!config.eof()) { //feed in potts and ising of each config
+        config >> buffer;
+        if(config.eof()) {
+            break;
+        }
+
+        config >> buffer;
+
+        config >> buffer;
+        buffer.erase(buffer.size()-1);
+        spin[iter].potts = std::stoi(buffer);
+
+        config >> buffer;
+        spin[iter].Sz = std::stoi(buffer);
+
+        iter++;
+    }
+
+    config.close();
+
     set_coordinates(spin, Ns, L);
-    
+
     set_nn(spin, Ns, L);
-
-    // set_hex_coordinates(spin, Ns, L);
-
-    // set_hex_nn(spin, Ns, L);
-    
-    init_random(main_measurements, main_interactions, spin, Ns, L);
 
     std::cout << "Thank you for choosing the Potts Model :)" << std::endl;
 
     std::cout << "Lattice Length = " << L << std::endl;
     std::cout << "T = " << T << std::endl;
 
-    main_properties.set_pb(1./T);
-    
-    Metropolis_MC_Sim(main_interactions, main_measurements, main_properties, 1./T, spin, Ns, L, D_name, L_name, new_dir_name, print_config);
+    Metropolis_MC_Sim_timed(main_interactions, main_measurements, main_properties, 1./T, spin, Ns, L, L_name, D_name, dir_print_name, D, L);
 
     delete[] main_interactions.Vd;
     delete[] spin;
 
     return 0;
-} 
+}

@@ -56,6 +56,8 @@ int main () {
         }
     }
 
+    Vd_read.close();
+
     std::string buffer = "";
 
     //still need to set the other parts of each lattice point like nearest neighbors

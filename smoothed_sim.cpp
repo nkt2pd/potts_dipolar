@@ -31,7 +31,7 @@ int main(int argc, char *argv[]) {
     Measurements main_measurements;
 
     const std::string L_name = std::to_string(L);
-    
+
     std::ifstream Vd_read;
     Vd_read.open("Vd_file.dat");
 
@@ -69,7 +69,7 @@ int main(int argc, char *argv[]) {
         config >> buffer;
 
         config >> buffer;
-        buffer.erase(buffer.size()-1);
+        // buffer.erase(buffer.size()-1);
         spin[iter].potts = std::stoi(buffer);
 
         config >> buffer;
