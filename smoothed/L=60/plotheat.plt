@@ -2,6 +2,7 @@ set xrange [0:4]
 set yrange [0:2]
 
 set xtics
+set ytics
 
 unset title
 unset ylabel

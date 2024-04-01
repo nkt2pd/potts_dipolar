@@ -28,7 +28,7 @@ set terminal qt font "Helvetica,20"
 unset title
 set ylabel "Stripe Region"
 
-plot "./DJ0.200000/T=0.250000_config.dat" using (myShift(1)):2:(myPt(4)):(myColor(4)) w p ps 1.5 pt var lc rgb var
+plot "./DJ0.200000/T=init_config.dat" using (myShift(1)):2:(myPt(4)):(myColor(4)) w p ps 1.5 pt var lc rgb var
 pause -1 "Hit return to continue"
 
 unset title
