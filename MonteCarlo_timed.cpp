@@ -95,12 +95,18 @@ void Metropolis_MC_Sim_timed(Interactions main_interactions, Measurements main_m
 
     int n_therm = 0;
 
+    std::cout << "start timer" << std::endl;
+
     while ((double)((t_therm_now - t_therm_start)/CLOCKS_PER_SEC) < 10800) {
 
         accepted += MC_sweep_timed(main_measurements, main_interactions, main_properties, beta, spin, Ns, L, D, J);
 
         t_therm_now = clock();
         n_therm++;
+
+        if(n_therm % 1000 == 0) {
+            std::cout << "Thermalizing... n = " << n_therm << std::endl;
+        }
 
     }
 

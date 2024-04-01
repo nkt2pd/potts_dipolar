@@ -6,21 +6,21 @@
 #include "Properties.hpp"
 #include "Site.hpp"
 #include "Setup_Lattice.hpp"
-#include "MonteCarlo_var.hpp"
+#include "MonteCarlo_timed.hpp"
 #include "Housekeeping.hpp"
 #include "Rand.hpp"
 
 //If using this program, must clear files manually before running right now
 
 int main(int argc, char *argv[]) {
-    if (argc != 3) {
+    if (argc != 5) {
         std::cout << "Usage: ./potts_dipolar_Ising_singleTemp <Lattice Length> <Temp index> <D> <config_name>" << std::endl;
         return 1;
     }
 
     const int L = atof(argv[1]);
     double T_idx = atof(argv[2]);
-    double T = T_idx*(2.5/40.);
+    double T = T_idx*(1.5/40.) + 0.5;
     double D = atof(argv[3]);
 
     const int Ns = L*L;
@@ -35,7 +35,7 @@ int main(int argc, char *argv[]) {
     const std::string T_name(argv[2]);
     const std::string D_name(argv[3]);
     const std::string config_name(argv[4]);
-    const std::string dir_print_name = "";
+    const std::string dir_print_name = "./highres_sim_singleTemp/L=" + L_name + "DJ" + D_name;
 
     main_interactions.compute_Vd(L, 200);
 
@@ -79,7 +79,7 @@ int main(int argc, char *argv[]) {
     std::cout << "Lattice Length = " << L << std::endl;
     std::cout << "T = " << T << std::endl;
 
-    Metropolis_MC_Sim_var(main_interactions, main_measurements, main_properties, 1./T, spin, Ns, L, L_name, D_name, dir_print_name, D, L);
+    Metropolis_MC_Sim_timed(main_interactions, main_measurements, main_properties, 1./T, spin, Ns, L, L_name, D_name, dir_print_name, D, L);
 
     delete[] main_interactions.Vd;
     delete[] spin;
