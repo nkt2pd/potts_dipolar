@@ -1,4 +1,4 @@
-set xrange [0:4]
+set xrange [0:2.5]
 set yrange [0:2]
 set y2range [0:1]
 
@@ -17,7 +17,7 @@ set title "D/J = 0.025"
 unset y2tics
 unset key
 set multiplot layout 2,1 rowsfirst
-unset xtics
+set xtics
 unset logscale
 unset xlabel
 
@@ -27,7 +27,7 @@ unset title
 set ylabel "Potts order"
 set xlabel "T/J"
 
-set yrange [0:1]
+set yrange [0:1.4]
 
 set tmargin at screen 0.5; set bmargin at screen 0.2
 
@@ -36,9 +36,10 @@ set tmargin at screen 0.5; set bmargin at screen 0.2
 unset multiplot
 set key
 
-set title "D/J = 0.675"
+set title "D/J = 0.15"
 
-plot "./DJ0.675000/heat.dat" using 1:2 title "Specific Heat" with linespoints lc rgb 0xFF0000
+plot "./DJ0.150000/heat.dat" using 1:2 title "Specific Heat" with linespoints lc rgb 0xFF0000, \
+     "./DJ0.150000/Potts_m.dat" using 1:2 title "Potts m" with linespoints lc rgb 0x0000FF
 pause -1 "Hit return to continue"
 
 set title "D/J = 0.05"
