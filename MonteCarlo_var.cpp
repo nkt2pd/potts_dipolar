@@ -87,9 +87,9 @@ void Metropolis_MC_Sim_var(Interactions main_interactions, Measurements main_mea
     clock_t t_now;
     double t_diff = 0;
 
-    int thermalize = 200;
+    int thermalize = 100;
     int nsweep = 10;
-    int ndata = 500;
+    int ndata = 250;
 
     //Run 1000 sweeps of the system to achieve equilibrium
     double accepted = 0;

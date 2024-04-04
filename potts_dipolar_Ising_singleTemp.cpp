@@ -79,7 +79,7 @@ int main(int argc, char *argv[]) {
     std::cout << "Lattice Length = " << L << std::endl;
     std::cout << "T = " << T << std::endl;
 
-    Metropolis_MC_Sim_timed(main_interactions, main_measurements, main_properties, 1./T, spin, Ns, L, L_name, D_name, dir_print_name, D, L);
+    Metropolis_MC_Sim_timed(main_interactions, main_measurements, main_properties, 1./T, spin, Ns, L, L_name, D_name, dir_print_name, D, J);
 
     delete[] main_interactions.Vd;
     delete[] spin;
