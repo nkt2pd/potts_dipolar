@@ -7,7 +7,7 @@
             "args": [
                 "-fdiagnostics-color=always",
                 "-g",
-                "${file}","C:\\Users\\quent\\Projects\\Research\\potts_dipolar\\potts_dipolar\\Rand.cpp","C:\\Users\\quent\\Projects\\Research\\potts_dipolar\\potts_dipolar\\Housekeeping.cpp","C:\\Users\\quent\\Projects\\Research\\potts_dipolar\\potts_dipolar\\MonteCarlo.cpp","C:\\Users\\quent\\Projects\\Research\\potts_dipolar\\potts_dipolar\\MonteCarlo_timed.cpp","C:\\Users\\quent\\Projects\\Research\\potts_dipolar\\potts_dipolar\\Setup_Lattice.cpp",
+                "${file}","C:\\Users\\quent\\Projects\\Research\\potts_dipolar\\potts_dipolar\\Rand.cpp","C:\\Users\\quent\\Projects\\Research\\potts_dipolar\\potts_dipolar\\Housekeeping.cpp","C:\\Users\\quent\\Projects\\Research\\potts_dipolar\\potts_dipolar\\MonteCarlo.cpp","C:\\Users\\quent\\Projects\\Research\\potts_dipolar\\potts_dipolar\\MonteCarlo_timed.cpp","C:\\Users\\quent\\Projects\\Research\\potts_dipolar\\potts_dipolar\\Setup_Lattice.cpp","C:\\Users\\quent\\Projects\\Research\\potts_dipolar\\potts_dipolar\\MonteCarlo_var.cpp",
                 "-o",
                 "${fileDirname}\\${fileBasenameNoExtension}.exe"               
             ],
