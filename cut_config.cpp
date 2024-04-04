@@ -23,7 +23,7 @@ int main() {
     Interactions main_interactions(L);
     Measurements main_measurements;
 
-    std::string file_name = "C:\\users\\quent\\Projects\\Research\\potts_dipolar\\potts_dipolar\\smoothed\\L=60\\DJ0.025000\\init_config.dat";
+    std::string file_name = "C:\\users\\quent\\Projects\\Research\\potts_dipolar\\potts_dipolar\\smoothed\\L=60\\DJ0.750000\\init_config.dat";
 
     std::ifstream config(file_name);
 
@@ -58,8 +58,8 @@ int main() {
     
     set_nn(spin, Ns, L);
 
-    std::ofstream L48("C:\\users\\quent\\Projects\\Research\\potts_dipolar\\potts_dipolar\\smoothed\\L=48\\DJ0.025000\\init_config.dat");
-    std::ofstream L36("C:\\users\\quent\\Projects\\Research\\potts_dipolar\\potts_dipolar\\smoothed\\L=36\\DJ0.025000\\init_config.dat");
+    std::ofstream L48("C:\\users\\quent\\Projects\\Research\\potts_dipolar\\potts_dipolar\\smoothed\\L=48\\DJ0.750000\\init_config.dat");
+    std::ofstream L36("C:\\users\\quent\\Projects\\Research\\potts_dipolar\\potts_dipolar\\smoothed\\L=36\\DJ0.750000\\init_config.dat");
 
     for(int j = 0; j < L; j++) {
         for(int i = 0; i < L; i++) {

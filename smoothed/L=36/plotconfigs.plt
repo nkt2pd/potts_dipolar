@@ -23,5 +23,5 @@ unset ylabel
 unset y2label
 set grid x,y
 
-plot "./DJ0.025000/init_config.dat" using (myShift(1)):2:(myPt(4)):(myColor(4)) w p ps 1 pt var lc rgb var
+plot "./DJ0.750000/T=0.050000_config.dat" using (myShift(1)):2:(myPt(4)):(myColor(4)) w p ps 1 pt var lc rgb var
 pause -1 "Hit return to continue"

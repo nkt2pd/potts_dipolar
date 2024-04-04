@@ -87,7 +87,7 @@ void Metropolis_MC_Sim_var(Interactions main_interactions, Measurements main_mea
     clock_t t_now;
     double t_diff = 0;
 
-    int thermalize = 100;
+    int thermalize = 1000;
     int nsweep = 10;
     int ndata = 250;
 
@@ -106,8 +106,7 @@ void Metropolis_MC_Sim_var(Interactions main_interactions, Measurements main_mea
 
     const std::string T_val = std::to_string(1./beta);
 
-    std::ofstream config;
-    config.open("./" + new_dir_name + "/L=" + L_name + "/DJ" + D_name + "/T=" + T_val + "_config.dat", std::fstream::app);
+    std::ofstream config("./" + new_dir_name + "/L=" + L_name + "/DJ" + D_name + "/T=" + T_val + "_config.dat");
 
     for(int i = 0; i < Ns; i++) {
         config << spin[i].x << ", " << spin[i].y << ", " << spin[i].potts << ", " << spin[i].Sz << std::endl;
