@@ -35,7 +35,7 @@ int main(int argc, char *argv[]) {
     const std::string T_name(argv[2]);
     const std::string D_name(argv[3]);
     const std::string config_name(argv[4]);
-    const std::string dir_print_name = "./highres_sim_singleTemp/L=" + L_name + "DJ" + D_name;
+    const std::string dir_print_name = "./highres_sim_singleTemp/L=" + L_name + "/DJ" + D_name;
 
     main_interactions.compute_Vd(L, 200);
 
