@@ -31,9 +31,9 @@ int main(int argc, char *argv[]) {
     Interactions main_interactions(L);
     Measurements main_measurements;
 
-    const std::string L_name(argv[1]);
-    const std::string T_name(argv[2]);
-    const std::string D_name(argv[3]);
+    const std::string L_name = std::to_string(L);
+    const std::string T_name = std::to_string(T);
+    const std::string D_name = std::to_string(D);
     const std::string config_name(argv[4]);
     const std::string dir_print_name = "./highres_sim_singleTemp/L=" + L_name + "/DJ" + D_name;
 
@@ -80,7 +80,6 @@ int main(int argc, char *argv[]) {
     std::cout << "T = " << T << std::endl;
 
     Metropolis_MC_Sim_timed(main_interactions, main_measurements, main_properties, 1./T, spin, Ns, L, L_name, D_name, dir_print_name, D, J);
-
     delete[] main_interactions.Vd;
     delete[] spin;
 
