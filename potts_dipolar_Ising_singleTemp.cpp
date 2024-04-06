@@ -20,7 +20,13 @@ int main(int argc, char *argv[]) {
 
     const int L = atof(argv[1]);
     double T_idx = atof(argv[2]);
-    double T = T_idx*(1.5/40.) + 0.5;
+    double T = 0;
+    if(T_idx <= 20) {
+        T = T_idx*(0.2/20.);
+    } else {
+        T = (T_idx-20)*(1.8/30.) + 0.2;
+    }
+    // double T = T_idx*(1.5/40.) + 0.5;
     double D = atof(argv[3]);
 
     const int Ns = L*L;
