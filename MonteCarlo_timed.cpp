@@ -187,9 +187,7 @@ void Metropolis_MC_Sim_timed(Interactions main_interactions, Measurements main_m
     std::ofstream n_config;
     n_config.open("./" + dir_print_name + "/L=" + L_name + "/DJ" + D_name + "/datapoints.dat", std::fstream::app);
 
-    for(int i = 0; i < Ns; i++) {
-        n_config << "T = " << T_val << ", n = " << n << std::endl;
-    }
+    n_config << "T = " << T_val << ", n = " << n << std::endl;
 
     n_config.close();
 
