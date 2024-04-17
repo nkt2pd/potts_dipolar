@@ -12,7 +12,7 @@
 
 int main() {
 
-    const int L = 60;
+    const int L = 48;
     const int Ns = L*L;
 
     const double J = 1;
@@ -51,9 +51,9 @@ int main() {
 
     int diag = 1;
 
-    for(int i = 0; i<=30; i++) {
+    for(int i = 0; i<3; i++) {
 
-        double D = (double)i*(0.75/30.);
+        double D = 0.15 + 0.3*(double)i;
         double ground_state = 0;
         double ground_energy = 0;
         double energy = 0;

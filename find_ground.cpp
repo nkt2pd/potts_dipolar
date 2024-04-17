@@ -18,7 +18,7 @@ int main(int argc, char *argv[]) {
         return 1;
     }
 
-    const int L = atof(argv[1]);
+    const int L = 48;
     const int Ns = L*L;
 
     Site* spin = new Site[Ns];
