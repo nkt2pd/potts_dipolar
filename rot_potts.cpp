@@ -18,11 +18,16 @@
 
 int main() {
 
-    double J = 1.;
-    double D = 0.675;
-    double T = 1.25;
+    //D = 0.025, T = 0.5, a2KT
+    //D = 0.75, T = 0.8, bwKT
+    //D = 0.75, T = 0.2, bwFOnKT
+    //D = 0.75, T = 0.07, aFO
 
-    const int L = 60;
+    double J = 1.;
+    double D = 0.75;
+    double T = 0.07;
+
+    const int L = 48;
     const int Ns = L * L;
 
     const std::string L_name = std::to_string(L);
@@ -30,8 +35,14 @@ int main() {
     const std::string D_name = std::to_string(D/J);
     const std::string T_name = std::to_string(T);
 
-    std::string file_name_in =  "C:\\users\\quent\\Projects\\Research\\potts_dipolar\\potts_dipolar\\smoothed\\L=" + L_name + "\\DJ" + D_name + "\\T=" + T_name + "_config.dat";
-    std::string file_name_out = "C:\\users\\quent\\Projects\\Research\\potts_dipolar\\potts_dipolar\\figs\\hist_configs\\bwKT_rot5_hist.dat";
+    const std::string region = "aFO";
+
+    int rot_num = 5;
+    const std::string rotnum_name = std::to_string(rot_num);
+    
+
+    std::string file_name_in =  "C:\\users\\quent\\Projects\\Research\\potts_dipolar\\potts_dipolar\\highres_sim_singleTemp\\L=" + L_name + "\\DJ" + D_name + "\\T=" + T_name + "_config.dat";
+    std::string file_name_out = "C:\\users\\quent\\Projects\\Research\\potts_dipolar\\potts_dipolar\\highres_histograms\\hist_configs\\" + region + "_rot" + rotnum_name + "_hist.dat";
     
     std::ifstream config_in(file_name_in);
     std::ofstream config_out(file_name_out);
@@ -44,16 +55,21 @@ int main() {
             break;
         }
         config_out << stod(buffer) << ", ";
-        
 
         config_in >> buffer;
         config_out << stod(buffer) << ", ";
 
         config_in >> buffer;
-        config_out << mod(stoi(buffer) + 5, 6) << ", ";
+        config_out << mod(stoi(buffer) + rot_num, 6) << ", ";
+
+        if(mod(stoi(buffer) + rot_num, 6) == 0 || mod(stoi(buffer) + rot_num, 6) == 2 || mod(stoi(buffer) + rot_num, 6) == 4) {
+            config_out << "1" << std::endl;
+        } else {
+            config_out << "-1" << std::endl;
+        }
 
         config_in >> buffer;
-        config_out << buffer << std::endl;
+        
     }
 
     return 0;

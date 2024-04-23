@@ -22,16 +22,18 @@ int main() {
     Interactions main_interactions(L);
     Measurements main_measurements;
 
-    std::ifstream Vd_read;
-    Vd_read.open("Vd_file.dat");
+    // std::ifstream Vd_read;
+    // Vd_read.open("Vd_file.dat");
 
-    for(int y = 0; y < L; y++) {
-        for(int x = 0; x < L; x++) {
-            Vd_read >> main_interactions.Vd[y*L + x];
-        }
-    }
+    // for(int y = 0; y < L; y++) {
+    //     for(int x = 0; x < L; x++) {
+    //         Vd_read >> main_interactions.Vd[y*L + x];
+    //     }
+    // }
 
-    Vd_read.close();
+    // Vd_read.close();
+
+    main_interactions.compute_Vd(L, 200);
 
     set_coordinates(spin, Ns, L);
     set_nn(spin, Ns, L);
@@ -47,7 +49,7 @@ int main() {
     h_vec.push_back(L);
 
     std::ofstream grounds_w;
-    grounds_w.open("grounds_hz_diag4.dat");
+    grounds_w.open("grounds_L48.dat");
 
     int diag = 1;
 

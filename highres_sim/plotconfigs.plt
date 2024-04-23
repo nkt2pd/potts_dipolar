@@ -23,12 +23,12 @@ unset ylabel
 unset y2label
 set grid x,y
 
-plot "./L=60/DJ0.025000/T=0.500000_config.dat" using (myShift(1)):2:(myPt(4)):(myColor(4)) w p ps 1 pt var lc rgb var
+plot "./L=36/DJ0.025000/T=0.640000_config.dat" using (myShift(1)):2:(myPt(4)):(myColor(4)) w p ps 1 pt var lc rgb var
 pause -1 "Hit return to continue"
-plot "./L=60/DJ0.025000/T=0.560000_config.dat" using (myShift(1)):2:(myPt(4)):(myColor(4)) w p ps 1 pt var lc rgb var
+plot "./L=48/DJ0.025000/T=0.620000_config.dat" using (myShift(1)):2:(myPt(4)):(myColor(4)) w p ps 1 pt var lc rgb var
 pause -1 "Hit return to continue"
-plot "./L=60/DJ0.025000/T=0.580000_config.dat" using (myShift(1)):2:(myPt(4)):(myColor(4)) w p ps 1 pt var lc rgb var
-pause -1 "Hit return to continue"
-plot "./L=60/DJ0.025000/T=0.680000_config.dat" using (myShift(1)):2:(myPt(4)):(myColor(4)) w p ps 1 pt var lc rgb var
-pause -1 "Hit return to continue"
-plot "./L=60/DJ0.025000/T=1.000000_config.dat" using (myShift(1)):2:(myPt(4)):(myColor(4)) w p ps 1 pt var lc rgb var
+plot "./L=60/DJ0.025000/T=0.600000_config.dat" using (myShift(1)):2:(myPt(4)):(myColor(4)) w p ps 1 pt var lc rgb var
+# pause -1 "Hit return to continue"
+# plot "./L=60/DJ0.025000/T=0.680000_config.dat" using (myShift(1)):2:(myPt(4)):(myColor(4)) w p ps 1 pt var lc rgb var
+# pause -1 "Hit return to continue"
+# plot "./L=60/DJ0.025000/T=1.000000_config.dat" using (myShift(1)):2:(myPt(4)):(myColor(4)) w p ps 1 pt var lc rgb var
