@@ -1,5 +1,6 @@
 set xrange [0:0.6]
-set yrange [0:3]
+set yrange [0:1]
+
 
 set xtics
 set ytics
