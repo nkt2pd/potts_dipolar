@@ -27,7 +27,7 @@ int main(int argc, char *argv[]) {
     //     T = (T_idx-20)*(1.8/30.) + 0.2;
     // }
     // double T = T_idx*(1.5/40.) + 0.5;
-    T = 0.5 + T_idx*(0.15/15.);
+    T = T_idx*(0.6/60.);
     double D = atof(argv[3]);
 
     const int Ns = L*L;
@@ -42,7 +42,7 @@ int main(int argc, char *argv[]) {
     const std::string T_name = std::to_string(T);
     const std::string D_name = std::to_string(D);
     const std::string config_name(argv[4]);
-    const std::string dir_print_name = "highres_sim_singleTemp2";
+    const std::string dir_print_name = "highres_sim_singleTemp3";
 
     main_interactions.compute_Vd(L, 200);
 
