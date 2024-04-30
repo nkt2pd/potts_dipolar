@@ -27,7 +27,7 @@ int main(int argc, char *argv[]) {
     //     T = (T_idx-20)*(1.8/30.) + 0.2;
     // }
     // double T = T_idx*(1.5/40.) + 0.5;
-    T = T_idx*(0.6/60.);
+    T = 0.5 + T_idx*(0.15/15.);
     double D = atof(argv[3]);
 
     const int Ns = L*L;
