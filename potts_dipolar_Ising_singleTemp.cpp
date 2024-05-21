@@ -42,7 +42,7 @@ int main(int argc, char *argv[]) {
     const std::string T_name = std::to_string(T);
     const std::string D_name = std::to_string(D);
     const std::string config_name(argv[4]);
-    const std::string dir_print_name = "highres_sim_singleTemp3";
+    const std::string dir_print_name = "highres_sim_singleTemp4";
 
     main_interactions.compute_Vd(L, 200);
 
