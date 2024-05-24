@@ -26,6 +26,6 @@ set grid x,y
 unset multiplot
 
 set title "D = 0.025 after 2 KT"
-plot "uniformconfig.dat" using (myShift(1)):2:(myPt(4)):(myColor(3)) w p ps 1 pt var lc rgb var
+plot "./uniformconfig_L48.dat" using (myShift(1)):2:(myPt(4)):(myColor(3)) w p ps 1 pt var lc rgb var
 pause -1 "Hit return to continue"
 
