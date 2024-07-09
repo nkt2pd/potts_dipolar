@@ -37,12 +37,12 @@ int main() {
 
     const std::string region = "aFO";
 
-    int rot_num = 5;
+    int rot_num = 1;
     const std::string rotnum_name = std::to_string(rot_num);
     
 
-    std::string file_name_in =  "C:\\users\\quent\\Projects\\Research\\potts_dipolar\\potts_dipolar\\highres_sim_singleTemp\\L=" + L_name + "\\DJ" + D_name + "\\T=" + T_name + "_config.dat";
-    std::string file_name_out = "C:\\users\\quent\\Projects\\Research\\potts_dipolar\\potts_dipolar\\highres_histograms\\hist_configs\\" + region + "_rot" + rotnum_name + "_hist.dat";
+    std::string file_name_in =  "C:\\users\\quent\\Projects\\Research\\potts_dipolar\\potts_dipolar\\DJ 0.75 rot configs\\DJ0.750000_rot0_config.dat";
+    std::string file_name_out = "C:\\users\\quent\\Projects\\Research\\potts_dipolar\\potts_dipolar\\DJ 0.75 rot configs\\DJ0.750000_rot" + rotnum_name + "_config.dat";
     
     std::ifstream config_in(file_name_in);
     std::ofstream config_out(file_name_out);

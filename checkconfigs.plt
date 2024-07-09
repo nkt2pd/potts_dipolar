@@ -25,5 +25,5 @@ set grid x,y
 
 set title "DJ 0 initial"
 
-plot "uniformconfig.dat" using (myShift(1)):2:(myPt(4)):(myColor(4)) w p ps 1 pt var lc rgb var
+plot "DJ0.750000_init_config.dat" using (myShift(1)):2:(myPt(4)):(myColor(4)) w p ps 1 pt var lc rgb var
 pause -1 "Hit return to continue"
