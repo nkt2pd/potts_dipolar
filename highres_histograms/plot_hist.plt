@@ -44,12 +44,12 @@ set multiplot layout 1,4 rowsfirst title "Histograms"
 
 set xlabel "Stripe Region, After First Order"
 plot "hex.dat" using 1:2 with lines dt 2 lc rgb "blue", \
-     "./hist_data_simmed/aFO_rot0_hist_simmed.dat" using 1:2 with points pt 7 lc rgb "red", \
-     "./hist_data_simmed/aFO_rot1_hist_simmed.dat" using 1:2 with points pt 7 lc rgb "red", \
-     "./hist_data_simmed/aFO_rot2_hist_simmed.dat" using 1:2 with points pt 7 lc rgb "red", \
-     "./hist_data_simmed/aFO_rot3_hist_simmed.dat" using 1:2 with points pt 7 lc rgb "red", \
-     "./hist_data_simmed/aFO_rot4_hist_simmed.dat" using 1:2 with points pt 7 lc rgb "red", \
-     "./hist_data_simmed/aFO_rot5_hist_simmed.dat" using 1:2 with points pt 7 lc rgb "red"
+     "./hist_data_simmed/aFO_rot0_hist_simmed2.dat" using 1:2 with points pt 7 lc rgb "red", \
+     "./hist_data_simmed/aFO_rot1_hist_simmed2.dat" using 1:2 with points pt 7 lc rgb "red", \
+     "./hist_data_simmed/aFO_rot2_hist_simmed2.dat" using 1:2 with points pt 7 lc rgb "red", \
+     "./hist_data_simmed/aFO_rot3_hist_simmed2.dat" using 1:2 with points pt 7 lc rgb "red", \
+     "./hist_data_simmed/aFO_rot4_hist_simmed2.dat" using 1:2 with points pt 7 lc rgb "red", \
+     "./hist_data_simmed/aFO_rot5_hist_simmed2.dat" using 1:2 with points pt 7 lc rgb "red"
 
 
 # set xlabel "Disorder"
