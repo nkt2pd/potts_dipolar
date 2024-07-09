@@ -15,7 +15,7 @@
 
 int main() {
 
-    const int L = 60;
+    const int L = 48;
     const int Ns = L * L; 
 
     Site* spin = new Site[Ns];
@@ -23,7 +23,7 @@ int main() {
     Interactions main_interactions(L);
     Measurements main_measurements;
 
-    init_dstripe(main_measurements, main_interactions, spin, Ns, L, 3);
+    init_stripe(main_measurements, main_interactions, spin, Ns, L, 1);
 
     set_coordinates(spin, Ns, L);
     

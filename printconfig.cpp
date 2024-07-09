@@ -35,7 +35,7 @@ int main() {
     // init_uniform(main_measurements, main_interactions, spin, Ns, L);
 
     // std::string config_name = "ground_L" + std::to_string(L) + "_D" + std::to_string(D) + ".dat";
-    std::string config_name = "DJ0.750000_init_config.dat";
+    std::string config_name = "DJ0.750000_init_config2.dat";
     std::ofstream config(config_name);
 
     // for(int i = 0; i < Ns; i++) {
