@@ -29,6 +29,14 @@ set title "D = 0.025 after 2 KT"
 plot "./L=48/DJ0.750000/T=0.070000_rot0config.dat" using (myShift(1)):2:(myPt(4)):(myColor(3)) w p ps 1 pt var lc rgb var
 pause -1 "Hit return to continue"
 
+set title "D = 0.025 after 2 KT"
+plot "./L=48/DJ0.750000/T=0.070000_rot1config.dat" using (myShift(1)):2:(myPt(4)):(myColor(3)) w p ps 1 pt var lc rgb var
+pause -1 "Hit return to continue"
+
+set title "D = 0.025 after 2 KT"
+plot "./L=48/DJ0.750000/T=0.070000_rot2config.dat" using (myShift(1)):2:(myPt(4)):(myColor(3)) w p ps 1 pt var lc rgb var
+pause -1 "Hit return to continue"
+
 set title "D = 0.75 Critical KT Region"
 plot "./L=48/DJ0.750000/T=0.070000_rot3config.dat" using (myShift(1)):2:(myPt(4)):(myColor(3)) w p ps 1 pt var lc rgb var
 pause -1 "Hit return to continue"

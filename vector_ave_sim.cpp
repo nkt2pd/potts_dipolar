@@ -23,8 +23,8 @@ int main(int argc, char* argv[]) {
     //D = 0.75, T = 0.07, aFO
 
     double J = 1.;
-    double D = 0.025;
-    double T = 1.25;
+    double D = 0.75;
+    double T = 0.07;
     double temp_T = 2;
 
     const int L = 48;

@@ -50,6 +50,10 @@ int update_site_timed(Measurements main_measurements, Interactions main_interact
     if (delE == 0) {
         //if there is no change in the energy, coin flip to see if accepted
         if (r < 0.5) {
+            if((p_new % 2 == 0 && Sz_new == -1) || (p_new % 2 != 0 && Sz_new == 1)) {
+                throw std::runtime_error("Potts and Ising variable are somehow uncoupled");
+            }
+
             spin[k].potts = p_new;
             spin[k].Sz = Sz_new;
 
@@ -59,6 +63,9 @@ int update_site_timed(Measurements main_measurements, Interactions main_interact
         }
     } else {
         if (r < exp(-delE * beta)) {
+            if((p_new % 2 == 0 && Sz_new == -1) || (p_new % 2 != 0 && Sz_new == 1)) {
+                throw std::runtime_error("Potts and Ising variable are somehow uncoupled");
+            }
             spin[k].potts = p_new;
             spin[k].Sz = Sz_new;
 
@@ -97,7 +104,7 @@ void Metropolis_MC_Sim_timed(Interactions main_interactions, Measurements main_m
 
     std::cout << "start timer" << std::endl;
 
-    while ((double)((t_therm_now - t_therm_start)/CLOCKS_PER_SEC) < 60) {
+    while ((double)((t_therm_now - t_therm_start)/CLOCKS_PER_SEC) < 3600) {
 
         accepted += MC_sweep_timed(main_measurements, main_interactions, main_properties, beta, spin, Ns, L, D, J);
 

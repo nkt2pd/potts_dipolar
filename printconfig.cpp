@@ -53,7 +53,7 @@ int main() {
     //     }
     // }
     int layer = 1;
-    int random_potts = 0;
+    int random_potts = 1;
 
     for(int y = 0; y < L; y++) {
         for(int x = 0; x < L; x++) {
