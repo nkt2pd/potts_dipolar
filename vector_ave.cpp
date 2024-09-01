@@ -20,10 +20,10 @@ int main(int argc, char* argv[]) {
     //get new configuration
 
     double J = 1.;
-    double D = 0.675;
-    double T = 1.25;
+    double D = 0.75;
+    double T = 0.07;
 
-    const int L = 60;
+    const int L = 48;
     const int Ns = L * L;
 
     const std::string L_name = std::to_string(L);
@@ -34,9 +34,9 @@ int main(int argc, char* argv[]) {
 
     //collect data for histogram
 
-    std::string file_name_in = "C:\\users\\quent\\Projects\\Research\\potts_dipolar\\potts_dipolar\\figs\\hist_configs\\bwKT_rot2_config.dat";
+    std::string file_name_in = "C:\\users\\quent\\Projects\\Research\\potts_dipolar\\potts_dipolar\\highres_histograms\\L=48\\DJ0.750000\\T=0.070000_rot5config.dat";
 
-    std::string file_name_out = "C:\\users\\quent\\Projects\\Research\\potts_dipolar\\potts_dipolar\\figs\\bwKT_rot2_hist.dat";
+    std::string file_name_out = "C:\\users\\quent\\Projects\\Research\\potts_dipolar\\potts_dipolar\\highres_histograms\\hist_configs\\7_14_24\\aFO_rot5_hist.dat";
 
     std::ifstream config_in(file_name_in);
     std::ofstream config_out(file_name_out);
@@ -63,16 +63,16 @@ int main(int argc, char* argv[]) {
 
     config_in.clear();
     config_in.seekg(0);
-        for(int i = 0; i < 11; i++) { //x position of lower left corner of box
-            for(int j = 0; j < 11; j++) { //y position of lower left corner of box
+        for(int i = 0; i < 9; i++) { //x position of lower left corner of box
+            for(int j = 0; j < 7; j++) { //y position of lower left corner of box
                 count = 0;
                 sum_x = 0;
                 sum_y = 0;
                 ave_x = 0;
                 ave_y = 0;
 
-                for(int k = 0; k < 10; k++) { //y position within box from left
-                    for(int l = 0; l < 10; l++) { //x position within box from bottom
+                for(int k = 0; k < 8; k++) { //y position within box from left
+                    for(int l = 0; l < 6; l++) { //x position within box from bottom
 
                         idx_x = 5*i + l;
                         idx_y = 5*j + k;

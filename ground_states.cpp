@@ -49,13 +49,13 @@ int main() {
     h_vec.push_back(L);
 
     std::ofstream grounds_w;
-    grounds_w.open("grounds_L48_manyD2.dat");
+    grounds_w.open("grounds_L48_manyD4.dat");
 
     int diag = 1;
 
     for(int i = 0; i<50; i++) {
 
-        double D = (0.32/50.)*(double)i;
+        double D = 0.0436 + (0.0004/50.)*(double)i;
         double ground_state = 0;
         double ground_energy = 0;
         double energy = 0;

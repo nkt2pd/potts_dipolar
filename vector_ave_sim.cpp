@@ -23,8 +23,9 @@ int main(int argc, char* argv[]) {
     //D = 0.75, T = 0.07, aFO
 
     double J = 1.;
-    double D = 0.025;
-    double T = 1.25;
+    double D = 0.75;
+    double T = 0.07;
+    double temp_T = 2;
 
     const int L = 48;
     const int Ns = L * L;
@@ -44,7 +45,7 @@ int main(int argc, char* argv[]) {
     for(int m = 0; m < 6; m++) {
         std::cout << "m = " << m << std::endl;
         std::string rotnum_name = std::to_string(m);
-        for(int n = 0; n < 4; n++) {
+        for(int n = 0; n < 1; n++) {
             if(n == 0) {
                 hist_type = "a2KT";
             } else if(n == 1) {
@@ -55,6 +56,8 @@ int main(int argc, char* argv[]) {
                 hist_type = "aFO";
             }
 
+            //hist_type override
+            hist_type = "aFO";
             hist_name = hist_type + "_rot" + rotnum_name;
 
             if(hist_type == "a2KT") {
@@ -123,8 +126,13 @@ int main(int argc, char* argv[]) {
             
             set_nn(spin, Ns, L);
 
-            int thermalize = 1000;
+            int thermalize = 10000;
             int accepted = 0;
+
+
+            for(int i = 0; i < 1000 ; i++) {
+                accepted += MC_sweep_var(main_measurements, main_interactions, main_properties, 1./temp_T, spin, Ns, L, D, J);
+            }
 
             for (int i = 0; i < thermalize; i++) {
                 if(i%100 == 0) {
@@ -147,7 +155,7 @@ int main(int argc, char* argv[]) {
 
             file_name_in = file_name_out;
 
-            file_name_out = "C:\\users\\quent\\Projects\\Research\\potts_dipolar\\potts_dipolar\\highres_histograms\\hist_data_simmed\\" + hist_name + "_hist_simmed.dat";
+            file_name_out = "C:\\users\\quent\\Projects\\Research\\potts_dipolar\\potts_dipolar\\highres_histograms\\hist_data_simmed\\" + hist_name + "_hist_simmed2.dat";
 
             std::ifstream config_in(file_name_in);
             std::ofstream config_out(file_name_out);\
