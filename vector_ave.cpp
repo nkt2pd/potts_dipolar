@@ -21,7 +21,7 @@ int main(int argc, char* argv[]) {
 
     double J = 1.;
     double D = 0.75;
-    double T = 0.07;
+    double T = 1.1;
 
     const int L = 48;
     const int Ns = L * L;
