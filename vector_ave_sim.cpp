@@ -19,6 +19,7 @@ int main(int argc, char* argv[]) {
 
     //D = 0.025, T = 0.5, a2KT
     //D = 0.75, T = 0.8, bwKT
+        //try T = 1.1 for next bwKT histogram w singlTemp_4 data
     //D = 0.75, T = 0.2, bwFOnKT
     //D = 0.75, T = 0.07, aFO
 
