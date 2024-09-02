@@ -34,9 +34,9 @@ int main(int argc, char* argv[]) {
 
     //collect data for histogram
 
-    std::string file_name_in = "C:\\users\\quent\\Projects\\Research\\potts_dipolar\\potts_dipolar\\highres_histograms\\L=48\\DJ0.750000\\T=0.070000_rot5config.dat";
+    std::string file_name_in = "C:\\users\\quent\\Projects\\Research\\potts_dipolar\\potts_dipolar\\highres_histograms\\hist_configs_simmed\\7_15_24\\aFO_rot5_config_simmed.dat";
 
-    std::string file_name_out = "C:\\users\\quent\\Projects\\Research\\potts_dipolar\\potts_dipolar\\highres_histograms\\hist_configs\\7_14_24\\aFO_rot5_hist.dat";
+    std::string file_name_out = "C:\\users\\quent\\Projects\\Research\\potts_dipolar\\potts_dipolar\\highres_histograms\\hist_data_simmed\\7_15_24\\aFO_rot5_hist_simmed2.dat";
 
     std::ifstream config_in(file_name_in);
     std::ofstream config_out(file_name_out);
@@ -55,6 +55,12 @@ int main(int argc, char* argv[]) {
     double sum_x = 0, sum_y = 0;
     double ave_x = 0, ave_y = 0;
     double count = 0;
+    int box_L = 8;
+    int num_stamps = L/box_L;
+
+    if(L % box_L != 0) {
+        std::runtime_error("Box Size and Lattice Size are not compatible");
+    }
 
     //need to write this code to get the x position and y position using the indices of for loop
     //then in a while loop, check the x position of each line until it matches. if it does,
@@ -63,19 +69,19 @@ int main(int argc, char* argv[]) {
 
     config_in.clear();
     config_in.seekg(0);
-        for(int i = 0; i < 9; i++) { //x position of lower left corner of box
-            for(int j = 0; j < 7; j++) { //y position of lower left corner of box
+        for(int i = 0; i < num_stamps; i++) { //x position of lower left corner of box
+            for(int j = 0; j < num_stamps; j++) { //y position of lower left corner of box
                 count = 0;
                 sum_x = 0;
                 sum_y = 0;
                 ave_x = 0;
                 ave_y = 0;
 
-                for(int k = 0; k < 8; k++) { //y position within box from left
-                    for(int l = 0; l < 6; l++) { //x position within box from bottom
+                for(int k = 0; k < box_L; k++) { //y position within box from left
+                    for(int l = 0; l < box_L; l++) { //x position within box from bottom
 
-                        idx_x = 5*i + l;
-                        idx_y = 5*j + k;
+                        idx_x = box_L*i + l;
+                        idx_y = box_L*j + k;
 
                         x = (double)idx_x + 0.5*(double)idx_y;
                         y = 0.5*sqrt(3)*(double)idx_y;

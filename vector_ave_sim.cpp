@@ -25,7 +25,6 @@ int main(int argc, char* argv[]) {
     double J = 1.;
     double D = 0.75;
     double T = 0.07;
-    double temp_T = 2;
 
     const int L = 48;
     const int Ns = L * L;
@@ -79,9 +78,9 @@ int main(int argc, char* argv[]) {
             std::string D_name = std::to_string(D);
             std::string T_name = std::to_string(T);
 
-            std::string file_name_in = "C:\\users\\quent\\Projects\\Research\\potts_dipolar\\potts_dipolar\\highres_histograms\\hist_configs\\" + hist_name + "_hist.dat";
+            std::string file_name_in = "C:\\users\\quent\\Projects\\Research\\potts_dipolar\\potts_dipolar\\DJ 0.75 rot configs\\DJ0.750000_rot" + rotnum_name + "config.dat";
 
-            std::string file_name_out = "C:\\users\\quent\\Projects\\Research\\potts_dipolar\\potts_dipolar\\highres_histograms\\hist_configs_simmed\\" + hist_name + "_config_simmed.dat";
+            std::string file_name_out = "C:\\users\\quent\\Projects\\Research\\potts_dipolar\\potts_dipolar\\highres_histograms\\hist_configs_simmed\\7_15_24\\" + hist_name + "_config_simmed.dat";
 
             std::ifstream sim_in(file_name_in);
             std::ofstream sim_out(file_name_out);
@@ -126,14 +125,19 @@ int main(int argc, char* argv[]) {
             
             set_nn(spin, Ns, L);
 
-            int thermalize = 10000;
+            int thermalize = 50000;
             int accepted = 0;
+            double therm_T = 0.3;
 
-
-            for(int i = 0; i < 1000 ; i++) {
-                accepted += MC_sweep_var(main_measurements, main_interactions, main_properties, 1./temp_T, spin, Ns, L, D, J);
+            std::cout << "Thermalizing at higher Temp. T = " << therm_T << std::endl;
+            for(int i = 0; i < 10000 ; i++) {
+                if(i%100 == 0) {
+                    std::cout << "Simulating... i = " << i << std::endl;
+                }
+                accepted += MC_sweep_var(main_measurements, main_interactions, main_properties, 1./therm_T, spin, Ns, L, D, J);
             }
 
+            std::cout << "Thermalizing at T = " << T << std::endl;
             for (int i = 0; i < thermalize; i++) {
                 if(i%100 == 0) {
                     std::cout << "Simulating... i = " << i << std::endl;
@@ -155,7 +159,7 @@ int main(int argc, char* argv[]) {
 
             file_name_in = file_name_out;
 
-            file_name_out = "C:\\users\\quent\\Projects\\Research\\potts_dipolar\\potts_dipolar\\highres_histograms\\hist_data_simmed\\" + hist_name + "_hist_simmed2.dat";
+            file_name_out = "C:\\users\\quent\\Projects\\Research\\potts_dipolar\\potts_dipolar\\highres_histograms\\hist_data_simmed\\7_15_24\\" + hist_name + "_hist_simmed2.dat";
 
             std::ifstream config_in(file_name_in);
             std::ofstream config_out(file_name_out);\
