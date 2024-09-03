@@ -42,6 +42,13 @@ int main(int argc, char* argv[]) {
 
     main_interactions.compute_Vd(L, 200);
 
+    int box_L = 8;
+    int num_stamps = L/box_L;
+
+    if(L % box_L != 0) {
+        std::runtime_error("Box Size and Lattice Size are not compatible");
+    }
+
     for(int m = 0; m < 6; m++) {
         std::cout << "m = " << m << std::endl;
         std::string rotnum_name = std::to_string(m);
@@ -57,14 +64,14 @@ int main(int argc, char* argv[]) {
             }
 
             //hist_type override
-            hist_type = "aFO";
+            hist_type = "bwKT";
             hist_name = hist_type + "_rot" + rotnum_name;
 
             if(hist_type == "a2KT") {
                 T = 0.5;
                 D = 0.025;
             } else if(hist_type == "bwKT") {
-                T = 0.8;
+                T = 1.1;
                 D = 0.75;
             } else if(hist_type == "bwFOnKT"){
                 T = 0.2;
@@ -79,9 +86,9 @@ int main(int argc, char* argv[]) {
             std::string D_name = std::to_string(D);
             std::string T_name = std::to_string(T);
 
-            std::string file_name_in = "C:\\users\\quent\\Projects\\Research\\potts_dipolar\\potts_dipolar\\DJ 0.75 rot configs\\DJ0.750000_rot" + rotnum_name + "config.dat";
+            std::string file_name_in = "C:\\users\\quent\\Projects\\Research\\potts_dipolar\\potts_dipolar\\rot_configs\\DJ0.75_T1.1\\DJ0.750000_T" + T_name + "_rot" + rotnum_name + "_config.dat";
 
-            std::string file_name_out = "C:\\users\\quent\\Projects\\Research\\potts_dipolar\\potts_dipolar\\highres_histograms\\hist_configs_simmed\\7_15_24\\" + hist_name + "_config_simmed.dat";
+            std::string file_name_out = "C:\\users\\quent\\Projects\\Research\\potts_dipolar\\potts_dipolar\\highres_histograms\\hist_configs_simmed\\9_2_24\\" + hist_name + "_config_simmed.dat";
 
             std::ifstream sim_in(file_name_in);
             std::ofstream sim_out(file_name_out);
@@ -126,17 +133,17 @@ int main(int argc, char* argv[]) {
             
             set_nn(spin, Ns, L);
 
-            int thermalize = 50000;
+            int thermalize = 1000;
             int accepted = 0;
-            double therm_T = 0.3;
+            double therm_T = 1.1;
 
-            std::cout << "Thermalizing at higher Temp. T = " << therm_T << std::endl;
-            for(int i = 0; i < 10000 ; i++) {
-                if(i%100 == 0) {
-                    std::cout << "Simulating... i = " << i << std::endl;
-                }
-                accepted += MC_sweep_var(main_measurements, main_interactions, main_properties, 1./therm_T, spin, Ns, L, D, J);
-            }
+            // std::cout << "Thermalizing at higher Temp. T = " << therm_T << std::endl;
+            // for(int i = 0; i < thermalize ; i++) {
+            //     if(i%100 == 0) {
+            //         std::cout << "Simulating... i = " << i << std::endl;
+            //     }
+            //     accepted += MC_sweep_var(main_measurements, main_interactions, main_properties, 1./therm_T, spin, Ns, L, D, J);
+            // }
 
             std::cout << "Thermalizing at T = " << T << std::endl;
             for (int i = 0; i < thermalize; i++) {
@@ -160,7 +167,7 @@ int main(int argc, char* argv[]) {
 
             file_name_in = file_name_out;
 
-            file_name_out = "C:\\users\\quent\\Projects\\Research\\potts_dipolar\\potts_dipolar\\highres_histograms\\hist_data_simmed\\7_15_24\\" + hist_name + "_hist_simmed2.dat";
+            file_name_out = "C:\\users\\quent\\Projects\\Research\\potts_dipolar\\potts_dipolar\\highres_histograms\\hist_data_simmed\\9_2_24\\" + hist_name + "_hist_simmed.dat";
 
             std::ifstream config_in(file_name_in);
             std::ofstream config_out(file_name_out);\
@@ -182,19 +189,19 @@ int main(int argc, char* argv[]) {
             //then in a while loop, check the x position of each line until it matches. if it does,
             //see if the y position matches. if it does, we have our line and we can go on to get its potts variable
 
-            for(int i = 0; i < 11; i++) { //x position of lower left corner of box
-                for(int j = 0; j < 11; j++) { //y position of lower left corner of box
+            for(int i = 0; i < num_stamps; i++) { //x position of lower left corner of box
+                for(int j = 0; j < num_stamps; j++) { //y position of lower left corner of box
                     count = 0;
                     sum_x = 0;
                     sum_y = 0;
                     ave_x = 0;
                     ave_y = 0;
 
-                    for(int k = 0; k < 10; k++) { //y position within box from left
-                        for(int l = 0; l < 10; l++) { //x position within box from bottom
+                    for(int k = 0; k < box_L; k++) { //y position within box from left
+                        for(int l = 0; l < box_L; l++) { //x position within box from bottom
 
-                            idx_x = 5*i + l;
-                            idx_y = 5*j + k;
+                            idx_x = box_L*i + l;
+                            idx_y = box_L*j + k;
 
                             x = (double)idx_x + 0.5*(double)idx_y;
                             y = 0.5*sqrt(3)*(double)idx_y;
