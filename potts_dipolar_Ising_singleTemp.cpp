@@ -14,7 +14,7 @@
 //9_2_24 run: Fixing low D = 0.025 heat graph. T = 0.5, 0.5375, 0.575, 0.6025 for L = 36, 48, 60 w/ 
 
 int main(int argc, char *argv[]) {
-    if (argc != 5) {
+    if (argc != 4) {
         std::cout << "Usage: ./potts_dipolar_Ising_singleTemp <Lattice Length> <Temp index> <D> <config_name>" << std::endl;
         return 1;
     }
