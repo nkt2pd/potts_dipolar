@@ -104,7 +104,7 @@ void Metropolis_MC_Sim_timed(Interactions main_interactions, Measurements main_m
 
     std::cout << "start timer" << std::endl;
 
-    while ((double)((t_therm_now - t_therm_start)/CLOCKS_PER_SEC) < 3600) {
+    while ((double)((t_therm_now - t_therm_start)/CLOCKS_PER_SEC) < THERM_TIME) {
 
         accepted += MC_sweep_timed(main_measurements, main_interactions, main_properties, beta, spin, Ns, L, D, J);
 
@@ -144,7 +144,7 @@ void Metropolis_MC_Sim_timed(Interactions main_interactions, Measurements main_m
 
     int n = 0;
 
-    while ((double)((t_data_now - t_data_start)/CLOCKS_PER_SEC) < 60) {
+    while ((double)((t_data_now - t_data_start)/CLOCKS_PER_SEC) < SIM_TIME) {
 
         accepted = 0;
         for (int r = 0; r < nsweep; r++) {
