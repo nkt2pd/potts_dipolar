@@ -29,7 +29,7 @@ int main(int argc, char *argv[]) {
     // }
     // double T = T_idx*(1.5/40.) + 0.5;
     
-    T = 0.5 + T_idx*(0.375);
+    T = 0.5 + T_idx*(0.0375);
 
     double D = atof(argv[3]);
 
