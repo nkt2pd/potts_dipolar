@@ -12,6 +12,6 @@ int update_site_timed(Measurements main_measurements, Interactions main_interact
 
 double MC_sweep_timed(Measurements main_measurements, Interactions main_interactions, Properties main_properties, double beta, Site *spin, int Ns, int L, double D, double J);
 
-void Metropolis_MC_Sim_timed(Interactions main_interactions, Measurements main_measurements, Properties main_properties, double beta, Site *spin, int Ns, int L, const std::string L_name, const std::string D_name, const std::string new_dir_name, double D, double J);
+void Metropolis_MC_Sim_timed(Interactions main_interactions, Measurements main_measurements, Properties main_properties, double beta, Site *spin, int Ns, int L, const std::string L_name, const std::string D_name, const std::string new_dir_name, double D, double J, double T_idx);
 
 #endif

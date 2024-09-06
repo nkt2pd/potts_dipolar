@@ -13,6 +13,9 @@
 //If using this program, must clear files manually before running right now
 //9_2_24 run: Fixing low D = 0.025 heat graph. T = 0.5, 0.5375, 0.575, 0.6025 for L = 36, 48, 60 w/ 
 
+//9_6_24: Currently configured to run 10 instances of the same simulation with different output names. Need to revert
+//back before using again
+
 int main(int argc, char *argv[]) {
     if (argc != 4) {
         std::cout << "Usage: ./potts_dipolar_Ising_singleTemp <Lattice Length> <Temp index> <D> <config_name>" << std::endl;
@@ -21,15 +24,16 @@ int main(int argc, char *argv[]) {
 
     const int L = atof(argv[1]);
     double T_idx = atof(argv[2]);
-    double T = 0;
+    // double T = 0;
     // if(T_idx <= 20) {
     //     T = T_idx*(0.2/20.);
     // } else {
     //     T = (T_idx-20)*(1.8/30.) + 0.2;
     // }
     // double T = T_idx*(1.5/40.) + 0.5;
-    
-    T = 0.5 + T_idx*(0.0375);
+    double T = 0.07;
+
+
 
     double D = atof(argv[3]);
 
@@ -91,7 +95,7 @@ int main(int argc, char *argv[]) {
     std::cout << "Lattice Length = " << L << std::endl;
     std::cout << "T = " << T << std::endl;
 
-    Metropolis_MC_Sim_timed(main_interactions, main_measurements, main_properties, 1./T, spin, Ns, L, L_name, D_name, dir_print_name, D, J);
+    Metropolis_MC_Sim_timed(main_interactions, main_measurements, main_properties, 1./T, spin, Ns, L, L_name, D_name, dir_print_name, D, J, T_idx);
     delete[] main_interactions.Vd;
     delete[] spin;
 

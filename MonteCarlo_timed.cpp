@@ -84,7 +84,7 @@ double MC_sweep_timed(Measurements main_measurements, Interactions main_interact
     return ((double) hits)/((double) Ns);      // success rate
 }
 
-void Metropolis_MC_Sim_timed(Interactions main_interactions, Measurements main_measurements, Properties main_properties, double beta, Site *spin, int Ns, int L, const std::string L_name, const std::string D_name, const std::string dir_print_name, double D, double J) {
+void Metropolis_MC_Sim_timed(Interactions main_interactions, Measurements main_measurements, Properties main_properties, double beta, Site *spin, int Ns, int L, const std::string L_name, const std::string D_name, const std::string dir_print_name, double D, double J, double T_idx) {
 
     clock_t t_start = clock();
     clock_t t_now = clock();
@@ -122,7 +122,7 @@ void Metropolis_MC_Sim_timed(Interactions main_interactions, Measurements main_m
     const std::string T_val = std::to_string(1./beta);
 
     std::ofstream config;
-    config.open("./" + dir_print_name + "/L=" + L_name + "/DJ" + D_name + "/T=" + T_val + "_config.dat", std::fstream::app);
+    config.open("./" + dir_print_name + "/L=" + L_name + "/DJ" + D_name + "/T=" + T_val + "_config" + std::to_string(T_idx) + ".dat", std::fstream::app);
 
     for(int i = 0; i < Ns; i++) {
         config << spin[i].x << ", " << spin[i].y << ", " << spin[i].potts << ", " << spin[i].Sz << std::endl;
