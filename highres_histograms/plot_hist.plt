@@ -7,10 +7,10 @@ unset key
 #unset terminal
 
 set multiplot layout 1,4 rowsfirst title "Histograms"
-# unset multiplot
+unset multiplot
 # set terminal qt
 
-# set size square
+set size square
 
 # set xlabel "Between First Order and KT"
 # plot "hex.dat" using 1:2 with lines dt 2 lc rgb "blue", \
@@ -60,6 +60,15 @@ plot "hex.dat" using 1:2 with lines dt 2 lc rgb "blue", \
      "./hist_data_simmed/9_2_24/bwKT_rot4_hist_simmed.dat" using 1:2 with points pt 7 lc rgb "red", \
      "./hist_data_simmed/9_2_24/bwKT_rot5_hist_simmed.dat" using 1:2 with points pt 7 lc rgb "red"
 
+pause -1
+set xlabel "Between KT, U(1)"
+plot "hex.dat" using 1:2 with lines dt 2 lc rgb "blue", \
+     "./hist_data_simmed/bwKT_rot0_hist_simmed.dat" using 1:2 with points pt 7 lc rgb "red", \
+     "./hist_data_simmed/bwKT_rot1_hist_simmed.dat" using 1:2 with points pt 7 lc rgb "red", \
+     "./hist_data_simmed/bwKT_rot2_hist_simmed.dat" using 1:2 with points pt 7 lc rgb "red", \
+     "./hist_data_simmed/bwKT_rot3_hist_simmed.dat" using 1:2 with points pt 7 lc rgb "red", \
+     "./hist_data_simmed/bwKT_rot4_hist_simmed.dat" using 1:2 with points pt 7 lc rgb "red", \
+     "./hist_data_simmed/bwKT_rot5_hist_simmed.dat" using 1:2 with points pt 7 lc rgb "red"
 
 # set xlabel "Disorder"
 # plot "hex.dat" using 1:2 with lines dt 2 lc rgb "blue", \
